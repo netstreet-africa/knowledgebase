@@ -1,0 +1,164 @@
+---
+title: "Managing Spam in Your Netstreet Africa Email Account"
+sidebarTitle: "Managing Spam"
+description: "Learn how to use SpamAssassin, filtering rules, and blocklists in cPanel to reduce unwanted email in your Netstreet Africa mailbox."
+---
+
+Spam — unsolicited bulk email — is one of the most persistent problems in email communication. Netstreet Africa hosting accounts with cPanel include **SpamAssassin**, a powerful and widely-used spam filtering engine, along with additional tools for creating custom filtering rules and managing sender blocklists. This page explains how to use these tools to keep your inbox clean and reduce unwanted messages.
+
+---
+
+## How SpamAssassin works
+
+SpamAssassin analyses every incoming email against a large set of rules and assigns each message a **spam score**. Rules look at factors such as the message subject, body content, HTML formatting, the sending server's reputation, and whether SPF/DKIM authentication is in place. If a message's score exceeds a configurable threshold, SpamAssassin marks it as spam.
+
+You can choose to:
+- **Delete** spam messages automatically before they reach your inbox
+- **Tag** spam messages with a subject prefix (e.g. `***SPAM***`) and move them to a folder
+- **Deliver** all messages and let you sort them manually
+
+<Note>
+  SpamAssassin is available on all cPanel hosting accounts at Netstreet Africa.
+  If your account uses a different control panel, please contact our support team
+  via the [client area](https://my.netstreet.co.za) for assistance.
+</Note>
+
+---
+
+## Enabling SpamAssassin in cPanel
+
+<Steps>
+  <Step title="Log in to cPanel">
+    Access cPanel from your Netstreet Africa Hosting Panel: go to **Products & Services → Hosting & Servers → Manage → cPanel**.
+  </Step>
+  <Step title="Open Spam Filters">
+    In the **Email** section of the cPanel home screen, click **Spam Filters**.
+  </Step>
+  <Step title="Enable spam filtering">
+    Toggle **Process New Emails and Mark them as Spam** to **On**. This activates SpamAssassin for all incoming messages on your account.
+  </Step>
+  <Step title="Enable automatic deletion (optional)">
+    If you want SpamAssassin to automatically delete messages that score very high, toggle **Automatically Delete New Spam (Auto-Delete)** to **On**.
+
+    You can adjust the auto-delete score threshold by clicking **Spam Threshold Score**. A lower score means more aggressive filtering; a higher score means only very obvious spam is deleted. The default threshold is typically **5**.
+  </Step>
+</Steps>
+
+<Warning>
+  Be cautious with the auto-delete feature. If the spam threshold is set too
+  low, legitimate emails may be deleted permanently. Start with the default
+  threshold and lower it gradually if spam continues to get through.
+</Warning>
+
+---
+
+## Adjusting the spam threshold score
+
+The spam threshold controls how aggressively SpamAssassin filters your email:
+
+| Score | Effect |
+|---|---|
+| 2–3 | Very aggressive — high risk of false positives (legitimate mail deleted) |
+| 5 | Default — balanced filtering suitable for most users |
+| 7–10 | Conservative — only very obvious spam is caught |
+
+To change the threshold:
+
+1. In **Spam Filters**, click **Spam Threshold Score** under the Advanced Settings section.
+2. Enter your preferred score and click **Update Spam Settings**.
+
+---
+
+## Creating custom email filters
+
+If SpamAssassin is not catching a specific type of unwanted message, or if you want to organise your inbox automatically, you can create custom filtering rules.
+
+<Steps>
+  <Step title="Open Email Filters in cPanel">
+    In the **Email** section, click **Email Filters** (for a specific mailbox) or **Global Email Filters** (to apply rules to all mailboxes on your account).
+  </Step>
+  <Step title="Create a new filter">
+    Click **Create a New Filter** and give your filter a descriptive name.
+  </Step>
+  <Step title="Define the filter rules">
+    Set the conditions that incoming messages must match. You can filter based on:
+    - **From** — sender email address or domain
+    - **Subject** — keywords in the subject line
+    - **To** — the recipient address
+    - **Body** — content within the message body
+    - **Spam Status** — messages already tagged by SpamAssassin
+    - **Spam Bar** — numeric spam score level
+  </Step>
+  <Step title="Choose an action">
+    Decide what to do when a message matches the filter:
+    - **Discard** — delete the message
+    - **Redirect to email** — forward to another address
+    - **Deliver to folder** — move to a specific mailbox folder
+    - **Pipe to a program** — pass the message to a server-side script
+  </Step>
+  <Step title="Save the filter">
+    Click **Save** to activate the rule. It will apply to all new incoming messages.
+  </Step>
+</Steps>
+
+---
+
+## Managing blocklists and allowlists
+
+SpamAssassin also lets you manually specify senders that should always be treated as spam (blocklist) or always be delivered without filtering (allowlist).
+
+### Adding to the blocklist (Block List)
+
+<Steps>
+  <Step title="Open Spam Filters in cPanel" />
+  <Step title="Click Edit Spam Blacklist Settings">
+    Under the **Spam Box** or **Additional Configuration** area, click **Edit Spam Blacklist Settings**.
+  </Step>
+  <Step title="Add the sender to block">
+    Enter the email address or domain you want to block (e.g. `spammer@example.com` or `@suspicious-domain.com`) and click **Add Item**.
+  </Step>
+</Steps>
+
+### Adding to the allowlist (White List)
+
+<Steps>
+  <Step title="Open Spam Filters in cPanel" />
+  <Step title="Click Edit Spam Whitelist Settings">
+    Click **Edit Spam Whitelist Settings**.
+  </Step>
+  <Step title="Add a trusted sender">
+    Enter the email address or domain you always want to receive email from (e.g. a newsletter you subscribe to) and click **Add Item**.
+  </Step>
+</Steps>
+
+<Tip>
+  If important newsletters or business partners are landing in your spam folder,
+  add their sending domain to the allowlist to ensure their messages always reach
+  your inbox.
+</Tip>
+
+---
+
+## Enabling the SpamAssassin spam box
+
+Rather than deleting spam, you can redirect it to a dedicated **Spam Box** folder. This lets you review flagged messages before permanent deletion.
+
+<Steps>
+  <Step title="In Spam Filters, enable Spam Box">
+    Look for the **Spam Box** toggle and turn it **On**. cPanel will automatically create a `spam` folder in your mailbox.
+  </Step>
+  <Step title="Check your spam box regularly">
+    Log in to webmail and review the **spam** folder periodically. Any legitimate messages that were incorrectly flagged can be moved back to your inbox.
+  </Step>
+</Steps>
+
+---
+
+## Best practices for a spam-free inbox
+
+- **Never reply to spam.** Replying confirms your address is active and will result in more spam.
+- **Do not unsubscribe from obvious spam.** Unsubscribe links in spam emails can confirm your address is live. Only use unsubscribe links for legitimate newsletters you previously signed up for.
+- **Configure SPF, DKIM, and DMARC** for your domain to prevent spammers from spoofing your email address. See our [Preventing Spam](/email/preventing-spam) and [DNS Settings for Email](/email/dns-settings-for-email) guides.
+- **Keep your website software updated.** Compromised websites are often used to send spam. See our [Securing a Hacked Site](/security/securing-hacked-site) guide.
+
+If spam is severe and persistent, please open a support ticket in the [Netstreet Africa client area](https://my.netstreet.co.za) for further assistance.

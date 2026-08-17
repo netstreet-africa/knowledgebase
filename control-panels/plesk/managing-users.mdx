@@ -1,0 +1,186 @@
+---
+title: "Managing Users and Roles in Plesk — Netstreet Africa"
+sidebarTitle: "Managing Users"
+description: "How to add Plesk users, assign roles, limit permissions, create custom roles, and remove users from your Netstreet Africa Plesk hosting account."
+---
+
+Plesk lets you create separate user accounts for people who need access to your hosting environment — such as developers, web designers, content editors, or business partners. Instead of sharing your main Plesk credentials, you create individual accounts and assign each one a role that limits what they can see and do. This keeps your Netstreet Africa hosting account secure while still enabling productive collaboration.
+
+## Understanding roles in Plesk
+
+A **role** is a named set of permissions that controls which Plesk features and services a user can access. Every user you create must be assigned a role. Plesk comes with several built-in roles, and you can also create your own custom roles to match your exact requirements.
+
+**Default built-in roles:**
+
+| Role | Description |
+|---|---|
+| **Administrator** | Full access to all features and settings for the assigned subscription(s) |
+| **Webmaster** | Access to website and file management tools, but not billing or user management |
+| **Application User** | Restricted access intended for users who only manage specific installed applications |
+| **Account owner** | Reserved for the primary account holder |
+
+<Info>
+  You can modify the built-in roles or create entirely new ones to grant precisely the permissions your team needs. Custom roles are covered in the [Managing user roles](#managing-user-roles) section below.
+</Info>
+
+## Creating a user
+
+<Steps>
+  <Step title="Log in to Plesk">
+    Open Plesk through the Netstreet Africa client area or directly at `https://yourdomain.com:8443`. See [Logging In to Plesk](/control-panels/plesk/logging-in) for help.
+  </Step>
+  <Step title="Open the Users section">
+    In the left sidebar, click **Users**. The **Users** page lists all existing user accounts on your Plesk account.
+  </Step>
+  <Step title="Click Create User Account">
+    On the **Users** page, click the **Create User Account** button.
+  </Step>
+  <Step title="Enter the contact name">
+    Under **General Information**, in the **Contact name** text box, type the user's full name or a descriptive label (for example, `Jane Developer` or `Agency X`).
+  </Step>
+  <Step title="Enter an email address">
+    In the **Email address** text box, enter the user's email address. You can use:
+    - An **existing external email address** (such as the person's work email)
+    - A **new mailbox on your domain** (for example, `dev@yourdomain.com`) — Plesk will create the mailbox for you
+  </Step>
+  <Step title="Assign a role">
+    In the **User role** list box, select the role that matches the level of access you want to grant.
+
+    <Tip>
+      If none of the built-in roles fit, you can create a custom role before adding the user — see [Creating a user role](#creating-a-user-role) below. Then return here and assign it.
+    </Tip>
+  </Step>
+  <Step title="Select subscription access">
+    In the **Access to subscriptions** list box, select which subscription (or subscriptions, if you have multiple domains) the user should be able to manage. You can restrict a user to a single domain even if your account hosts several.
+  </Step>
+  <Step title="Set the username and password">
+    Under **Plesk Preferences**:
+    - In the **Username** text box, type a login name for the user.
+    - In the **Password** and **Confirm password** text boxes, type a password for the account.
+
+    <Tip>
+      Click **Generate** to have Plesk create a strong, random password. Share it with the user via a secure channel — avoid sending passwords over plain email.
+    </Tip>
+  </Step>
+  <Step title="Select the interface language">
+    In the **Plesk language** list box, select the display language for this user's Plesk interface.
+  </Step>
+  <Step title="Ensure the account is active">
+    Confirm the **User is active** check box is selected. If it is not, the user will not be able to log in.
+  </Step>
+  <Step title="Create the account">
+    Click **OK**. Plesk creates the user account. The user can now log in at your Plesk URL using their username and password.
+  </Step>
+</Steps>
+
+<Note>
+  When the user logs in, they will see a version of Plesk filtered to only show the features and subscriptions their role and access settings permit. They will not see other domains or settings outside their scope.
+</Note>
+
+## Managing an existing user
+
+<Steps>
+  <Step title="Open Users">
+    In the left sidebar, click **Users**.
+  </Step>
+  <Step title="Select the user">
+    Click the name of the user you want to modify.
+  </Step>
+  <Step title="Click Change Settings">
+    On the user account page, click **Change Settings**.
+  </Step>
+  <Step title="Make your changes and save">
+    Update any fields — such as the role, subscription access, password, or contact details — then click **OK**. Plesk applies the changes immediately.
+  </Step>
+</Steps>
+
+## Removing a user
+
+<Steps>
+  <Step title="Open Users">
+    In the left sidebar, click **Users**.
+  </Step>
+  <Step title="Select the user to remove">
+    On the **Users** page, tick the check box next to the user you want to delete.
+  </Step>
+  <Step title="Click Remove and confirm">
+    Click the **Remove** button, then click **Yes** in the confirmation dialog. Plesk permanently deletes the user account.
+  </Step>
+</Steps>
+
+<Warning>
+  Removing a user is permanent. If you only want to temporarily block someone's access — for example, during a dispute or project pause — consider changing their password rather than deleting the account entirely. There is no built-in suspend option for Plesk users in the same way as cPanel team users.
+</Warning>
+
+## Managing user roles
+
+### Creating a user role
+
+Creating a custom role allows you to define exactly which Plesk services a user can and cannot access — perfect for tailoring access to a specific job function.
+
+<Steps>
+  <Step title="Open Users">
+    In the left sidebar, click **Users**.
+  </Step>
+  <Step title="Click User Roles">
+    At the top of the **Users** page, click the **User Roles** tab.
+  </Step>
+  <Step title="Click Create User Role">
+    Click the **Create User Role** button on the **User Roles** page.
+  </Step>
+  <Step title="Name the role">
+    Under **General**, in the **User role name** text box, type a descriptive name for the role — for example, `Frontend Developer`, `Content Editor`, or `Database Admin`.
+  </Step>
+  <Step title="Configure service permissions">
+    Under **Access to Plesk services**, each available service is listed with two options:
+    - Click **Granted** to allow the user to access that service
+    - Click **Denied** to block the user from accessing it
+
+    Work through the list and set permissions to match what this type of user should be able to do. Common configurations include:
+
+    | Role purpose | Suggested permissions |
+    |---|---|
+    | Developer | File Manager ✓, Databases ✓, PHP settings ✓, DNS ✗, Billing ✗ |
+    | Content editor | File Manager ✓, WordPress Toolkit ✓, Databases ✗, DNS ✗ |
+    | Database admin | Databases ✓, phpMyAdmin ✓, File Manager ✗, Email ✗ |
+  </Step>
+  <Step title="Save the role">
+    Click **OK**. Plesk creates the role and it immediately becomes available to assign to new or existing users.
+  </Step>
+</Steps>
+
+### Editing a user role
+
+<Steps>
+  <Step title="Go to User Roles">
+    In the left sidebar, click **Users**, then click the **User Roles** tab.
+  </Step>
+  <Step title="Select the role to edit">
+    Click the name of the role you want to modify.
+  </Step>
+  <Step title="Adjust permissions and save">
+    Change the service permissions as needed, then click **OK**. The updated permissions apply immediately to all users assigned this role.
+  </Step>
+</Steps>
+
+<Note>
+  Editing a built-in role affects all users assigned to it. If you want to fine-tune permissions for just one user, create a new custom role specifically for them rather than modifying a shared built-in role.
+</Note>
+
+### Removing a user role
+
+<Steps>
+  <Step title="Go to User Roles">
+    In the left sidebar, click **Users**, then click the **User Roles** tab.
+  </Step>
+  <Step title="Select the role to delete">
+    Tick the check box next to the role you want to remove.
+  </Step>
+  <Step title="Click Remove and confirm">
+    Click **Remove**, then click **Yes** to confirm. Plesk deletes the role.
+  </Step>
+</Steps>
+
+<Warning>
+  You cannot delete a role that is currently assigned to one or more users. Reassign those users to a different role first, then delete the role you no longer need.
+</Warning>

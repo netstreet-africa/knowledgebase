@@ -1,0 +1,178 @@
+---
+title: "Managing MySQL Databases in the Enhance Panel"
+sidebarTitle: "Databases"
+description: "Create and manage MySQL databases and users, import and export data, and access phpMyAdmin in the Netstreet Africa Enhance control panel."
+---
+
+The Enhance control panel makes it straightforward to create and manage MySQL databases for your websites on Netstreet Africa. Whether you are setting up a new WordPress installation, configuring a custom application, or importing an existing database from another host, everything you need is available from the **Databases** tab within each website — including one-click access to phpMyAdmin for direct database administration. Enhance also fully supports PostgreSQL if your application requires it.
+
+---
+
+## Before you begin
+
+<Note>
+  Always create at least one database user before you create the database itself. This way you can assign user access permissions during the database creation step, rather than having to go back and add them afterwards.
+</Note>
+
+---
+
+## Creating a database user
+
+<Steps>
+  <Step title="Go to your website">
+    In the left sidebar, click **Websites**, then click the website you want to manage.
+  </Step>
+  <Step title="Open the Databases tab">
+    Click the **Databases** tab at the top of the website management page.
+  </Step>
+  <Step title="Click Add user">
+    On the **MySQL databases** page, click **Add user**.
+  </Step>
+  <Step title="Enter the username and password">
+    In the **Add database user** section, enter a username and a strong password for the new user.
+  </Step>
+  <Step title="Assign database access (optional)">
+    If any databases already exist, they will appear in the **Database access** section. Select the checkbox next to each database you want this user to be able to access.
+  </Step>
+  <Step title="Click Add">
+    Click **Add** to create the user. The new user will appear on the **Users** tab.
+  </Step>
+</Steps>
+
+---
+
+## Managing database users
+
+After creating a user, you can modify their settings at any time:
+
+<Steps>
+  <Step title="Go to the Databases tab">
+    Navigate to **Websites → [your domain] → Databases** and click the **Users** tab.
+  </Step>
+  <Step title="Click the user you want to modify">
+    The user settings page opens.
+  </Step>
+  <Step title="Make your changes">
+    From this page you can:
+    - **Reset password** — Click **Reset** to set a new password for the user
+    - **Allow remote access** — Enter an IP address in the **Remote access IP** field to permit connections from outside the server (useful for connecting from a local development machine)
+    - **Delete the user** — Click **Delete** to permanently remove the user
+  </Step>
+</Steps>
+
+<Warning>
+  Deleting a database user cannot be undone. If the user is currently assigned to one or more databases, those databases will lose that user's access. Make sure no active application is depending on the user before deleting it.
+</Warning>
+
+---
+
+## Creating a database
+
+<Steps>
+  <Step title="Go to your website">
+    In the left sidebar, click **Websites**, then click the website you want to manage.
+  </Step>
+  <Step title="Open the Databases tab">
+    Click the **Databases** tab at the top of the page.
+  </Step>
+  <Step title="Click Add database">
+    Click the **Add database** button.
+  </Step>
+  <Step title="Enter the database name">
+    In the **Add database** section, type a name for your database.
+  </Step>
+  <Step title="Assign database users">
+    In the **Add database user** section, select one or more users from the list:
+    - Leave **All database privileges** selected to grant full access
+    - Clear **All database privileges** and tick individual permissions to grant only specific access (e.g. SELECT only for a read-only reporting user)
+  </Step>
+  <Step title="Click Add">
+    Click **Add** to create the database. It will appear on the **Databases** tab immediately.
+  </Step>
+</Steps>
+
+---
+
+## Managing an existing database
+
+Once a database has been created, click it from the **Databases** tab to access the following options:
+
+<CardGroup cols={2}>
+  <Card title="phpMyAdmin" icon="table">
+    Click **phpMyAdmin** to open the full phpMyAdmin interface in a new tab. From here you can run SQL queries, browse table contents, edit rows, and perform any advanced database operation.
+  </Card>
+  <Card title="Add or remove users" icon="user-plus">
+    Assign additional database users to this database, or remove existing users to revoke their access.
+  </Card>
+  <Card title="Import (Upload)" icon="upload">
+    Click **Upload** to import a `.sql` file and populate the database. This is the standard method for restoring a database from a backup or migrating from another host.
+  </Card>
+  <Card title="Export (Download)" icon="download">
+    Click **Download** to export the entire database as a `.sql` file. Save this file as a backup or use it to migrate the database to another server.
+  </Card>
+  <Card title="Delete" icon="trash">
+    Click **Delete** to permanently remove the database and all of its contents.
+  </Card>
+</CardGroup>
+
+<Warning>
+  Deleting a database permanently removes all of its data. This action cannot be undone. Always export a backup using the **Download** option before deleting a database.
+</Warning>
+
+---
+
+## Importing a database from another host
+
+If you are migrating a website from another host — including from a cPanel account — you can import your existing database using the upload feature.
+
+<Steps>
+  <Step title="Export the database from your old host">
+    On your old host, use phpMyAdmin or the `mysqldump` command to export the database as a `.sql` file:
+    ```bash
+    mysqldump -u username -p database_name > backup.sql
+    ```
+  </Step>
+  <Step title="Create a new database and user in Enhance">
+    Follow the steps above to create a new database and a database user in the Enhance panel.
+  </Step>
+  <Step title="Import the SQL file">
+    Click the database name from the **Databases** tab, then click **Upload**. Select your `.sql` file and confirm the import.
+  </Step>
+  <Step title="Update your application's database credentials">
+    Update your website's configuration file (e.g. `wp-config.php` for WordPress) with the new database name, username, and password from the Enhance panel.
+  </Step>
+</Steps>
+
+---
+
+## Connecting to a database remotely
+
+By default, databases on Enhance are only accessible from the server itself — this is a security best practice. If you need to connect from a local development tool such as TablePlus, Sequel Pro, or MySQL Workbench, you must enable remote access for the database user.
+
+<Steps>
+  <Step title="Go to database users">
+    Navigate to **Websites → [your domain] → Databases → Users** and click the user you want to allow remote access for.
+  </Step>
+  <Step title="Enter your IP address">
+    In the **Remote access IP** field, enter the public IP address of your computer or office network.
+  </Step>
+  <Step title="Save the change">
+    Save the settings. You can now connect to the database remotely using your database client with the server's IP address, the database username, and password.
+  </Step>
+</Steps>
+
+<Tip>
+  To find your current public IP address, search "what is my IP" in any search engine. If your IP address changes frequently (as with most home internet connections), consider using SSH tunnelling for remote database access instead, as it does not require an open remote access IP.
+</Tip>
+
+---
+
+## PostgreSQL support
+
+Enhance on Netstreet Africa fully supports PostgreSQL in addition to MySQL. If your application requires PostgreSQL, contact our support team at [my.netstreet.co.za](https://my.netstreet.co.za) to enable it on your account and for configuration guidance.
+
+---
+
+## Need help?
+
+If you have questions about database configuration, run into import errors, or need help migrating a database from another provider, open a support ticket through the Netstreet Africa client area at [my.netstreet.co.za](https://my.netstreet.co.za).

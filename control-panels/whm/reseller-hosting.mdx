@@ -1,0 +1,219 @@
+---
+title: "Reseller Hosting with WHM on Netstreet Africa"
+sidebarTitle: "Reseller Hosting"
+description: "Learn how to manage reseller packages, create client cPanel accounts, configure branding, and run your hosting business using WHM on Netstreet Africa."
+---
+
+Netstreet Africa reseller hosting lets you run your own hosting business under your brand, powered by our infrastructure. With WebHost Manager (WHM), you get a reseller-level control panel that sits above your clients' individual cPanel accounts — giving you the ability to create packages, provision accounts, manage resources, apply custom branding, and bill clients, all from a single interface. This guide covers everything you need to know to get your reseller operation running.
+
+---
+
+## How reseller hosting works
+
+When you sign up for a Netstreet Africa reseller plan, you receive:
+
+- A **WHM account** — your reseller-level admin panel
+- A **cPanel account** — your own personal hosting space
+- A **resource pool** — a defined allocation of disk space, bandwidth, and accounts that you distribute across your clients as you see fit
+
+Your clients each get their own **cPanel account** that they manage independently. They never see WHM — only their own cPanel — and they have no visibility into other clients' accounts.
+
+<Info>
+  If you are considering moving from a cPanel-based reseller plan to Netstreet Africa's Enhance-based reseller offering, see the [From cPanel to Enhance](/control-panels/enhance/from-cpanel) guide for a full comparison and migration walkthrough.
+</Info>
+
+---
+
+## Step 1: Create your hosting packages
+
+Before you can provision client accounts, you need at least one hosting package. A package defines the resources and features available to accounts assigned to it.
+
+<Steps>
+  <Step title="Log in to WHM">
+    Log in to WHM using any of the methods described in [Accessing WHM](/control-panels/whm/accessing-whm).
+  </Step>
+  <Step title="Search for Add a Package">
+    In the WHM search box, start typing **add a package** and click **Add a Package** when it appears in the results.
+  </Step>
+  <Step title="Configure the package">
+    Fill in the package settings:
+
+    | Field | Description |
+    |---|---|
+    | **Package Name** | A name you will recognise — e.g. "Starter", "Business", "E-Commerce" |
+    | **Disk Space** | Maximum disk storage in MB for accounts on this package |
+    | **Monthly Bandwidth** | Maximum data transfer in MB per month |
+    | **Max FTP Accounts** | Maximum number of FTP accounts the client can create |
+    | **Max Email Accounts** | Maximum number of email accounts |
+    | **Max Mailing Lists** | Maximum number of mailing lists |
+    | **Max SQL Databases** | Maximum number of MySQL databases |
+    | **Max Sub Domains** | Maximum number of subdomains |
+    | **Max Parked Domains** | Maximum number of parked/alias domains |
+    | **Max Addon Domains** | Maximum number of addon domains |
+    | **CGI Access** | Whether to allow CGI scripts |
+    | **Shell Access** | Whether to allow SSH access (not recommended for shared plans) |
+  </Step>
+  <Step title="Click Add">
+    Click **Add** to save the package. It will now be available to assign when creating client accounts.
+  </Step>
+</Steps>
+
+<Tip>
+  Create a range of packages — for example a basic shared plan, a business plan, and a premium plan — so you can accommodate clients with different needs without having to create custom configurations for each one.
+</Tip>
+
+---
+
+## Step 2: Create a client account
+
+Once you have at least one package, you can provision cPanel accounts for your clients.
+
+<Steps>
+  <Step title="Search for Create a New Account">
+    In the WHM search box, type **create** and click **Create a New Account**.
+  </Step>
+  <Step title="Fill in the account details">
+    Complete the account creation form:
+
+    - **Domain** — The client's primary domain name (e.g. `clientbusiness.co.za`)
+    - **Username** — A short cPanel username (max 8 characters, letters and numbers only)
+    - **Password** — Set a strong password, or click the generator to create one automatically
+    - **Email** — The client's contact email address
+    - **Package** — Select the package you want to assign to this account
+  </Step>
+  <Step title="Review and create">
+    Review the settings and click **Create**. WHM creates the cPanel account and configures the web server. The process takes a few seconds.
+  </Step>
+  <Step title="Send credentials to your client">
+    Once the account is created, share the cPanel login URL and credentials with your client. They can log in at `https://yourdomain.co.za:2083` or via the direct cPanel URL for their account.
+  </Step>
+</Steps>
+
+---
+
+## Accessing a client's cPanel account
+
+You can log in to any client's cPanel account directly from WHM without needing their password — similar to the Impersonate feature in Enhance.
+
+<Steps>
+  <Step title="Find the account">
+    In WHM, go to **Account Functions → List Accounts**. Find the client's account in the list.
+  </Step>
+  <Step title="Click the cPanel icon">
+    Click the cPanel icon (the small orange cPanel logo) next to the account. You are immediately logged in to the client's cPanel as if you were them.
+  </Step>
+  <Step title="Return to WHM when done">
+    To return to WHM from inside cPanel, click **Home** or navigate back to the WHM URL directly.
+  </Step>
+</Steps>
+
+---
+
+## Managing client accounts
+
+WHM gives you full control over every account on your reseller plan.
+
+<CardGroup cols={2}>
+  <Card title="Modify an account" icon="pen-to-square">
+    Change the package, domain, contact email, or resource limits for any client. Go to **Account Functions → Modify an Account**.
+  </Card>
+  <Card title="Change a password" icon="key">
+    Reset a client's cPanel password at any time. Go to **Account Functions → Change a Package** or use the **Password Modification** tool.
+  </Card>
+  <Card title="Suspend an account" icon="ban">
+    Temporarily disable access to a client's cPanel without deleting any data. Go to **Account Functions → Manage Account Suspension**.
+  </Card>
+  <Card title="Terminate an account" icon="trash">
+    Permanently delete a client account and all associated data. Go to **Account Functions → Terminate an Account**. This cannot be undone.
+  </Card>
+  <Card title="View resource usage" icon="chart-bar">
+    See how much disk space and bandwidth each account is consuming from the **Account Functions → List Accounts** view.
+  </Card>
+  <Card title="Move between packages" icon="arrows-rotate">
+    Upgrade or downgrade a client to a different package at any time. Go to **Account Functions → Upgrade/Downgrade an Account**.
+  </Card>
+</CardGroup>
+
+---
+
+## Branding options
+
+One of the key advantages of Netstreet Africa reseller hosting is the ability to present your hosting service entirely under your own brand. Your clients will see your company name — not Netstreet Africa's.
+
+### White-label nameservers
+
+Set up private nameservers (e.g. `ns1.yourbrand.co.za` and `ns2.yourbrand.co.za`) so that when clients look up their domain, they see your brand rather than a generic server name. You can configure this through **Reseller Center → Nameserver Configuration** in WHM, and register the nameservers as glue records through Netstreet Africa's domain management tools.
+
+### Custom cPanel branding
+
+<Steps>
+  <Step title="Open the Brand Manager">
+    In WHM, search for **Branding** and click **Brand Manager**.
+  </Step>
+  <Step title="Create a custom theme">
+    Upload your logo, set your company name, and configure colours to match your brand. This theme will be applied to the cPanel interface that your clients see.
+  </Step>
+  <Step title="Apply the theme">
+    Set your custom theme as the default for all new accounts, or apply it to specific existing accounts.
+  </Step>
+</Steps>
+
+### Custom nameserver hostname
+
+You can also configure WHM to show your custom hostname and company name in system-generated emails (such as welcome emails and password reset messages) so that all client-facing communications are branded consistently.
+
+---
+
+## Setting up WHMCS for billing automation
+
+Many Netstreet Africa resellers use WHMCS to automate client billing, provisioning, and support. WHMCS integrates directly with WHM via an API, so creating a new client order in WHMCS automatically creates the corresponding cPanel account in WHM — and suspending an overdue account in WHMCS automatically suspends it in WHM.
+
+<Steps>
+  <Step title="Order a WHMCS licence">
+    WHMCS licences are available through the Netstreet Africa client area at [my.netstreet.co.za](https://my.netstreet.co.za).
+  </Step>
+  <Step title="Install WHMCS on your hosting account">
+    Install WHMCS on one of your cPanel domains. WHMCS provides detailed installation documentation, or the Netstreet Africa support team can assist.
+  </Step>
+  <Step title="Connect WHMCS to WHM">
+    In WHMCS, go to **Setup → Products/Services → Servers** and add your WHM server using your reseller hostname and API token. WHMCS will then be able to create, suspend, and terminate cPanel accounts automatically.
+  </Step>
+</Steps>
+
+<Note>
+  Netstreet Africa supports WHMCS integration on all cPanel-based reseller plans. Contact support at [my.netstreet.co.za](https://my.netstreet.co.za) if you need help setting up the WHM API credentials.
+</Note>
+
+---
+
+## Frequently asked questions
+
+<Accordion title="How many cPanel accounts can I create on a reseller plan?">
+  The number of accounts you can create depends on your reseller plan. Each plan specifies a maximum number of accounts (for example, unlimited accounts or a fixed number). You can view your current account usage and limits in WHM under **Reseller Center → Resource Usage**.
+</Accordion>
+
+<Accordion title="Can I sell hosting to clients at my own prices?">
+  Yes. You buy wholesale from Netstreet Africa and set your own retail prices. You invoice your clients directly — Netstreet Africa has no relationship with your end customers.
+</Accordion>
+
+<Accordion title="Do my clients know they are hosted on Netstreet Africa?">
+  Only if you tell them. With private nameservers and custom cPanel branding, your clients see your brand at every touchpoint. Netstreet Africa operates entirely in the background.
+</Accordion>
+
+<Accordion title="Can I give a client their own reseller privileges?">
+  Yes. You can grant sub-reseller privileges to a client account via **Reseller Center → Setup Reseller Accounts** in WHM. This allows that client to create and manage their own cPanel accounts within the resource limits you set for them.
+</Accordion>
+
+<Accordion title="What happens if a client exceeds their disk or bandwidth limit?">
+  Clients who exceed their disk quota will be unable to create new files until the issue is resolved. Bandwidth overages are handled according to your plan's overage policy. You can monitor usage and proactively upgrade clients to higher packages via **Account Functions → Upgrade/Downgrade an Account**.
+</Accordion>
+
+<Accordion title="Can I migrate existing cPanel accounts to my reseller plan?">
+  Yes. WHM includes a built-in transfer tool under **Transfers → Transfer or Restore an Account**. You can migrate accounts from another WHM/cPanel server by providing the source server's hostname and root credentials. Contact Netstreet Africa support if you need help with bulk migrations.
+</Accordion>
+
+---
+
+## Need help?
+
+The Netstreet Africa support team is available to assist with any aspect of your reseller setup. Open a support ticket at [my.netstreet.co.za](https://my.netstreet.co.za) for help with package configuration, account provisioning, WHMCS integration, or anything else related to your reseller business.

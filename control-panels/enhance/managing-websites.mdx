@@ -1,0 +1,214 @@
+---
+title: "Managing Your Websites in the Enhance Panel"
+sidebarTitle: "Websites"
+description: "Learn how to add, configure, and manage your websites in the Netstreet Africa Enhance control panel — from files and domains to WordPress and backups."
+---
+
+The Enhance control panel organises everything around individual websites, making it straightforward to manage multiple domains without getting lost in menus. Once you log in to your Enhance panel on Netstreet Africa, the **Websites** section in the left sidebar is where you will spend the majority of your time — from uploading files and managing DNS, to installing WordPress and configuring SSL certificates.
+
+---
+
+## Accessing your websites
+
+<Steps>
+  <Step title="Log in to your Enhance panel">
+    Log in through the Netstreet Africa client area at [my.netstreet.co.za](https://my.netstreet.co.za), or visit the custom panel URL your account is configured with.
+  </Step>
+  <Step title="Click Websites in the sidebar">
+    In the left sidebar, click **Websites**. The **Manage websites** page lists all of the domains hosted on your account.
+  </Step>
+  <Step title="Select the website you want to manage">
+    Click on the domain name you want to work with. This opens the website management view with a series of tabs across the top of the page.
+  </Step>
+</Steps>
+
+---
+
+## Website management tabs
+
+Each website in Enhance has its own set of tabs that cover every aspect of managing that site. Here is what each tab contains:
+
+<Tabs>
+  <Tab title="Apps">
+    Use the **Apps** tab to install web applications with a single click. Click **Install app**, choose your settings, and click **Install**.
+
+    Supported one-click applications include:
+    - **WordPress** — Full WordPress Toolkit integration (see below)
+    - **Joomla** — Standard one-click installation
+
+    Any other application can be installed manually via File Manager or SSH.
+  </Tab>
+  <Tab title="Files">
+    Use the **Files** tab to access the built-in File Manager. You can upload, download, create, edit, rename, move, compress, and delete files and folders — all without needing an FTP client.
+
+    **File Manager features:**
+    - Folder tree navigation in the left sidebar
+    - Right-click context menu on any file or folder
+    - Upload files and entire folders
+    - Edit text files directly in the browser
+    - CHMOD / permissions management
+    - Compress and extract archives
+    - Bulk actions on multiple files at once
+
+    <Warning>
+      Take extra care when using bulk delete — there is no recycle bin in the File Manager. Always verify your selection before confirming a deletion.
+    </Warning>
+  </Tab>
+  <Tab title="Databases">
+    Use the **Databases** tab to manage MySQL databases and database users. You can create databases, assign users with granular permissions, import SQL files, export backups, and open **phpMyAdmin** with a single click.
+
+    For full database management instructions, see [Managing Databases](/control-panels/enhance/managing-databases).
+  </Tab>
+  <Tab title="Emails">
+    Use the **Emails** tab to create and manage email accounts, forwarders, and aliases associated with this domain.
+
+    For full email management instructions, see [Managing Email](/control-panels/enhance/managing-email).
+  </Tab>
+  <Tab title="Domains">
+    Use the **Domains** tab to manage all domains and subdomains associated with this website. You can:
+    - Add subdomains
+    - Add addon domains
+    - Create domain aliases
+    - Change the document root directory for a domain
+    - View and edit DNS records for the domain
+  </Tab>
+  <Tab title="Analytics">
+    Use the **Analytics** tab to view bandwidth usage and visitor statistics. You can filter data by today, last week, or last month to track traffic trends for your site.
+  </Tab>
+  <Tab title="Backups">
+    Use the **Backups** tab to manage automatic backups and perform selective restores. You can restore:
+    - Email accounts and messages
+    - Website files
+    - A custom combination of email, files, and databases
+
+    Backups are taken automatically on a daily schedule by the Enhance platform. No configuration is required.
+  </Tab>
+  <Tab title="Security">
+    Use the **Security** tab to manage SSL/TLS certificates for your site and to control access by IP address — allowing or blocking specific IP ranges from reaching your website.
+
+    Let's Encrypt certificates can be issued and renewed automatically at no extra cost.
+  </Tab>
+  <Tab title="Advanced">
+    The **Advanced** tab brings together several additional tools:
+
+    - **Redirects** — Add permanent (301) or temporary (302) redirects
+    - **Optimization** — Enable PHP Opcode caching (OPcache)
+    - **FTP** — Add, modify, and delete FTP accounts
+    - **Developer Tools** — PHP version and settings, cron jobs, and SSH access
+
+    <Tip>
+      To change the PHP version for a specific site, go to **Advanced → Developer Tools** and look for the PHP configuration section. You can change the version and customise `php.ini` values on a per-site basis.
+    </Tip>
+  </Tab>
+</Tabs>
+
+---
+
+## Adding a new website
+
+<Steps>
+  <Step title="Go to Websites">
+    In the left sidebar, click **Websites**.
+  </Step>
+  <Step title="Click Add Website">
+    Click the **Add Website** button.
+  </Step>
+  <Step title="Choose the website type">
+    You will be presented with options:
+    - **Production website** — A live website for a domain you own
+    - **Import from cPanel** — Transfer an existing site from a cPanel server
+  </Step>
+  <Step title="Enter the domain name">
+    Type the domain name and click **Add**. The Enhance panel creates a new website space for that domain.
+  </Step>
+  <Step title="Install an application (optional)">
+    If you want to run WordPress, click the **Apps** tab on your new website, click **Install app**, and follow the WordPress installation prompts.
+  </Step>
+</Steps>
+
+---
+
+## Managing WordPress sites
+
+The WordPress Toolkit in Enhance is included with every Netstreet Africa Enhance plan at no extra cost. It gives you a dedicated management interface for each WordPress installation on your account.
+
+### Opening the WordPress management page
+
+<Steps>
+  <Step title="Go to your website">
+    In the left sidebar, click **Websites**, then click the domain where WordPress is installed.
+  </Step>
+  <Step title="Find the application">
+    In the **Applications installed** section at the bottom of the overview, locate your WordPress site.
+  </Step>
+  <Step title="Click Manage">
+    Click **Manage** to open the WordPress Toolkit interface.
+  </Step>
+</Steps>
+
+### WordPress Toolkit features
+
+<CardGroup cols={2}>
+  <Card title="General settings" icon="gear">
+    Log in to your WordPress dashboard via SSO, change the site URL or file path, manage WordPress versions, and enable maintenance mode.
+  </Card>
+  <Card title="Plugins" icon="puzzle-piece">
+    View, install, activate, deactivate, update, and delete plugins — all without logging in to the WordPress dashboard separately.
+  </Card>
+  <Card title="Themes" icon="paintbrush">
+    View, install, activate, deactivate, update, and delete themes from the Enhance panel directly.
+  </Card>
+  <Card title="Security" icon="lock">
+    Restrict WordPress admin access to specific IP addresses to prevent unauthorised login attempts.
+  </Card>
+  <Card title="Users" icon="users">
+    Add, modify, and delete WordPress user accounts including usernames, email addresses, and passwords.
+  </Card>
+  <Card title="Single Sign-On" icon="key">
+    Log in to your WordPress dashboard instantly from Enhance without entering a separate username and password.
+  </Card>
+  <Card title="Debug settings" icon="bug">
+    Enable WP_DEBUG, WP_DEBUG_LOG, and WP_DEBUG_DISPLAY for troubleshooting development issues.
+  </Card>
+  <Card title="Staging" icon="flask">
+    Clone your live site to a staging environment, make changes safely, and push them back to production when ready.
+  </Card>
+</CardGroup>
+
+---
+
+## Deploying a Node.js application
+
+Enhance on Netstreet Africa supports Node.js application deployment for developers building custom web applications.
+
+<Steps>
+  <Step title="Upload your application files">
+    Go to **Websites → [your domain] → Files**. In your home directory, create a folder for your application (for example, `my-app`) and upload your application files into it.
+  </Step>
+  <Step title="Configure SSH access (if needed)">
+    Go to **Advanced → Developer Tools** and scroll to **SSH Password Authentication**. Click **Reset** and set a new SSH password. Connect using:
+    ```bash
+    ssh -p 22 username@your-server-ip
+    ```
+  </Step>
+  <Step title="Deploy via the Node.js tool">
+    Back in the Enhance panel, go to **Advanced → Developer Tools** and locate the **Deploy Node.js** section. Configure the deployment settings and point it to your application folder.
+  </Step>
+  <Step title="Install dependencies via SSH">
+    In your SSH session, navigate to your application directory and run:
+    ```bash
+    npm install
+    ```
+    Your Node.js application is now running and proxied through the Enhance web server.
+  </Step>
+</Steps>
+
+<Info>
+  Enhance automatically assigns a PORT environment variable to your Node.js application. Make sure your `index.js` reads from `process.env.PORT` rather than hardcoding a port number.
+</Info>
+
+---
+
+## Need help?
+
+If you run into any issues managing your websites on the Netstreet Africa Enhance panel, open a support ticket through the client area at [my.netstreet.co.za](https://my.netstreet.co.za). For site migrations from cPanel, our team can handle the full transfer for you.

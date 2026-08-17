@@ -1,0 +1,156 @@
+---
+title: "Managing WordPress with the WordPress Toolkit in Plesk"
+sidebarTitle: "WordPress Toolkit"
+description: "Use the WordPress Toolkit in Plesk to install, configure, clone, secure, and manage multiple WordPress sites from one central interface."
+---
+
+The WordPress Toolkit is a powerful management interface built into Plesk that lets you install, configure, and manage one or more WordPress sites from a single dashboard. Instead of logging in to each WordPress site individually, you can update plugins, run security checks, clone installations, and manage themes all from within Plesk. This is especially useful if you manage multiple WordPress sites on the same hosting account.
+
+<Note>
+  Plesk is available on legacy Netstreet Africa Managed WordPress accounts and can be installed manually on unmanaged VPS and Dedicated server plans. It is not included with new standard shared hosting accounts, which use the Enhance control panel instead.
+</Note>
+
+## Accessing the WordPress Toolkit
+
+There are two ways to reach the WP Toolkit in Plesk: a quick-access toolbar on the Websites & Domains page, and the full WP Toolkit interface.
+
+<Tabs>
+  <Tab title="Quick access toolbar">
+    <Steps>
+      <Step title="Log in to Plesk">
+        Access Plesk from your Netstreet Africa client area by clicking **Login to Control Panel** next to your hosting account.
+      </Step>
+      <Step title="Open Websites & Domains">
+        In the left sidebar, click **Websites & Domains**.
+      </Step>
+      <Step title="Use the quick-access buttons">
+        Scroll to the domain where WordPress is installed. You will see a toolbar with the following buttons directly below the domain name:
+        - **Log In** — logs you directly into the WordPress admin area for that installation.
+        - **Check Security** — runs an instant security audit against your WordPress installation.
+        - **Plugins** — opens a plugin management panel for that installation.
+        - **Themes** — opens a theme management panel.
+        - **Clone** — creates an exact copy of the WordPress installation (useful for staging or testing).
+        - **Sync** — synchronises content or database between two WordPress instances.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Full WP Toolkit interface">
+    <Steps>
+      <Step title="Log in to Plesk">
+        Access Plesk from your Netstreet Africa client area.
+      </Step>
+      <Step title="Open WordPress in the sidebar">
+        In the Plesk left sidebar, click **WordPress**. The full WP Toolkit page opens.
+      </Step>
+      <Step title="Explore the available tabs">
+        The WP Toolkit has three main tabs: **Instances**, **Plugins**, and **Themes**. Each is described in detail below.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Managing WordPress installations (Instances tab)
+
+The **Instances** tab is the main dashboard of the WP Toolkit. It lists all WordPress installations on your hosting account and gives you access to key management actions.
+
+<Steps>
+  <Step title="View all installations">
+    Each WordPress installation is listed as a card showing the site URL, WordPress version, and status indicators for updates and security.
+  </Step>
+  <Step title="Install a new WordPress site">
+    Click **Install** at the top of the page. Choose between:
+    - **Install (Quick)** — installs WordPress with default settings in seconds.
+    - **Install (Custom)** — lets you specify the installation path, admin username, password, email, and other settings before installation.
+  </Step>
+  <Step title="Scan for existing installations">
+    If you have WordPress installed outside the Toolkit (for example, uploaded manually via FTP), click **Scan** to detect and add those installations to the Toolkit dashboard.
+  </Step>
+  <Step title="Check for updates">
+    Click **Updates** to see a summary of available core, plugin, and theme updates across all your installations. You can apply updates individually or in bulk.
+  </Step>
+  <Step title="Run a security check">
+    Click **Security** to perform a security audit across all WordPress installations. See the [WordPress Security](/hosting/wordpress/security) guide for details on the checks performed and how to resolve issues.
+  </Step>
+</Steps>
+
+## Managing plugins (Plugins tab)
+
+The **Plugins** tab lets you install, activate, deactivate, update, and uninstall plugins across all your WordPress instances from a single screen.
+
+| Action | How to perform it |
+|---|---|
+| Install a plugin | Click **Install**, search for the plugin by name or keyword, then click **Install** |
+| Upload a plugin | Click **Upload plugin** to upload a `.zip` file (for premium plugins purchased elsewhere) |
+| Activate / deactivate | Select the plugin and click **Activate** or **Deactivate** |
+| Update a plugin | Select the plugin and click **Update** |
+| Uninstall a plugin | Select the plugin and click **Uninstall** |
+
+<Tip>
+  You can apply actions to plugins across multiple WordPress instances simultaneously. Select the checkboxes next to multiple installations in the filter, then perform your chosen action — it will be applied to all selected sites at once.
+</Tip>
+
+## Managing themes (Themes tab)
+
+The **Themes** tab works identically to the Plugins tab but for themes. From here you can install, upload, update, and uninstall themes across all your WordPress installations.
+
+| Action | How to perform it |
+|---|---|
+| Install a theme | Click **Install**, browse or search the WordPress theme directory, then click **Install** |
+| Upload a theme | Click **Upload theme** to upload a `.zip` file of a premium theme |
+| Update a theme | Select the theme and click **Update** |
+| Uninstall a theme | Select the theme and click **Uninstall** |
+
+<Warning>
+  Deleting the currently active theme from the Themes tab will revert your site to a default WordPress theme. Always check which theme is active before uninstalling.
+</Warning>
+
+## Cloning a WordPress site
+
+Cloning creates a full copy of an existing WordPress installation — including all files, the database, themes, and plugins — at a new location. This is the quickest way to create a staging environment or duplicate a site for a new client.
+
+<Steps>
+  <Step title="Locate the installation to clone">
+    On the **Instances** tab or the quick-access toolbar under **Websites & Domains**, find the WordPress site you want to clone.
+  </Step>
+  <Step title="Click Clone">
+    Click the **Clone** button. The Clone dialog appears.
+  </Step>
+  <Step title="Specify the destination">
+    Choose where the clone should be placed — typically a subdomain (e.g., `staging.yourdomain.com`) or a separate domain on your account.
+  </Step>
+  <Step title="Confirm">
+    Click **OK**. The Toolkit creates the clone and updates all internal URLs in the database to reflect the new location.
+  </Step>
+</Steps>
+
+## Synchronising two WordPress instances
+
+The **Sync** feature lets you push specific content — files, the database, or both — from one WordPress installation to another. This is useful when you have made changes to a staging site and want to push them to your live site.
+
+<Steps>
+  <Step title="Click Sync">
+    On the **Instances** tab or quick-access toolbar, click **Sync** for the source installation (the one you want to copy from).
+  </Step>
+  <Step title="Choose source and target">
+    In the Sync dialog, select the source installation and the target installation you want to update.
+  </Step>
+  <Step title="Select what to sync">
+    Choose whether to sync files, the database, or both. Review the options carefully — syncing the database overwrites the target's database content.
+  </Step>
+  <Step title="Confirm">
+    Click **Sync**. The Toolkit applies the changes to the target installation.
+  </Step>
+</Steps>
+
+<Warning>
+  Syncing from staging to your live site overwrites the live database or files depending on what you selected. Always create a backup of your live site before performing a sync. See the backup instructions in the [Managed WordPress](/hosting/wordpress/managed-wordpress) guide.
+</Warning>
+
+## Logging in to WordPress from the Toolkit
+
+You can log in to any WordPress site's administration area directly from the WP Toolkit without needing your WordPress username and password.
+
+- From the **Instances** tab, click the **Log In** button on any site's card.
+- From **Websites & Domains**, click the **Log In** button in the quick-access toolbar below your domain.
+
+This opens the WordPress dashboard in a new browser tab, bypassing the login form.

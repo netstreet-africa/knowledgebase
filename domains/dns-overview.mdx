@@ -1,0 +1,135 @@
+---
+title: "DNS Overview: How Domain Name System Works"
+sidebarTitle: "DNS Overview"
+description: "Understand how DNS works, what DNS record types do, and how Netstreet Africa manages DNS for your domains and hosting services."
+---
+
+The Domain Name System (DNS) is the internet's address book. When someone types your domain name into a browser, DNS translates that human-readable name into an IP address that computers use to locate your server. Understanding how DNS works — and knowing which record types to use — will help you configure your domain correctly and troubleshoot issues more effectively.
+
+## How DNS works
+
+When a visitor enters `www.yourdomain.co.za` in their browser, a series of lookups happens in the background:
+
+1. The browser checks its local cache for a recent answer.
+2. If not cached, it queries a **recursive resolver** (usually provided by your ISP or a service like Google's `8.8.8.8`).
+3. The resolver queries a **root nameserver**, which directs it to the **TLD nameserver** for `.co.za`.
+4. The TLD nameserver points the resolver to the **authoritative nameserver** for your domain (the nameservers you have set).
+5. The authoritative nameserver returns the DNS record — for example, the IP address in your A record.
+6. The browser connects to that IP address and loads your site.
+
+This entire process typically completes in milliseconds. The result is cached for the duration of the record's **TTL (Time to Live)** value, measured in seconds, before the lookup is repeated.
+
+## DNS propagation
+
+When you create or change a DNS record, the change does not take effect everywhere in the world instantly. DNS servers around the internet cache records according to their TTL values. Propagation — the process of those caches expiring and picking up the new record — can take anywhere from a few minutes to **48 hours**, depending on your TTL settings and caching behaviour across the internet.
+
+<Tip>
+  If you are planning a server migration or major DNS change, lower your TTL values to 300 seconds (5 minutes) a day or two in advance. This speeds up propagation considerably when you make the actual change. Remember to raise the TTL again afterwards.
+</Tip>
+
+## DNS record types
+
+Netstreet Africa supports all standard DNS record types. Here is a reference table of the most commonly used records:
+
+| Record type | Purpose | Example value |
+|------------|---------|--------------|
+| **A** | Maps a domain or subdomain to an IPv4 address | `196.22.140.10` |
+| **AAAA** | Maps a domain or subdomain to an IPv6 address | `2001:db8::1` |
+| **CNAME** | Creates an alias that points to another domain name | `myshop.co.za → shops.example.com` |
+| **MX** | Specifies the mail servers responsible for receiving email | `10 mail.netstreet.co.za` |
+| **TXT** | Stores arbitrary text data; used for SPF, DKIM, domain verification | `v=spf1 include:spf.netstreet.co.za ~all` |
+| **SRV** | Defines location of servers for specific services (SIP, XMPP, etc.) | `_sip._tcp 100 1 5060 sip.yourdomain.co.za` |
+| **NS** | Delegates a zone (or subdomain) to a set of nameservers | `ns1.netstreet.co.za` |
+| **PTR** | Reverse DNS — maps an IP address back to a domain name | Used for email reputation, diagnostics |
+| **SOA** | Start of Authority — contains zone metadata and serial number | Managed automatically by Netstreet Africa |
+
+<Info>
+  You cannot set a CNAME record on the root (apex) of a domain (e.g. `yourdomain.co.za` itself). For the root domain, always use an A or AAAA record. Some services that require a CNAME at the root — such as certain CDN providers — may offer a proprietary "ALIAS" or "ANAME" record type instead.
+</Info>
+
+### A record
+
+An **A record** is the most fundamental DNS record. It tells the internet where to find your website by mapping your domain to an IPv4 address. You typically need at least one A record pointing your root domain (`yourdomain.co.za`) and/or your `www` subdomain to your server's IP address.
+
+### AAAA record
+
+An **AAAA record** works exactly like an A record, but for **IPv6** addresses. IPv6 uses a longer address format (e.g. `2001:db8::1`) to accommodate the massive growth of internet-connected devices. If your server has an IPv6 address, adding an AAAA record alongside your A record ensures visitors using IPv6 can reach you.
+
+### CNAME record
+
+A **CNAME (Canonical Name) record** creates an alias from one name to another. For example, you might create a CNAME pointing `www.yourdomain.co.za` to `yourdomain.co.za`, so both addresses serve the same site. CNAMEs are also used when third-party services (like Mailchimp or HubSpot) ask you to point a subdomain to their servers.
+
+<Warning>
+  A CNAME record cannot coexist with other record types for the same name. Do not set a CNAME on a name that also has an MX record, TXT record, or A record.
+</Warning>
+
+### MX record
+
+**MX (Mail Exchanger) records** tell the internet which mail servers accept email for your domain. Each MX record has a **priority value** — lower numbers have higher priority. If your primary mail server is unavailable, the sending server will try the next-highest-priority MX record.
+
+```
+Priority  Value
+10        mail1.netstreet.co.za
+20        mail2.netstreet.co.za
+```
+
+### TXT record
+
+**TXT records** store arbitrary text and are used for a wide range of purposes:
+
+- **SPF** — Specifies which mail servers are authorised to send email on behalf of your domain.
+- **DKIM** — Contains a public key used to verify the authenticity of outgoing email.
+- **DMARC** — Sets a policy for how receivers should handle email that fails SPF or DKIM checks.
+- **Domain verification** — Services like Google Search Console and Microsoft 365 ask you to add a TXT record to prove you own the domain.
+
+### SRV record
+
+**SRV (Service) records** direct specific application protocols to the correct server and port. They are commonly used for VoIP (SIP), instant messaging (XMPP), and other services that require a specific server and port combination. For more detail, see [Adding SRV Records](/domains/adding-srv-records).
+
+## How DNS management works at Netstreet Africa
+
+DNS management for your domains depends on whether your domain is paired with a hosting product:
+
+<CardGroup cols={2}>
+  <Card title="Domain + Hosting Package" icon="server">
+    If your domain is linked to a Netstreet Africa hosting plan, DNS records are managed through your control panel (cPanel, Plesk, or Enhance). Changes are applied to the zone on our authoritative nameservers.
+  </Card>
+  <Card title="Standalone Domain" icon="globe">
+    If you registered a domain without an associated hosting product, you can manage DNS records directly in the **DNS** section of your client area at my.netstreet.co.za.
+  </Card>
+</CardGroup>
+
+<Note>
+  If your domain is pointing to external nameservers (e.g. Cloudflare), DNS changes must be made at that external provider — not in your Netstreet Africa client area. Changes made here will have no effect until you point nameservers back to us.
+</Note>
+
+## DNSSEC
+
+DNSSEC (DNS Security Extensions) adds a layer of cryptographic authentication to DNS responses, helping prevent DNS spoofing and cache poisoning attacks. Netstreet Africa's nameservers do not currently support DNSSEC natively. However, if you have registered your domain with us and use external nameservers that support DNSSEC (such as Cloudflare), we can configure DNSSEC at the **registrar level** on your behalf.
+
+To request DNSSEC configuration at the registrar level, [open a support ticket](https://my.netstreet.co.za) and provide:
+
+- DS Record
+- Digest
+- Digest Type
+- Algorithm
+- Public Key
+- Key Tag
+- Flags
+
+## Related topics
+
+<CardGroup cols={2}>
+  <Card title="Managing DNS Zones" href="/domains/managing-dns-zones" icon="list">
+    Add, edit, export, and delete DNS records for your domain.
+  </Card>
+  <Card title="Adding SRV Records" href="/domains/adding-srv-records" icon="server">
+    Configure SRV records for VoIP, XMPP, and other service-based protocols.
+  </Card>
+  <Card title="Wildcard DNS" href="/domains/wildcard-dns" icon="asterisk">
+    Use wildcard entries to handle requests for any subdomain.
+  </Card>
+  <Card title="Domain Management" href="/domains/domain-management" icon="sliders">
+    Update nameservers and manage your domain settings.
+  </Card>
+</CardGroup>

@@ -1,0 +1,243 @@
+---
+title: "Getting a Free SSL Certificate with Let's Encrypt"
+sidebarTitle: "Let's Encrypt"
+description: "Step-by-step guide to installing a free Let's Encrypt SSL certificate on your Netstreet Africa hosting account via cPanel, Plesk, Enhance, or a VPS."
+---
+
+Let's Encrypt is a free, automated, and open Certificate Authority run by the Internet Security Research Group (ISRG). It was created with a single goal: to make encrypted HTTPS connections the default across the entire web. Netstreet Africa automatically provisions free SSL certificates for all new hosting accounts — in most cases, you do not need to do anything at all. This guide explains how Let's Encrypt works on your Netstreet Africa account, how to verify your certificate is active, and how to install or renew a certificate manually when needed.
+
+<Info>
+  Netstreet Africa is transitioning new accounts from Let's Encrypt to **cPanel
+  SSL** certificates. The two are equivalent in terms of trust level, validity,
+  and encryption strength. The only visible difference is that your browser's
+  certificate details will say "cPanel Inc" instead of "Let's Encrypt." Your
+  site's security is unaffected.
+</Info>
+
+---
+
+## How automatic SSL works
+
+When you add a domain to your Netstreet Africa hosting account, the system automatically:
+
+1. Generates an SSL certificate for your domain (and the `www.` subdomain)
+2. Installs the certificate on the web server
+3. Renews the certificate automatically every 90 days
+
+This process is completely transparent — you do not need to do anything. Certificates can take up to **four hours** to generate for a newly added domain. If your site urgently needs a certificate sooner, please contact Netstreet Africa support via your [client area](https://my.netstreet.co.za).
+
+<Note>
+  Automatic SSL **does not** overwrite any existing paid SSL certificate already
+  installed on your account. If you have purchased a certificate from a third
+  party, it takes precedence and will be used in preference to the free
+  certificate.
+</Note>
+
+---
+
+## Installing Let's Encrypt via cPanel
+
+If you need to verify your SSL certificate status or manually trigger installation on a cPanel account:
+
+<Steps>
+  <Step title="Log in to cPanel">
+    Access cPanel from your Netstreet Africa Hosting Panel: go to **Products & Services → Hosting & Servers → Manage → cPanel**.
+  </Step>
+  <Step title="Open the SSL/TLS section">
+    In the **Security** section of the cPanel home screen, click **SSL/TLS**.
+  </Step>
+  <Step title="View certificates on the server">
+    Under **Certificates (CRT)**, click **Generate, view, upload, or delete SSL certificates**.
+  </Step>
+  <Step title="Check the Issuer column">
+    In the **Certificates on Server** list, look in the **Issuer** column. If Let's Encrypt (or cPanel Inc) is listed, your certificate is active and automatically renewing.
+  </Step>
+</Steps>
+
+### Troubleshooting automatic SSL in cPanel
+
+If a certificate has not been generated for your domain, the most common causes are:
+
+<Accordion title="Another SSL certificate is already installed">
+  If a valid, expired, or self-signed certificate is already installed on the
+  domain, the automatic installer will skip it. Remove the existing certificate
+  first, then allow up to four hours for the free certificate to be issued.
+</Accordion>
+
+<Accordion title="URL rewrite rules are blocking certificate validation">
+  Let's Encrypt validates domain ownership by placing a file in the
+  `public_html/.well-known/acme-challenge/` directory. If your `.htaccess` file
+  has URL rewrite rules that block access to this path, validation will fail.
+
+  Add the following line to your `.htaccess` file to exclude the `.well-known`
+  directory from rewrites:
+
+  ```
+  RewriteRule ^.well-known - [L]
+  ```
+</Accordion>
+
+<Accordion title="The domain does not resolve to the server">
+  Let's Encrypt verifies that the domain resolves to your server's IP address
+  before issuing a certificate. If your domain's DNS is not yet pointing to
+  Netstreet Africa's servers, wait for DNS propagation to complete (up to 48
+  hours) before the certificate can be issued.
+</Accordion>
+
+---
+
+## Installing Let's Encrypt via Plesk
+
+If your VPS runs Plesk (available on legacy Managed WordPress accounts and self-installed on Unmanaged VPS):
+
+<Steps>
+  <Step title="Log in to Plesk" />
+  <Step title="Navigate to Websites & Domains">
+    In the left sidebar, click **Websites & Domains**.
+  </Step>
+  <Step title="Click the Let's Encrypt icon">
+    Locate the Let's Encrypt plugin icon for your domain and click it. The **Let's Encrypt SSL Certificate** page opens.
+  </Step>
+  <Step title="Enter your email address">
+    Type a valid email address. Let's Encrypt sends renewal reminders and important notices to this address.
+  </Step>
+  <Step title="Include the www subdomain (optional)">
+    Select **Include www.yourdomain.co.za as an alternative domain name** if you want the certificate to cover both `yourdomain.co.za` and `www.yourdomain.co.za`.
+  </Step>
+  <Step title="Click Install">
+    Plesk will contact Let's Encrypt, complete domain validation, and install the certificate. When complete, you will see a success message.
+  </Step>
+  <Step title="Verify SSL is enabled">
+    Go to **Websites & Domains → Hosting Settings**. Under **Security**, confirm the **SSL support** check box is selected and the Let's Encrypt certificate is chosen in the **Certificate** list.
+  </Step>
+</Steps>
+
+### Renewing Let's Encrypt in Plesk
+
+Plesk renews Let's Encrypt certificates automatically once a month (certificates expire every 90 days, so this provides a comfortable buffer). To manually trigger a renewal:
+
+1. Go to **Websites & Domains** → click the **Let's Encrypt** icon
+2. Click **Renew**
+
+---
+
+## Installing SSL via Enhance Control Panel
+
+If your Netstreet Africa account uses the Enhance control panel:
+
+<Steps>
+  <Step title="Log in to the Hosting Panel">
+    Go to [my.netstreet.co.za](https://my.netstreet.co.za) and log in.
+  </Step>
+  <Step title="Go to Websites">
+    In the left sidebar, click **Websites**.
+  </Step>
+  <Step title="Select your website">
+    On the **Manage Websites** page, click the website you want to manage.
+  </Step>
+  <Step title="Open the Security tab">
+    Click the **Security** tab.
+  </Step>
+  <Step title="Install a custom SSL certificate">
+    In the **SSL Certificates** section, click **Install Custom SSL**. Then:
+
+    - Select the **Domain** from the drop-down list
+    - Paste your **Certificate (CRT)** text, or click **Upload file** to upload it
+    - Paste your **Private Key** text, or upload the file
+    - Click **Upload**
+
+    The Hosting Panel installs the certificate for the selected domain.
+  </Step>
+</Steps>
+
+<Note>
+  In most cases with Enhance, you do not need to install an SSL certificate
+  manually — the free SSL certificate is installed and renewed automatically.
+  Use the manual procedure above only if you have purchased a paid certificate
+  from Netstreet Africa or a third-party provider.
+</Note>
+
+---
+
+## Installing Let's Encrypt on an Unmanaged VPS (command line)
+
+If you run an Unmanaged VPS at Netstreet Africa, you manage SSL certificates yourself via the command line using **Certbot**.
+
+<Warning>
+  The Let's Encrypt documentation recommends using `snapd` for Certbot
+  installation. However, `snapd` is incompatible with the Netstreet Africa VPS
+  infrastructure. Use your Linux distribution's package manager to install
+  Certbot directly instead.
+</Warning>
+
+<Tabs>
+  <Tab title="Ubuntu / Debian + Nginx">
+    ```bash
+    # Install Nginx and Certbot
+    sudo apt install -y nginx certbot python3-certbot-nginx
+
+    # Obtain and install the certificate
+    sudo certbot --nginx -d yourdomain.co.za -d www.yourdomain.co.za
+    ```
+
+    Certbot will automatically update your Nginx configuration and set up a cron job for automatic renewal.
+  </Tab>
+  <Tab title="Ubuntu / Debian + Apache">
+    ```bash
+    # Install Apache and Certbot
+    sudo apt install -y apache2 certbot python3-certbot-apache
+
+    # Obtain and install the certificate
+    sudo certbot --apache -d yourdomain.co.za -d www.yourdomain.co.za
+    ```
+  </Tab>
+  <Tab title="AlmaLinux + Apache">
+    ```bash
+    # Install Certbot via EPEL
+    sudo yum install epel-release
+    sudo yum install certbot python3-certbot-apache
+
+    # Obtain and install the certificate
+    sudo certbot --apache -d yourdomain.co.za -d www.yourdomain.co.za
+    ```
+  </Tab>
+</Tabs>
+
+Certbot sets up automatic renewal. Test the renewal process with:
+
+```bash
+sudo certbot renew --dry-run
+```
+
+For a full list of Certbot-compatible ACME clients, visit [letsencrypt.org/docs/client-options](https://letsencrypt.org/docs/client-options).
+
+---
+
+## Frequently asked questions
+
+<Accordion title="How long does it take for a new certificate to be issued?">
+  On shared hosting accounts, certificates are usually issued within minutes.
+  In some cases it can take up to four hours. If your certificate has not
+  appeared after four hours, please contact Netstreet Africa support.
+</Accordion>
+
+<Accordion title="Does Let's Encrypt work with all domains?">
+  Let's Encrypt requires the domain to resolve to your server's IP address
+  before it can issue a certificate. Domains that have not yet had their DNS
+  updated, or that use a third-party proxy service that masks the origin IP,
+  may not pass validation immediately.
+</Accordion>
+
+<Accordion title="Will my certificate renew automatically?">
+  Yes. On cPanel and Enhance accounts, certificates renew automatically. On
+  Plesk, Plesk handles renewal monthly. On an Unmanaged VPS with Certbot,
+  Certbot installs a cron job that handles renewal automatically.
+</Accordion>
+
+<Accordion title="Can I use Let's Encrypt for a wildcard certificate?">
+  Yes. Let's Encrypt supports wildcard certificates (e.g. `*.yourdomain.co.za`),
+  but they require DNS-based domain validation rather than the HTTP-based method
+  used for standard certificates. This is typically handled via the Certbot
+  `--manual` flag with DNS plugins on a VPS. Contact Netstreet Africa support
+  if you need assistance.
+</Accordion>

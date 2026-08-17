@@ -1,30 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
+  "projectType": "saas",
+  "projectName": "Netstreet Knowledge Base",
+  "projectDescription": "A comprehensive help center and knowledge base for Netstreet Africa's web hosting services, covering account management, domains, email, security, control panels, and server products.",
   "theme": "maple",
-  "name": "Netstreet Knowledge Base",
-  "colors": {
-    "primary": "#252727",
-    "light": "#a9fc63",
-    "dark": "#81fc80"
-  },
-  "favicon": "https://media.brand.dev/b94e19fa-9d86-4062-b2a3-2e6ab5d0b506.png",
-  "logo": {
-    "light": "https://media.brand.dev/c8fccded-04f2-48f9-a2e4-1443a94e0143.svg",
-    "dark": "https://media.brand.dev/c8fccded-04f2-48f9-a2e4-1443a94e0143.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "https://my.netstreet.co.za"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Client Area",
-      "href": "https://my.netstreet.co.za"
-    }
-  },
+  "primaryColor": "#252727",
+  "lightColor": "#a9fc63",
+  "darkColor": "#81fc80",
   "navigation": {
     "tabs": [
       {
@@ -173,9 +154,28 @@
       }
     ]
   },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/netstreet"
-    }
-  }
+  "keyFeatures": [
+    "Web hosting with cPanel, Plesk, and Enhance control panels",
+    "Domain registration, renewal, and DNS management",
+    "Managed and unmanaged VPS and dedicated server hosting",
+    "Managed WordPress hosting with CDN and staging",
+    "SSL certificate management including Let's Encrypt",
+    "Professional and business email hosting",
+    "Cloudflare CDN integration",
+    "Softaculous one-click app installer",
+    "Reseller hosting with WHM and Enhance",
+    "24/7 support with ticketing system"
+  ],
+  "publicApiSurface": [
+    "Hosting Panel (my.netstreet.co.za)",
+    "cPanel control panel",
+    "Plesk control panel",
+    "Enhance control panel",
+    "WebHost Manager (WHM)",
+    "Softaculous installer",
+    "DNS zone management",
+    "SSL certificate management",
+    "FTP/SFTP account management",
+    "SSH access"
+  ]
 }

@@ -1,0 +1,171 @@
+---
+title: "Managing Your Domain in the Netstreet Client Area"
+sidebarTitle: "Domain Management"
+description: "Learn how to manage your Netstreet Africa domain: view info, update nameservers, set registrar lock, get an EPP code, and update contacts."
+---
+
+The Netstreet Africa client area gives you full control over every domain registered through us. From updating nameservers to locking your domain against unauthorised transfers, everything you need is available at [my.netstreet.co.za](https://my.netstreet.co.za). This guide covers all the key domain management tasks you are likely to need.
+
+<Note>
+  The steps in this article apply only to domains purchased directly from Netstreet Africa. If you registered your domain with a third-party registrar, you will need to use their management interface to make changes.
+</Note>
+
+## Viewing domain information
+
+You can check the status, registration dates, expiry date, and other details for any of your domains at any time.
+
+<Steps>
+  <Step title="Log in to your client area">
+    Go to [my.netstreet.co.za](https://my.netstreet.co.za) and sign in.
+  </Step>
+  <Step title="Open your domains list">
+    In the left sidebar, under **Products & Services**, click **Domains**.
+  </Step>
+  <Step title="Select the domain">
+    Click the domain you want to view. Use the **Active**, **Cancelled**, or **All** filter tabs if you need to locate a specific domain quickly.
+  </Step>
+  <Step title="Review domain details">
+    The domain detail page displays your registration date, expiry date, nameservers, registrar lock status, and more.
+  </Step>
+</Steps>
+
+## Changing nameservers
+
+Nameservers tell the internet which DNS servers are authoritative for your domain. You may need to change your nameservers when migrating hosting providers, setting up a CDN like Cloudflare, or pointing your domain to a new server.
+
+<Steps>
+  <Step title="Open the domain detail page">
+    Log in to [my.netstreet.co.za](https://my.netstreet.co.za), go to **Domains**, and click the domain you want to update.
+  </Step>
+  <Step title="Click Update Nameservers">
+    On the domain overview, click **Update Nameservers**.
+  </Step>
+  <Step title="Enter your new nameservers">
+    In the **Update Nameservers** dialog, type the nameservers you want to use. You must specify at least **two** nameservers — a primary and a secondary.
+  </Step>
+  <Step title="Submit your changes">
+    Click **Submit**. Your nameserver update is sent to the domain registry.
+  </Step>
+</Steps>
+
+<Warning>
+  DNS changes can take up to **24–48 hours** to fully propagate across the internet. During this time, some visitors may still be directed to the old server. Plan nameserver changes during low-traffic periods where possible.
+</Warning>
+
+<Info>
+  If you are using Netstreet Africa hosting for your website and email, your nameservers should point to our nameservers. Contact our support team at [my.netstreet.co.za](https://my.netstreet.co.za) if you are unsure which nameservers to use.
+</Info>
+
+## Setting the registrar lock
+
+The registrar lock (also called a transfer lock or domain lock) prevents your domain from being transferred to another registrar without your authorisation. It is a critical security feature that protects against domain hijacking.
+
+<Steps>
+  <Step title="Open the domain detail page">
+    Log in to [my.netstreet.co.za](https://my.netstreet.co.za), navigate to **Domains**, and select the domain you want to lock or unlock.
+  </Step>
+  <Step title="Click Lock/Unlock">
+    On the domain overview, click **Lock/Unlock**.
+  </Step>
+  <Step title="Enable or disable the lock">
+    In the **Lock/Unlock** dialog:
+    - To **lock** the domain, ensure the **Locked** checkbox is selected.
+    - To **unlock** the domain (required before initiating a transfer), uncheck the **Locked** checkbox.
+  </Step>
+  <Step title="Submit">
+    Click **Submit** to save the change.
+  </Step>
+</Steps>
+
+<Warning>
+  Only unlock your domain when you are actively initiating a transfer. Re-lock it as soon as the transfer is complete to keep your domain secure.
+</Warning>
+
+## Updating registrant contact information
+
+Your registrant contact details represent the legal owner of the domain and are stored in the public WHOIS database (unless you have Domain Privacy enabled). Keeping this information accurate is a requirement under ICANN policy.
+
+<Steps>
+  <Step title="Open the domain detail page">
+    Log in to [my.netstreet.co.za](https://my.netstreet.co.za), go to **Domains**, and click the relevant domain.
+  </Step>
+  <Step title="Click Update Registrant">
+    On the domain overview, click **Update Registrant**.
+  </Step>
+  <Step title="Edit your details">
+    In the **Update Registrant** dialog, update the fields you need to change — name, address, email, phone number, and so on.
+  </Step>
+  <Step title="Submit your changes">
+    Click **Submit** to save.
+  </Step>
+</Steps>
+
+<Note>
+  Changing the registrant email address may trigger a verification message to both the old and new addresses. This is a mandatory ICANN security procedure. Follow the instructions in those emails to confirm the change.
+</Note>
+
+## Obtaining an EPP code (for outbound transfers)
+
+If you want to transfer your domain to a different registrar, you will need an **EPP code** (also called an Auth-Info code, transfer secret, or EPP key). This code acts as a one-time password that the receiving registrar uses to authorise the transfer.
+
+<Steps>
+  <Step title="Unlock your domain first">
+    Ensure the registrar lock is disabled before requesting an EPP code. See [Setting the registrar lock](#setting-the-registrar-lock) above.
+  </Step>
+  <Step title="Open the domain detail page">
+    Log in to [my.netstreet.co.za](https://my.netstreet.co.za), go to **Domains**, and click the domain you are transferring out.
+  </Step>
+  <Step title="Request the EPP code">
+    Click **Get EPP Code (Non-UK Domains)**.
+  </Step>
+  <Step title="Check your email">
+    The client area will confirm the request was accepted. The EPP code is then sent to the **registrant email address** on file for the domain.
+  </Step>
+</Steps>
+
+<Info>
+  The EPP code is sent to the registrant email address, not necessarily your client area login email. Make sure your registrant email address is current and accessible before requesting the code.
+</Info>
+
+## Updating the IPS tag (UK domains only)
+
+For domains registered under UK TLDs such as `.co.uk`, `.org.uk`, or `.me.uk`, the transfer process works differently. Instead of using an EPP code, you must update the **IPS (Internet Provider Security) tag** to the tag of the receiving registrar.
+
+<Steps>
+  <Step title="Get the IPS tag from the new registrar">
+    Contact the registrar you are transferring to and ask for their IPS tag.
+  </Step>
+  <Step title="Open the domain detail page">
+    Log in to [my.netstreet.co.za](https://my.netstreet.co.za), navigate to **Domains**, and click the UK domain you are transferring.
+  </Step>
+  <Step title="Click Update IPS Tag">
+    Click **Update IPS Tag (UK Domain Release)**.
+  </Step>
+  <Step title="Enter the new tag">
+    In the **New IPS Tag** text box, type the IPS tag provided by the gaining registrar.
+  </Step>
+  <Step title="Submit">
+    Click **Submit**. The change is sent to Nominet (the UK domain registry) immediately.
+  </Step>
+</Steps>
+
+<Warning>
+  Updating the IPS tag on a UK domain is **immediate and irreversible** via the standard process. Once updated, the domain is released to the new registrar. Only do this when you are ready to complete the transfer.
+</Warning>
+
+## Related topics
+
+<CardGroup cols={2}>
+  <Card title="Transferring a Domain" href="/domains/transferring-a-domain" icon="arrow-right-arrow-left">
+    Move a domain from another registrar to Netstreet Africa, or transfer out to a new provider.
+  </Card>
+  <Card title="Renewing a Domain" href="/domains/renewing-a-domain" icon="rotate-right">
+    Set up auto-renewal or renew your domain manually before it expires.
+  </Card>
+  <Card title="DNS Overview" href="/domains/dns-overview" icon="network-wired">
+    Understand how DNS works and what record types are available.
+  </Card>
+  <Card title="Managing DNS Zones" href="/domains/managing-dns-zones" icon="list">
+    Add, edit, or delete DNS records for your domain.
+  </Card>
+</CardGroup>

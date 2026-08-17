@@ -1,0 +1,197 @@
+---
+title: "Preventing Your Outgoing Email from Being Marked as Spam"
+sidebarTitle: "Preventing Spam"
+description: "Best practices and technical steps to prevent Netstreet Africa emails from landing in spam folders, including SPF, DKIM, DMARC setup and content guidelines."
+---
+
+Having your legitimate emails flagged as spam is frustrating and costly — especially if you run a business that relies on email communication. Modern mail servers use dozens of signals to evaluate whether an incoming message is trustworthy. If your domain lacks proper authentication records, or your email content triggers common spam filters, your messages may never reach your recipients' inboxes. This guide covers the technical and content-based steps you can take to maximise email deliverability from your Netstreet Africa hosting account.
+
+<Note>
+  This guide is intended for users with legitimate email that is being incorrectly
+  classified as spam. Sending unsolicited bulk email is a violation of Netstreet
+  Africa's Terms of Service and is prohibited under applicable anti-spam
+  legislation including South Africa's Protection of Personal Information Act
+  (POPIA) and the CAN-SPAM Act.
+</Note>
+
+---
+
+## Step 1 — Set up SPF (Sender Policy Framework)
+
+An SPF record is a DNS TXT record that tells receiving mail servers which IP addresses are authorised to send email on behalf of your domain. Without an SPF record, your messages have no proof of authorisation and are more likely to be flagged as spam or spoofed by attackers.
+
+### Adding your SPF record
+
+In your domain's DNS zone, add a TXT record with the following format:
+
+```
+Type:  TXT
+Host:  yourdomain.co.za
+Value: v=spf1 include:netstreet.co.za ~all
+TTL:   3600
+```
+
+If you send email from multiple services (e.g. your hosting server and a third-party newsletter platform), include all of them:
+
+```
+v=spf1 include:netstreet.co.za include:mailchimp.com ~all
+```
+
+<Warning>
+  You can only have **one** SPF record per domain. If you need to authorise
+  multiple senders, combine them all into a single record. Multiple SPF records
+  will cause authentication failures.
+</Warning>
+
+<Tip>
+  Use `~all` (soft fail) while setting up. Once you are confident all legitimate
+  senders are included, switch to `-all` (hard fail) for stronger protection.
+</Tip>
+
+---
+
+## Step 2 — Enable DKIM (DomainKeys Identified Mail)
+
+DKIM adds a cryptographic signature to every outgoing email. Receiving mail servers verify this signature against the public key published in your DNS, confirming the message genuinely came from your server and was not altered in transit.
+
+### Enabling DKIM via cPanel
+
+<Steps>
+  <Step title="Log in to cPanel">
+    Access cPanel via your Netstreet Africa Hosting Panel.
+  </Step>
+  <Step title="Open Email Deliverability">
+    In the **Email** section, click **Email Deliverability**.
+  </Step>
+  <Step title="Enable DKIM for your domain">
+    If DKIM is not yet installed, click **Repair** next to your domain. cPanel will automatically generate the DKIM key pair and add the required DNS TXT record.
+  </Step>
+  <Step title="Verify DKIM is active">
+    After a few minutes, check the status again on the Email Deliverability page. The DKIM status should show as **Valid**.
+  </Step>
+</Steps>
+
+---
+
+## Step 3 — Configure DMARC
+
+DMARC ties SPF and DKIM together with an enforced policy. It tells receiving mail servers what to do if an email fails both SPF and DKIM checks, and sends you aggregate reports so you can monitor your domain's email authentication health.
+
+Add the following TXT record to your DNS zone:
+
+```
+Type:  TXT
+Host:  _dmarc.yourdomain.co.za
+Value: v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.co.za
+TTL:   3600
+```
+
+Start with `p=none` (monitor only) to avoid accidentally blocking legitimate mail, then progress to `p=quarantine` and eventually `p=reject` once you have verified all your legitimate email sources pass authentication.
+
+See our [DNS Settings for Email](/email/dns-settings-for-email) guide for full details on configuring DMARC.
+
+---
+
+## Step 4 — Set up reverse DNS (rDNS)
+
+Reverse DNS (rDNS) maps your server's IP address back to a hostname. Many receiving mail servers — particularly Gmail, Yahoo, and Hotmail/Outlook — perform an rDNS lookup on the sending IP address. If no rDNS record exists, or if the hostname does not match the sending domain, your email may be flagged.
+
+To configure rDNS for your VPS or dedicated server, please open a support ticket in the [Netstreet Africa client area](https://my.netstreet.co.za) and provide the hostname you would like associated with your server's IP address.
+
+---
+
+## Step 5 — Follow best practices for email content
+
+Technical authentication is essential, but the content of your emails also plays a significant role in spam scoring.
+
+<CardGroup cols={2}>
+  <Card title="Do this ✓" icon="check-circle">
+    - Send plain-text messages or multi-part MIME (text + HTML)
+    - Use valid, well-formed HTML markup
+    - Include a clear, relevant subject line
+    - Include a physical mailing address in marketing emails
+    - Provide a clear unsubscribe mechanism
+    - Keep image-to-text ratios balanced
+  </Card>
+  <Card title="Avoid this ✗" icon="times-circle">
+    - Sending HTML-only messages with no plain-text alternative
+    - Using excessive exclamation marks (!) or dollar signs ($) in the subject
+    - Writing in ALL CAPS
+    - Using spam trigger words: "free money", "guaranteed", "act now"
+    - Including large image files with minimal text
+    - Using URL shorteners to hide the destination of links
+  </Card>
+</CardGroup>
+
+---
+
+## Step 6 — Manage your sender reputation
+
+Your sender reputation is tied to your sending IP address. If previous tenants of your IP address (on a shared server) sent spam, or if your own email practices result in high spam complaint rates, your reputation suffers.
+
+### What affects reputation
+
+- **Spam complaint rate** — recipients clicking "Report as Spam" in their email client
+- **Bounce rate** — sending to invalid or non-existent addresses
+- **Spam trap hits** — sending to addresses specifically set up to catch spammers
+- **Blacklist listings** — your IP appearing on organisations like SpamCop or Spamhaus
+
+### Checking your sender reputation
+
+Use free tools to check whether your sending IP or domain has been blacklisted:
+
+- [MXToolbox Blacklist Check](https://mxtoolbox.com/blacklists.aspx)
+- [Spamhaus Blocklist Lookup](https://www.spamhaus.org/lookup/)
+- [SpamCop](https://www.spamcop.net/)
+
+---
+
+## What to do if your email is blocked by a provider
+
+<Accordion title="Gmail">
+  - Ensure SPF, DKIM, and DMARC are all correctly configured
+  - Set up rDNS for your sending IP
+  - Review [Google's email sender guidelines](https://support.google.com/mail/answer/81126)
+  - Note that changes may take several days to have effect
+</Accordion>
+
+<Accordion title="Yahoo / AOL">
+  - Ensure SPF and DKIM are correctly configured
+  - Set up rDNS for your sending IP
+  - Maintain high recipient engagement (opens, clicks) to build a positive reputation
+</Accordion>
+
+<Accordion title="Outlook / Hotmail / MSN">
+  - Ensure SPF and DKIM are correctly configured
+  - Set up rDNS for your sending IP
+  - Register for Microsoft's **Junk Email Reporting Partner (JMRP)** programme at [postmaster.live.com/snds/JMRP.aspx](https://postmaster.live.com/snds/JMRP.aspx)
+  - Register for **Smart Network Data Services (SNDS)** at [postmaster.live.com/snds/addnetwork.aspx](https://postmaster.live.com/snds/addnetwork.aspx)
+  - Save the verification number provided — you will need it for any future Microsoft correspondence
+</Accordion>
+
+<Accordion title="Blocked by a real-time blacklist (RBL)">
+  If your IP has been blacklisted by an organisation like SpamCop or Spamhaus:
+
+  1. Ensure no devices on your network are infected with malware sending spam
+  2. Follow the specific removal instructions published by the blacklist organisation
+  3. If your IP address is dynamic, contact Netstreet Africa support to request a new IP assignment
+  4. Alternatively, use a dedicated outbound SMTP relay service
+
+  Netstreet Africa has no affiliation with blacklist organisations and cannot
+  directly remove your IP from their lists.
+</Accordion>
+
+---
+
+## Summary checklist
+
+<Steps>
+  <Step title="Add an SPF TXT record to your DNS zone" />
+  <Step title="Enable DKIM via the Email Deliverability section of cPanel" />
+  <Step title="Add a DMARC TXT record starting with p=none for monitoring" />
+  <Step title="Configure reverse DNS for your server's IP address" />
+  <Step title="Follow email content best practices to avoid spam triggers" />
+  <Step title="Monitor your sender reputation and act on blacklist alerts" />
+</Steps>
+
+For additional help with email deliverability, please open a support ticket in the [Netstreet Africa client area](https://my.netstreet.co.za).

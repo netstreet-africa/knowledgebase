@@ -1,0 +1,167 @@
+---
+title: "Using Cloudflare with Your Netstreet Africa Website"
+sidebarTitle: "Cloudflare"
+description: "Activate Cloudflare on your Netstreet Africa site to speed up delivery, protect against DDoS attacks, manage cache, and configure SSL end-to-end."
+---
+
+Cloudflare is a global content delivery network (CDN) and security platform that sits between your visitors and your Netstreet Africa server. When you enable Cloudflare, all traffic to your website is routed through Cloudflare's worldwide network of data centres before reaching your server. This gives your site two powerful advantages: **performance** (content is cached and served from a server closer to the visitor) and **security** (Cloudflare filters out malicious traffic, bots, and DDoS attacks before they can reach you).
+
+<Note>
+  Cloudflare offers a free plan that includes CDN, basic DDoS protection, and DNS management. Paid plans add additional security rules, image optimisation, and access controls. You can sign up at [cloudflare.com](https://www.cloudflare.com).
+</Note>
+
+## How Cloudflare works with your hosting
+
+Once activated, Cloudflare changes your domain's DNS so that requests resolve to Cloudflare's IP addresses rather than your server's IP directly. Cloudflare then forwards legitimate requests to your Netstreet Africa server ("origin") and caches static responses at its edge. This means:
+
+- Static files (images, CSS, JavaScript) are served from a Cloudflare node near your visitor — reducing latency significantly.
+- Your server's IP address is hidden behind Cloudflare, making direct attacks harder.
+- Bad actors and known malicious IP addresses are blocked or challenged at the network edge.
+
+## Activating Cloudflare
+
+There are two ways to start using Cloudflare: directly through the Cloudflare website, or through the Plesk control panel on legacy accounts.
+
+<Tabs>
+  <Tab title="Direct Cloudflare setup (all accounts)">
+    <Steps>
+      <Step title="Create a Cloudflare account">
+        Go to [cloudflare.com](https://www.cloudflare.com) and sign up for a free account.
+      </Step>
+      <Step title="Add your domain">
+        Click **Add a Site**, enter your domain name, and select the free plan (or a paid plan if you require advanced features).
+      </Step>
+      <Step title="Review your DNS records">
+        Cloudflare scans your existing DNS records and imports them automatically. Review the list carefully and confirm all your A, CNAME, MX, and TXT records are present. Click **Continue**.
+      </Step>
+      <Step title="Update your nameservers">
+        Cloudflare provides two nameserver addresses (for example, `alice.ns.cloudflare.com` and `bob.ns.cloudflare.com`). Log in to your Netstreet Africa client area, go to your domain's management page, and replace the existing nameservers with the ones Cloudflare provided.
+      </Step>
+      <Step title="Wait for propagation">
+        Nameserver changes typically propagate within a few minutes to a few hours. Once Cloudflare detects the change, your site is active on the Cloudflare network.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Plesk (legacy Managed WordPress)">
+    <Steps>
+      <Step title="Open ServerShield by Cloudflare">
+        Log in to Plesk and in the right-hand menu, click **ServerShield by Cloudflare**.
+      </Step>
+      <Step title="Sign in or create a Cloudflare account">
+        Enter your Cloudflare email address and password and click **Submit**. If you do not have a Cloudflare account, a new one will be created for you.
+      </Step>
+      <Step title="Enable Cloudflare for your domain">
+        Click the toggle next to the domain you want to protect. Your site is now routing through the Cloudflare network.
+      </Step>
+    </Steps>
+    <Note>
+      Plesk's ServerShield integration uses CNAME records for the `www` subdomain only. To ensure all traffic passes through Cloudflare, set up a redirect from your root domain (`yourdomain.com`) to `www.yourdomain.com`.
+    </Note>
+  </Tab>
+</Tabs>
+
+## CDN and performance benefits
+
+Cloudflare's CDN caches your website's static assets at over 300 data centre locations around the world. Visitors in Johannesburg, Nairobi, Lagos, or anywhere else on the globe receive content from a nearby Cloudflare node rather than waiting for a round-trip to your origin server.
+
+Key performance features include:
+
+- **Automatic static caching** — images, CSS, JavaScript, and other assets are cached at the edge with no configuration required.
+- **HTTP/2 and HTTP/3 support** — modern protocols that significantly reduce page load times.
+- **Minification** — Cloudflare can automatically minify HTML, CSS, and JavaScript files (enable under **Speed → Optimisation** in the Cloudflare dashboard).
+- **Always Online** — if your server is temporarily unreachable, Cloudflare serves a cached version of your pages to visitors.
+
+<Tip>
+  Enable Cloudflare's **Auto Minify** and **Brotli compression** options under **Speed → Optimisation** to further reduce page load times without any changes to your website files.
+</Tip>
+
+## DDoS protection
+
+A Distributed Denial of Service (DDoS) attack floods your server with enormous amounts of traffic, making your site slow or completely unreachable. Cloudflare's network absorbs and filters this traffic before it reaches Netstreet Africa's servers.
+
+Cloudflare's security features include:
+
+- **Automatic DDoS mitigation** — enabled on all plans at no extra cost, with no configuration required.
+- **Security Level** — controls how aggressively Cloudflare challenges visitors based on their IP reputation. Set this under **Security → Settings** in the Cloudflare dashboard. Options range from **Essentially Off** (minimal filtering) to **I'm Under Attack!** (maximum challenge rate, useful during an active attack).
+- **IP reputation filtering** — visitors from IP addresses known to be used for attacks, spam, or scraping are challenged with a CAPTCHA or blocked automatically.
+- **Rate limiting** — available on paid plans, lets you define rules that block or challenge IPs making an unusually high number of requests per second.
+
+<Warning>
+  Enabling **I'm Under Attack!** mode presents all visitors with a JavaScript challenge before they can access your site. While this stops most automated attacks, it can also affect legitimate users and automated tools such as search engine crawlers. Only use this mode temporarily during an active attack.
+</Warning>
+
+## Clearing the Cloudflare cache
+
+When you update your website — publishing new content, changing a theme, or deploying code — Cloudflare may continue serving outdated cached versions to visitors. Clearing the cache forces Cloudflare to fetch fresh content from your server.
+
+<Tabs>
+  <Tab title="Cloudflare Dashboard">
+    <Steps>
+      <Step title="Log in to Cloudflare">
+        Go to [dash.cloudflare.com](https://dash.cloudflare.com) and select your domain.
+      </Step>
+      <Step title="Open Caching settings">
+        In the left sidebar, click **Caching**, then click **Configuration**.
+      </Step>
+      <Step title="Purge the cache">
+        Click **Purge Cache**. Choose **Purge Everything** to clear all cached files, or **Custom Purge** to clear specific URLs or file types.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Plesk ServerShield">
+    <Steps>
+      <Step title="Open Cloudflare settings">
+        In Plesk, click **ServerShield by Cloudflare**, then click **Manage Cloudflare** next to your domain.
+      </Step>
+      <Step title="Purge the cache">
+        Click the **Purge Cache** button to immediately clear all cached resources for your site.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<Tip>
+  If you frequently update your site, consider enabling **Development Mode** temporarily while making changes. Development mode bypasses the cache for three hours, letting you see updates immediately. Find it under **Caching → Configuration → Development Mode** in the Cloudflare dashboard.
+</Tip>
+
+## Using Cloudflare with SSL
+
+Cloudflare offers its own SSL layer between visitors and Cloudflare's edge. It is important to configure this correctly to ensure end-to-end encryption and avoid redirect loops.
+
+### SSL/TLS encryption modes
+
+| Mode | Description | Recommended? |
+|---|---|---|
+| **Off** | No encryption between visitor and Cloudflare | ❌ Never |
+| **Flexible** | Encrypts visitor ↔ Cloudflare, but not Cloudflare ↔ origin | ⚠️ Only if no cert on origin |
+| **Full** | Encrypts end-to-end, accepts self-signed origin certificates | ✅ Good |
+| **Full (Strict)** | Encrypts end-to-end, requires a valid certificate on origin | ✅ Best |
+
+<Steps>
+  <Step title="Set SSL mode to Full or Full (Strict)">
+    In the Cloudflare dashboard, go to **SSL/TLS → Overview** and select **Full** or **Full (Strict)**. This ensures all traffic between Cloudflare and your Netstreet Africa server is encrypted.
+  </Step>
+  <Step title="Install an SSL certificate on your origin">
+    If using **Full (Strict)**, your Netstreet Africa server must have a valid SSL certificate installed (a free Let's Encrypt/cPanel certificate works perfectly). See the [SSL Certificates](/hosting/ssl-certificates) guide for installation instructions.
+  </Step>
+  <Step title="Enable Always Use HTTPS">
+    In the Cloudflare dashboard, go to **SSL/TLS → Edge Certificates** and enable **Always Use HTTPS**. This redirects all HTTP requests to HTTPS at the Cloudflare edge before they reach your server.
+  </Step>
+</Steps>
+
+<Warning>
+  If you also have an HTTP-to-HTTPS redirect in your `.htaccess` file and Cloudflare is set to **Flexible** SSL mode, you will experience an infinite redirect loop. Always use **Full** or **Full (Strict)** mode when you have HTTPS redirects on your origin server.
+</Warning>
+
+## Configuring DNS records for email
+
+When you move your domain's DNS to Cloudflare, make sure your email-related DNS records are set to **DNS only** (grey cloud icon) rather than **Proxied** (orange cloud). Email traffic should not be routed through Cloudflare.
+
+The following record types should always be **DNS only**:
+- `MX` records
+- `TXT` records for SPF, DKIM, and DMARC
+- Any A records for mail servers (e.g., `mail.yourdomain.com`)
+
+<Note>
+  If your email stops working after enabling Cloudflare, check that your mail-related DNS records are not set to proxied. Go to your Cloudflare DNS dashboard and switch the orange cloud to grey for all email-related records.
+</Note>

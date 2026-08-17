@@ -1,0 +1,145 @@
+---
+title: "Understanding the cPanel Home Screen Layout"
+sidebarTitle: "Home Screen"
+description: "Explore every section of the cPanel home screen — from the search bar and Statistics panel to feature icons and account information."
+---
+
+The cPanel home screen is your command centre for everything on your Netstreet Africa hosting account. As soon as you log in, you land on this screen, and from here you can reach any tool or setting in your account. Understanding the layout makes it far quicker to find what you need and to keep an eye on how your account is performing.
+
+## Overview of the home screen layout
+
+The cPanel home screen uses the **Jupiter** theme (the default on all Netstreet Africa accounts) and is divided into three main areas:
+
+- **Top navigation bar** — branding, search, notifications, and your account menu
+- **Left or right sidebar** — account statistics, general information, and server details
+- **Main content area** — all cPanel feature sections displayed as icon grids
+
+## The top navigation bar
+
+The top bar runs across the full width of the screen and contains the following elements:
+
+| Element | Purpose |
+|---|---|
+| **Search Tools** box | Type any feature name to filter icons instantly — ideal for navigating quickly |
+| **Notifications bell** | Alerts about account activity, SSL renewals, and cPanel updates |
+| **Username / Avatar** | Click to access your profile, preferences, and the log-out option |
+| **Home icon** | Returns you to the main icon grid from any sub-page |
+
+<Tip>
+  Use the **Search Tools** box to find features fast. For example, typing `pass` immediately surfaces the **Password & Security** tool so you can change your password without scrolling through sections.
+</Tip>
+
+## The Statistics and General Information panel
+
+On the right side of the home screen (or at the top on narrower displays) you will find two key informational panels.
+
+### General Information
+
+This panel shows a snapshot of your account identity:
+
+- **Username** — your cPanel login name
+- **Primary domain** — the main domain associated with your account
+- **Home directory** — the server path to your account's root folder
+- **Last login time and IP address** — a quick security check to confirm no unexpected logins
+
+Click **Server Information** within this panel to open a detailed page showing your hosting plan, server hostname, IP addresses, cPanel version, PHP version, and more. This information is often needed when configuring third-party services or troubleshooting with Netstreet Africa support.
+
+### Statistics
+
+The **Statistics** panel provides a real-time summary of resource consumption across your account:
+
+| Metric | What it shows |
+|---|---|
+| **CPU Usage** | Current CPU consumption relative to your plan limit |
+| **Physical Memory Usage** | RAM in use by your account's processes |
+| **Bandwidth** | Data transferred this month versus your monthly allowance |
+| **Disk Usage** | Storage used across all files, emails, and databases |
+| **Email Accounts** | Number of email accounts created versus your limit |
+| **Addon Domains / Subdomains** | Domains and subdomains currently active |
+| **MySQL Databases** | Number of databases in use |
+
+<Note>
+  If any statistic appears in red or shows you are close to a limit, consider optimising your site or contacting Netstreet Africa support to discuss upgrading your hosting plan.
+</Note>
+
+## Feature sections
+
+The main content area of the home screen is organised into labelled sections, each containing icons that link to specific tools. The sections you will see on a standard Netstreet Africa shared hosting account are:
+
+### Files
+
+Manage everything to do with storing and transferring website data:
+
+- **File Manager** — browse, upload, edit, copy, and delete files directly in your browser
+- **FTP Accounts** — create FTP accounts for yourself or collaborators with specific directory access
+- **Backup** — download a full or partial backup of your account to your local computer
+- **Disk Usage** — see a visual breakdown of how your disk quota is being used
+
+### Databases
+
+Control your MySQL databases and the applications that depend on them:
+
+- **Manage My Databases** (or **MySQL Databases**) — create databases and assign user privileges
+- **phpMyAdmin** — a web-based SQL client for running queries and inspecting data
+- **Remote MySQL** — whitelist external IP addresses that need direct database access
+
+### Domains
+
+Register and configure all domain-related settings:
+
+- **Domains** — add addon domains or manage existing ones, and view document root paths
+- **Subdomains** — create subdomains such as `blog.yourdomain.com`
+- **Redirects** — forward one URL to another
+- **Zone Editor** — view and edit DNS records (A, CNAME, MX, TXT, and more)
+
+### Email
+
+Set up and maintain every aspect of your email service:
+
+- **Email Accounts** — create, edit, or remove mailboxes on your domain
+- **Forwarders** — automatically redirect messages to another address
+- **Autoresponders** — send automatic replies, useful for out-of-office messages
+- **Spam Filters** — configure Apache SpamAssassin to block unwanted mail
+
+### Security
+
+Harden and monitor your account:
+
+- **SSL/TLS** — install SSL certificates to enable HTTPS on your domains
+- **Two-Factor Authentication** — require a time-based one-time password at login
+- **SSH Access** — manage SSH keys for secure command-line access
+- **IP Blocker** — deny access to specific IP addresses or ranges
+
+### Software
+
+Install and configure server-side applications and runtimes:
+
+- **Softaculous Apps Installer** — one-click installation for WordPress, Joomla, and hundreds of other applications
+- **MultiPHP Manager** — switch the PHP version used by individual domains
+- **MultiPHP INI Editor** — adjust PHP configuration values (memory limit, upload size, etc.)
+
+### Preferences
+
+Personalise your cPanel experience and manage access:
+
+- **Password & Security** — change your cPanel password
+- **Manage Team** — create sub-accounts (team users) with defined roles and limited access
+- **User Manager** — view all sub-accounts associated with your primary account
+- **Contact Information** — update the email address used for account notifications
+
+## Accessing a feature
+
+You have two ways to open any cPanel feature:
+
+<Steps>
+  <Step title="Browse by section">
+    Scroll down the home screen, locate the section containing the feature you need, and click its icon.
+  </Step>
+  <Step title="Use the search bar">
+    Click the **Search Tools** text box at the top of the screen and start typing the feature name. Matching icons appear immediately — click the one you want.
+  </Step>
+</Steps>
+
+<Info>
+  If you cannot find a feature you expect to see, it may not be included in your current Netstreet Africa hosting plan. Contact our support team and we will advise whether an upgrade or add-on is available.
+</Info>

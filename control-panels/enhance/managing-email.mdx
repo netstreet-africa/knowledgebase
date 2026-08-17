@@ -1,0 +1,202 @@
+---
+title: "Managing Your Email in the Enhance Control Panel"
+sidebarTitle: "Email"
+description: "Create and manage email accounts, forwarders, spam filters, and autoresponders for your domain in the Netstreet Africa Enhance control panel."
+---
+
+The Enhance control panel on Netstreet Africa gives you a clean, unified interface for managing all of your email accounts. Unlike traditional setups where email configuration was buried in separate sections, Enhance organises email directly under each website — so everything related to `yourdomain.co.za` is managed in one place. There is no separate webmail login for account management; you handle everything from your hosting panel, and your customers access their email through the branded control panel URL you provide.
+
+---
+
+## Before you begin
+
+- Make sure you are logged in to your Enhance control panel. You can access it through the Netstreet Africa client area at [my.netstreet.co.za](https://my.netstreet.co.za), or via your custom panel domain if you have configured one.
+- If you are a reseller managing email on behalf of a client, use the **Impersonate** feature to enter the customer's panel before following the steps below.
+
+---
+
+## Adding an email account
+
+<Steps>
+  <Step title="Go to Websites">
+    In the left sidebar, click **Websites**. The **Manage websites** page shows all domains on your account.
+  </Step>
+  <Step title="Select the website">
+    Click the website (domain name) for which you want to create an email account.
+  </Step>
+  <Step title="Open the Emails tab">
+    At the top of the website management page, click the **Emails** tab.
+  </Step>
+  <Step title="Click Add account">
+    Click the **Add account** button.
+  </Step>
+  <Step title="Fill in the account details">
+    Complete the fields for the new email account:
+    - **Username** — The part before the `@` symbol (e.g. `info` for `info@yourdomain.co.za`)
+    - **Password** — Set a strong, unique password for this mailbox
+    - **Mailbox size** — Set a storage quota for this account
+  </Step>
+  <Step title="Click Add">
+    Click **Add** to create the email account. It will appear immediately in the account list.
+  </Step>
+</Steps>
+
+---
+
+## Modifying an existing email account
+
+<Steps>
+  <Step title="Navigate to the Emails tab">
+    Go to **Websites → [your domain] → Emails** as described above.
+  </Step>
+  <Step title="Click the account you want to modify">
+    Click the email address in the list to open its settings.
+  </Step>
+  <Step title="Make your changes">
+    From the account settings page, you can update any of the following:
+  </Step>
+</Steps>
+
+### What you can manage per email account
+
+| Setting | Description |
+|---|---|
+| **Display name** | The sender name shown to recipients when you send email |
+| **Mailbox size** | The maximum storage quota for this mailbox |
+| **Password** | Reset or change the account password |
+| **Forwarders** | Automatically forward all incoming email to another address |
+| **Spam settings** | Configure how aggressively spam is filtered for this account |
+| **Autoresponders** | Send automatic out-of-office or custom reply messages |
+| **Email client settings** | View the IMAP, POP3, and SMTP settings for third-party email apps |
+
+---
+
+## Configuring forwarders
+
+Email forwarders let you automatically redirect all mail sent to one address on to another address — for example, forwarding `sales@yourdomain.co.za` to your personal Gmail inbox.
+
+<Steps>
+  <Step title="Open the email account">
+    Navigate to **Websites → [your domain] → Emails** and click the account you want to configure.
+  </Step>
+  <Step title="Find the Forwarders section">
+    Scroll to the **Forwarders** section within the account settings.
+  </Step>
+  <Step title="Add a forwarding address">
+    Enter the destination email address and save the change. All incoming mail to this account will be forwarded to the address you specified.
+  </Step>
+</Steps>
+
+<Info>
+  You can forward to multiple addresses by adding more than one forwarder to the same account. Mail will be delivered to all forwarding destinations simultaneously.
+</Info>
+
+---
+
+## Setting up spam filters
+
+Enhance includes built-in spam filtering for every email account. You can adjust the sensitivity level for individual mailboxes depending on how aggressively you want spam to be filtered.
+
+<Steps>
+  <Step title="Open the email account settings">
+    Navigate to **Websites → [your domain] → Emails** and click the account you want to configure.
+  </Step>
+  <Step title="Find Spam settings">
+    Scroll to the **Spam settings** section.
+  </Step>
+  <Step title="Adjust the filter level">
+    Configure the spam sensitivity. A higher sensitivity catches more spam but may occasionally flag legitimate email. A lower sensitivity lets more mail through but reduces false positives.
+  </Step>
+</Steps>
+
+<Tip>
+  If important emails are being incorrectly marked as spam, lower the filter sensitivity for that account or check whether the sender's domain has correct SPF and DKIM records. Contact Netstreet Africa support at [my.netstreet.co.za](https://my.netstreet.co.za) if you need help diagnosing persistent spam delivery issues.
+</Tip>
+
+---
+
+## Configuring autoresponders
+
+Autoresponders send an automatic reply to anyone who emails you — useful for out-of-office notifications, holiday hours, or acknowledging receipt of enquiries.
+
+<Steps>
+  <Step title="Open the email account settings">
+    Navigate to **Websites → [your domain] → Emails** and click the account you want to configure.
+  </Step>
+  <Step title="Find Out-of-office notifications">
+    Scroll to the **Out-of-office notifications** (autoresponders) section.
+  </Step>
+  <Step title="Write your reply and enable the autoresponder">
+    Enter the subject line and body text for the automatic reply, then enable the autoresponder. All incoming mail to this address will receive the automated response.
+  </Step>
+</Steps>
+
+---
+
+## Email client settings (IMAP, POP3, SMTP)
+
+The incoming and outgoing mail server settings for Netstreet Africa hosting are the same regardless of whether your account is on Enhance or cPanel. You can view the exact settings for any mailbox by opening that email account in the panel.
+
+<Tabs>
+  <Tab title="IMAP (recommended)">
+    IMAP keeps your mail synchronised across all of your devices. Any changes you make on one device — reading, deleting, or filing messages — are reflected everywhere.
+
+    | Setting | Value |
+    |---|---|
+    | Incoming server | Your domain or server hostname |
+    | Port | 993 |
+    | Security | SSL/TLS |
+    | Username | Your full email address |
+    | Password | Your email account password |
+  </Tab>
+  <Tab title="POP3">
+    POP3 downloads mail to a single device and typically removes it from the server. Use IMAP unless you have a specific reason to use POP3.
+
+    | Setting | Value |
+    |---|---|
+    | Incoming server | Your domain or server hostname |
+    | Port | 995 |
+    | Security | SSL/TLS |
+    | Username | Your full email address |
+    | Password | Your email account password |
+  </Tab>
+  <Tab title="SMTP (outgoing)">
+    SMTP is used to send email from your mail client.
+
+    | Setting | Value |
+    |---|---|
+    | Outgoing server | Your domain or server hostname |
+    | Port | 465 (SSL) or 587 (STARTTLS) |
+    | Security | SSL/TLS or STARTTLS |
+    | Authentication | Required — use your full email address and password |
+  </Tab>
+</Tabs>
+
+<Note>
+  The exact server hostname for your account is shown in the email client settings section within each email account in the Enhance panel. Log in to your panel, click the email account, and look for the **Email client settings** section to get your specific values.
+</Note>
+
+---
+
+## Accessing webmail
+
+Roundcube webmail is included with every Netstreet Africa Enhance plan. To access webmail:
+
+1. Visit `webmail.yourdomain.co.za` in your browser (replace `yourdomain.co.za` with your domain name)
+2. Log in with your full email address and password
+
+You can also access webmail through the Enhance panel — look for the webmail link within the email account settings.
+
+---
+
+## Reseller note: managing client email
+
+If you are a reseller on Netstreet Africa, your clients manage their own email by logging in to the branded control panel URL you have configured. You can also manage email on their behalf at any time by using the **Impersonate** feature from your Primary Panel.
+
+Each customer account has its own separate email management interface. Customers on your plan do not see each other's email settings.
+
+---
+
+## Need help?
+
+If you have trouble setting up email on a device, configuring spam filtering, or your email is not sending or receiving correctly, open a support ticket through the Netstreet Africa client area at [my.netstreet.co.za](https://my.netstreet.co.za).

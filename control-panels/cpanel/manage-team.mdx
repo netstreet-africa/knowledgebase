@@ -1,0 +1,158 @@
+---
+title: "Managing Team Users and Sub-Accounts in cPanel"
+sidebarTitle: "Manage Team"
+description: "Learn how to create, edit, suspend, and delete cPanel team users to give developers or collaborators limited, role-based access to your hosting account."
+---
+
+The **Manage Team** feature in cPanel lets you create sub-accounts — called team users — that can log in to your Netstreet Africa cPanel account and work within a defined set of permissions. Instead of sharing your main cPanel username and password (which grants full control), you can give a developer, designer, or team member access to only the tools they need. This is the recommended approach whenever you need to collaborate without compromising your account's security.
+
+<Info>
+  Each cPanel account can have up to **seven team users** (not counting your own primary account). On Managed VPS and Dedicated Server plans, the Manage Team feature requires a Premier cPanel licence (100 accounts). Contact Netstreet Africa support if you are unsure whether your plan includes this feature.
+</Info>
+
+## Accessing Manage Team
+
+<Steps>
+  <Step title="Log in to cPanel">
+    Open cPanel through the Netstreet Africa client area or at `https://yourdomain.com:2083`. See [Getting Started with cPanel](/control-panels/cpanel/getting-started) if you need help logging in.
+  </Step>
+  <Step title="Open Manage Team">
+    On the cPanel home screen, scroll to the **Preferences** section and click **Manage Team**. The **Manage Team** page lists all existing team users on your account.
+  </Step>
+</Steps>
+
+## Creating a team user
+
+<Steps>
+  <Step title="Click Create Team User">
+    On the **Manage Team** page, click the **Create Team User** button.
+  </Step>
+  <Step title="Set a username">
+    In the **Username** text box, type the username for the new team member. Usernames follow the format `username@yourdomain.com`, where `yourdomain.com` is your primary domain.
+  </Step>
+  <Step title="Configure the password">
+    Under the **Password** section, choose one of the following options:
+    - **The user will set the account password** — cPanel sends the new user an email invitation so they can choose their own password. This is the best option when granting access to an external developer.
+    - **Set the user's password** — type a password directly, or click **Generate** to let cPanel create a strong one for you.
+  </Step>
+  <Step title="Add a contact email">
+    In the **Contact email** text box, enter the team member's email address. cPanel uses this address to send login instructions and notifications.
+  </Step>
+  <Step title="Assign roles">
+    In the **Roles** list box, select one or more roles to define what the user can do. The available roles are:
+
+    | Role | Access granted |
+    |---|---|
+    | **Administrator** | Full access — includes all Database, Email, and Web tools |
+    | **Database** | Tools related to creating and managing MySQL databases and users |
+    | **Email** | Tools for managing email accounts, forwarders, and filters |
+    | **Web** | Tools related to domains, files, and website functionality |
+
+    <Tip>
+      Click **Show Features** next to any role to see the exact list of cPanel tools included in that role before you assign it.
+    </Tip>
+  </Step>
+  <Step title="Enable services (optional)">
+    Click **Services** to expand that section. You can grant or restrict access to:
+    - **Email** — enables the user to access email accounts on your domain
+    - **FTP** — enables the user to connect via FTP
+    - **Web Disk** — enables the user to access files via WebDAV
+  </Step>
+  <Step title="Set an expiry date (optional)">
+    If you are granting temporary access — for example, to a contractor or freelance developer — click **Security Settings** and select an expiry date. cPanel will automatically revoke the team user's access on that date.
+  </Step>
+  <Step title="Add notes (optional)">
+    Use the **Notes** text box to record information about why this account was created or who the team member is. These notes are visible only to you.
+  </Step>
+  <Step title="Create the user">
+    Click **Create**. cPanel creates the team user account. If you chose to let the user set their own password, they will receive an email invitation at the address you provided.
+  </Step>
+</Steps>
+
+<Warning>
+  Team users have real access to your hosting account. Only grant the minimum permissions necessary for their role. Review the audit log periodically (see below) to monitor their activity.
+</Warning>
+
+## Granting a developer limited access
+
+A common use case for team users is giving a web developer or agency the access they need to build or maintain your site — without exposing your full account. Here is the recommended approach:
+
+<Steps>
+  <Step title="Create a team user with the Web and Database roles">
+    Follow the steps above to create a new team user. Assign the **Web** role (for file and domain access) and optionally the **Database** role (if they need to work with your MySQL databases).
+  </Step>
+  <Step title="Enable FTP under Services">
+    Under **Services**, enable **FTP** so the developer can transfer files using an FTP client. cPanel will create an FTP account scoped to the directories permitted by their role.
+  </Step>
+  <Step title="Set an expiry date">
+    Under **Security Settings**, set an expiry date that matches your project timeline. This ensures access is automatically revoked when the project ends.
+  </Step>
+  <Step title="Share the login URL and credentials">
+    The developer logs in at the same cPanel URL you use (`https://yourdomain.com:2083`), using their full team username (for example, `dev@yourdomain.com`) and their password.
+  </Step>
+</Steps>
+
+<Note>
+  If the developer also needs direct access to a specific MySQL database from their local machine, you can whitelist their IP address using **Remote MySQL** in the **Databases** section of cPanel. This keeps database access tightly controlled without requiring full cPanel access.
+</Note>
+
+## Editing a team user
+
+<Steps>
+  <Step title="Open Manage Team">
+    On the **Preferences** section of the cPanel home screen, click **Manage Team**.
+  </Step>
+  <Step title="Click Edit User">
+    Find the team user you want to modify and click **Edit User** next to their name.
+  </Step>
+  <Step title="Make your changes and save">
+    Update the username, password, roles, services, expiry date, or notes as needed, then click **Save**.
+  </Step>
+</Steps>
+
+## Suspending and unsuspending a team user
+
+You can temporarily block a team user's access without deleting their account — useful if you need to pause a project or investigate unusual activity.
+
+<Steps>
+  <Step title="Open Manage Team">
+    In the **Preferences** section of the cPanel home screen, click **Manage Team**.
+  </Step>
+  <Step title="Suspend the user">
+    Locate the team user and click **Suspend**. Their account is immediately locked — they will not be able to log in until you unsuspend it.
+  </Step>
+  <Step title="Unsuspend when ready">
+    When you want to restore access, click **Unsuspend** next to the same user.
+  </Step>
+</Steps>
+
+## Deleting a team user
+
+<Steps>
+  <Step title="Open Manage Team">
+    In the **Preferences** section of the cPanel home screen, click **Manage Team**.
+  </Step>
+  <Step title="Delete the user">
+    Locate the team user you want to remove and click **Delete**.
+  </Step>
+  <Step title="Confirm deletion">
+    Click **Delete** again in the confirmation prompt. cPanel permanently removes the team user account.
+  </Step>
+</Steps>
+
+## Viewing the audit log
+
+The audit log records every action taken by your team users, giving you a clear trail of who did what and when. You should review it regularly to ensure no unauthorised or accidental changes have been made.
+
+<Steps>
+  <Step title="Open Manage Team">
+    In the **Preferences** section of the cPanel home screen, click **Manage Team**.
+  </Step>
+  <Step title="Open the audit log">
+    On the **Manage Team** page, click **View Audit Log**. cPanel displays a list of all recent actions performed by team users, including timestamps and the specific tools they accessed.
+  </Step>
+</Steps>
+
+<Tip>
+  Set a reminder to check the audit log monthly, especially if your team users have broad roles like Administrator. The log is your first line of defence in detecting unintended changes to your account.
+</Tip>

@@ -1,0 +1,155 @@
+---
+title: "Using Wildcard DNS for Subdomains at Netstreet Africa"
+sidebarTitle: "Wildcard DNS"
+description: "Learn what wildcard DNS is, what *.domain.co.za covers, when to use it, and how to configure a wildcard subdomain in cPanel or your DNS zone."
+---
+
+A wildcard DNS record is a catch-all entry that matches any subdomain of your domain that does not have a more specific record already defined. Instead of creating individual DNS records for every subdomain you might ever need, a single wildcard entry handles them all automatically. Netstreet Africa supports wildcard DNS for all hosted domains.
+
+## What does a wildcard DNS entry cover?
+
+A wildcard DNS record uses the asterisk (`*`) symbol as the subdomain label. For a domain like `yourdomain.co.za`, a wildcard record written as `*.yourdomain.co.za` will match:
+
+- `blog.yourdomain.co.za`
+- `shop.yourdomain.co.za`
+- `app.yourdomain.co.za`
+- `anything.yourdomain.co.za`
+- Any other single-label subdomain not already defined
+
+### What a wildcard does NOT cover
+
+- **The root domain itself** (`yourdomain.co.za`) — the wildcard only applies to subdomains.
+- **Multi-level subdomains** — `*.yourdomain.co.za` does **not** match `sub.blog.yourdomain.co.za`. You would need a separate wildcard at the next level (`*.blog.yourdomain.co.za`) to cover that.
+- **Existing specific records** — If you have an A record for `www.yourdomain.co.za` pointing to a different IP, that specific record takes precedence over the wildcard for `www`.
+
+<Info>
+  DNS resolvers always prefer more specific records over wildcard matches. A wildcard is only used when no exact matching record exists for the queried hostname.
+</Info>
+
+## When should you use wildcard DNS?
+
+<CardGroup cols={2}>
+  <Card title="Multi-tenant applications" icon="users">
+    SaaS platforms that assign each customer a unique subdomain (e.g. `customerA.yourdomain.co.za`, `customerB.yourdomain.co.za`) benefit greatly from a wildcard record, as you do not need to add a new DNS record for each new customer.
+  </Card>
+  <Card title="Development and staging environments" icon="code">
+    Developers who spin up subdomains dynamically for feature branches or staging environments can use a wildcard to avoid having to create new DNS records for every environment.
+  </Card>
+  <Card title="Wildcard SSL certificates" icon="lock">
+    A wildcard SSL certificate (e.g. `*.yourdomain.co.za`) pairs naturally with a wildcard DNS record to secure all subdomains under a single certificate.
+  </Card>
+  <Card title="Catching typos and legacy links" icon="magnifying-glass">
+    If your application handles subdomain routing in code, a wildcard DNS record ensures any subdomain resolves to your server, where your application can show an error or redirect.
+  </Card>
+</CardGroup>
+
+## How wildcard DNS works in practice
+
+Suppose you add a wildcard A record pointing `*.yourdomain.co.za` to your server IP `196.22.140.10`. When a visitor types `portal.yourdomain.co.za` into their browser:
+
+1. The DNS resolver queries for `portal.yourdomain.co.za`.
+2. No specific A record for `portal` exists in your zone.
+3. The resolver finds the wildcard record `*.yourdomain.co.za → 196.22.140.10`.
+4. The visitor's browser connects to `196.22.140.10`.
+5. Your web server or application handles the request and serves the appropriate content.
+
+The wildcard record handles the DNS layer — your web server still needs to be configured to respond to that subdomain correctly (e.g. via a virtual host or subdomain routing in your application).
+
+## Enabling wildcard subdomains in cPanel
+
+If your domain is hosted on a Netstreet Africa plan with cPanel, you can enable wildcard DNS using the Subdomains tool.
+
+<Steps>
+  <Step title="Log in to cPanel">
+    Access cPanel through your Netstreet Africa client area or via your hosting panel link.
+  </Step>
+  <Step title="Open the Subdomains tool">
+    In the **Domains** section of the cPanel home screen, click **Subdomains**.
+  </Step>
+  <Step title="Create a wildcard subdomain">
+    Under **Create a Subdomain**, type `*` (a single asterisk) in the **Subdomain** text box and select your domain from the drop-down list.
+  </Step>
+  <Step title="Set the document root">
+    cPanel will automatically suggest a document root based on the subdomain name. For a wildcard you may want to specify a custom path — for example, `/public_html/wildcard` — where your application or a default landing page resides.
+
+    <Tip>
+      If you want all wildcard subdomains to point to the same directory as your root domain, set the document root to `/public_html`.
+    </Tip>
+  </Step>
+  <Step title="Click Create">
+    Click **Create**. cPanel creates the wildcard subdomain and adds the corresponding `*.yourdomain.co.za` DNS entry to your zone file.
+  </Step>
+</Steps>
+
+## Adding a wildcard DNS record manually
+
+If you manage DNS directly through the client area (for a standalone domain without a hosting product), you can add a wildcard A record manually.
+
+<Steps>
+  <Step title="Log in to your client area">
+    Go to [my.netstreet.co.za](https://my.netstreet.co.za) and sign in.
+  </Step>
+  <Step title="Go to DNS settings">
+    In the left sidebar, under **Products & Services**, click **DNS**.
+  </Step>
+  <Step title="Open the DNS editor">
+    Click **DNS Records** next to the domain you want to configure.
+  </Step>
+  <Step title="Add a new record">
+    Click **Add New Record** and select **A** (or **AAAA** for IPv6) as the record type.
+  </Step>
+  <Step title="Set the Name field to *">
+    In the **Name** text box, type `*` (a single asterisk). This tells the DNS system this is a wildcard record.
+  </Step>
+  <Step title="Enter the IP address">
+    In the **Value** field, enter the IPv4 address of your server.
+  </Step>
+  <Step title="Save the record">
+    Click **Create** to save the wildcard record.
+  </Step>
+</Steps>
+
+## Wildcard CNAME records
+
+You can also create a wildcard CNAME record if you want all unmatched subdomains to resolve to another hostname rather than an IP address:
+
+| Type | Name | Value |
+|------|------|-------|
+| CNAME | `*` | `yourdomain.co.za` |
+
+This routes any unmatched subdomain to the same destination as your root domain.
+
+<Warning>
+  Wildcard CNAME records follow the same rules as all CNAME records: the name cannot coexist with other record types. Do not mix a wildcard CNAME with MX or NS records at the same level.
+</Warning>
+
+## Wildcard SSL certificates
+
+A standard SSL certificate only covers the exact domain(s) listed in it. To secure wildcard subdomains with HTTPS, you need a **wildcard SSL certificate** issued for `*.yourdomain.co.za`. Netstreet Africa supports wildcard Let's Encrypt certificates for qualifying plans. Contact our support team at [my.netstreet.co.za](https://my.netstreet.co.za) if you need help setting up a wildcard certificate.
+
+<Note>
+  A wildcard SSL certificate for `*.yourdomain.co.za` secures all **first-level** subdomains but does **not** cover the root domain `yourdomain.co.za` itself. To cover both, you typically need a Subject Alternative Name (SAN) certificate or a combined wildcard + root certificate.
+</Note>
+
+## Important considerations
+
+- **Security**: A wildcard record means any subdomain someone types will resolve to your server. Make sure your web server is configured to handle unexpected subdomain requests gracefully — ideally returning a 404 or redirecting to your main domain, rather than exposing sensitive content.
+- **Email**: Wildcard DNS does **not** affect email delivery. MX records must always be explicitly defined.
+- **Propagation**: Wildcard DNS changes are subject to the same propagation delays as all other DNS changes — allow up to 48 hours for changes to take effect globally.
+
+## Related topics
+
+<CardGroup cols={2}>
+  <Card title="Managing DNS Zones" href="/domains/managing-dns-zones" icon="list">
+    Add, edit, and delete DNS records for your domain in the client area.
+  </Card>
+  <Card title="DNS Overview" href="/domains/dns-overview" icon="network-wired">
+    Understand DNS record types and how DNS propagation works.
+  </Card>
+  <Card title="Adding SRV Records" href="/domains/adding-srv-records" icon="server">
+    Configure SRV records for service-specific DNS entries.
+  </Card>
+  <Card title="Domain Management" href="/domains/domain-management" icon="sliders">
+    Manage nameservers and other domain registration settings.
+  </Card>
+</CardGroup>

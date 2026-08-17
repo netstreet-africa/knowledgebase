@@ -1,0 +1,195 @@
+---
+title: "Managing PHP Versions and Settings on Netstreet Africa"
+sidebarTitle: "PHP Settings"
+description: "Change your PHP version and customise php.ini directives for your Netstreet Africa hosting account using your control panel."
+---
+
+PHP is the scripting language that powers WordPress and most other popular web applications. Netstreet Africa hosting accounts support multiple PHP versions, and you can switch between them at any time without affecting your account's other settings. You can also customise individual `php.ini` directives to tune PHP's behaviour for your specific application — for example, increasing the maximum upload file size or enabling specific extensions.
+
+<Warning>
+  Before changing your PHP version, verify that your applications (WordPress, plugins, themes, or any custom code) are compatible with the version you plan to select. Switching to an incompatible version may cause your site to display errors or stop working. Test changes on a staging site when possible.
+</Warning>
+
+## Changing the PHP version
+
+<Tabs>
+  <Tab title="Enhance (Hosting Panel)">
+    <Steps>
+      <Step title="Log in to your control panel">
+        Go to [my.netstreet.co.za](https://my.netstreet.co.za), click **Manage** next to your hosting account, then click **Login to Control Panel**.
+      </Step>
+      <Step title="Open your website settings">
+        In the left sidebar, click **Websites**, then click the name of the website whose PHP version you want to change.
+      </Step>
+      <Step title="Navigate to Developer tools">
+        Click the **Advanced** tab at the top of the page, then click **Developer tools**.
+      </Step>
+      <Step title="Select a PHP version">
+        In the **PHP** section, open the **Version** dropdown and select the PHP version you want to use.
+      </Step>
+      <Step title="Save your changes">
+        Click **Update**. Your site will begin using the new PHP version immediately.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="cPanel">
+    <Steps>
+      <Step title="Log in to cPanel">
+        Access cPanel through [my.netstreet.co.za](https://my.netstreet.co.za) or by visiting `https://yourdomain.com:2083`.
+      </Step>
+      <Step title="Open MultiPHP Manager">
+        In the **Software** section of the cPanel home screen, click **MultiPHP Manager**.
+      </Step>
+      <Step title="Select your domain">
+        Tick the checkbox next to the domain you want to update.
+      </Step>
+      <Step title="Choose a PHP version">
+        In the **PHP Version** dropdown at the top, select the version you want, then click **Apply**.
+      </Step>
+    </Steps>
+    <Note>
+      You can also configure PHP settings per-domain using the **MultiPHP INI Editor** in cPanel's **Software** section.
+    </Note>
+  </Tab>
+  <Tab title="Plesk">
+    <Steps>
+      <Step title="Log in to Plesk">
+        Access Plesk from your Netstreet Africa client area.
+      </Step>
+      <Step title="Open Websites & Domains">
+        In the left sidebar, click **Websites & Domains** and locate your domain.
+      </Step>
+      <Step title="Open PHP Settings">
+        Click **PHP Settings** (or **PHP version** depending on your Plesk version) next to the domain.
+      </Step>
+      <Step title="Select a version and save">
+        Choose the PHP version from the dropdown list and click **OK**.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Supported PHP versions
+
+Netstreet Africa supports multiple PHP versions to accommodate older and modern applications alike. Check the Hosting Panel for the full list of available versions for your account. As a general guide:
+
+| Version | Status | Recommended for |
+|---|---|---|
+| PHP 8.3 | Current stable | WordPress 6.x, modern frameworks |
+| PHP 8.2 | Active support | WordPress 6.x, Laravel 10+ |
+| PHP 8.1 | Security fixes | Most current applications |
+| PHP 8.0 | End of life | Legacy applications only |
+| PHP 7.4 | End of life | Older plugins/themes that haven't been updated |
+
+<Note>
+  End-of-life PHP versions no longer receive security patches. We strongly recommend running PHP 8.1 or later and ensuring all your plugins and themes are up to date.
+</Note>
+
+## Changing PHP settings (php.ini directives)
+
+You can customise individual `php.ini` directives to change how PHP behaves on your site without needing to edit server-level configuration files.
+
+<Tabs>
+  <Tab title="Enhance (Hosting Panel)">
+    <Steps>
+      <Step title="Navigate to Developer tools">
+        In the left sidebar, click **Websites**, select your site, click the **Advanced** tab, and then click **Developer tools**.
+      </Step>
+      <Step title="Open the php.ini editor">
+        In the sidebar, click **php.ini editor**.
+      </Step>
+      <Step title="Add a directive">
+        Click **Add directive**. In the **Directive** field, type the name of the directive you want to configure (for example, `upload_max_filesize`).
+      </Step>
+      <Step title="Set the value">
+        In the **Value** section, choose either **Text** or **Boolean**:
+        - For a text value (e.g., `64M`), type the value in the text field.
+        - For a boolean directive, click **Enable** or **Disable**.
+      </Step>
+      <Step title="Save and restart PHP">
+        Click **Create**. To apply the change, click **PHP** in the left sidebar, then click **Restart** in the **Restart PHP container** section.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="cPanel (MultiPHP INI Editor)">
+    <Steps>
+      <Step title="Open MultiPHP INI Editor">
+        In cPanel's **Software** section, click **MultiPHP INI Editor**.
+      </Step>
+      <Step title="Select your domain">
+        Under the **Editor Mode** tab, select the domain you want to configure from the dropdown.
+      </Step>
+      <Step title="Modify directives">
+        The editor displays common PHP directives with their current values. Change any value as needed.
+      </Step>
+      <Step title="Save changes">
+        Click **Apply** to save. Changes take effect immediately.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title=".htaccess (cPanel / Apache)">
+    You can override certain PHP directives by adding lines to your `.htaccess` file in `public_html`. This method works on Apache-based hosting accounts.
+
+    ```apache
+    # Increase maximum upload size
+    php_value upload_max_filesize 64M
+    php_value post_max_size 64M
+
+    # Increase maximum execution time
+    php_value max_execution_time 120
+
+    # Increase memory limit
+    php_value memory_limit 256M
+    ```
+
+    <Warning>
+      Not all PHP directives can be set via `.htaccess`. Directives that require `PHP_INI_SYSTEM` level access must be configured through your control panel's PHP INI editor.
+    </Warning>
+  </Tab>
+</Tabs>
+
+## Commonly adjusted PHP directives
+
+<Accordion title="upload_max_filesize">
+  Controls the maximum size of an individual file that can be uploaded via PHP. Default is typically `2M`. For WordPress media uploads, `64M` or higher is recommended.
+
+  ```
+  upload_max_filesize = 64M
+  ```
+</Accordion>
+
+<Accordion title="post_max_size">
+  Sets the maximum size of the entire POST request, which must be at least as large as `upload_max_filesize`. Set this to the same value or slightly higher.
+
+  ```
+  post_max_size = 64M
+  ```
+</Accordion>
+
+<Accordion title="memory_limit">
+  Specifies the maximum amount of memory a PHP script may consume. WordPress recommends at least `256M`.
+
+  ```
+  memory_limit = 256M
+  ```
+</Accordion>
+
+<Accordion title="max_execution_time">
+  Sets the maximum number of seconds a PHP script is allowed to run. Increase this if you experience timeouts during imports or large operations.
+
+  ```
+  max_execution_time = 120
+  ```
+</Accordion>
+
+<Accordion title="display_errors">
+  Controls whether PHP errors are shown in the browser. This should be **Off** on live production sites and **On** only during development.
+
+  ```
+  display_errors = Off
+  ```
+</Accordion>
+
+<Tip>
+  If you are running WordPress, you can also define many of these values in your `wp-config.php` file using PHP constants such as `define('WP_MEMORY_LIMIT', '256M');`. This is sometimes more reliable than setting them via `php.ini` on shared hosting.
+</Tip>

@@ -1,0 +1,407 @@
+---
+title: "Installing and Configuring OpenClaw AI Agent on Your VPS"
+sidebarTitle: "OpenClaw Guide"
+description: "Step-by-step guide to installing the OpenClaw AI agent on a Netstreet Africa Self-Managed VPS, including Homebrew, QuickStart setup, and public access via Nginx."
+---
+
+OpenClaw is an AI agent that runs directly on your server, giving you an intelligent assistant you can interact with over SSH or through a web interface. This guide walks you through everything you need to get OpenClaw up and running on a Netstreet Africa Self-Managed VPS — from installing prerequisites like Homebrew and creating a dedicated user, all the way to connecting an AI model provider and optionally exposing the ControlUI to the public internet via Nginx with a free Let's Encrypt SSL certificate.
+
+<Warning>
+  **Do not run OpenClaw as root.** If the AI agent is installed under the root
+  user, it has access to core system files. A poorly worded prompt could cause
+  the agent to perform destructive operations on your server. Always run
+  OpenClaw as a dedicated non-root user.
+</Warning>
+
+---
+
+## Prerequisites
+
+Before starting the OpenClaw installation, your Self-Managed VPS needs the following:
+
+<CardGroup cols={2}>
+  <Card title="Required" icon="check-circle">
+    - A Netstreet Africa Self-Managed VPS (root access required for setup)
+    - Homebrew (installed in this guide)
+    - A dedicated `openclaw` user (created in this guide)
+    - Node.js (installed automatically by the OpenClaw installer)
+  </Card>
+  <Card title="Optional (for public access)" icon="globe">
+    - A domain name pointing to your VPS IP
+    - Nginx (reverse proxy)
+    - Certbot (Let's Encrypt SSL)
+  </Card>
+</CardGroup>
+
+You can find your VPS root credentials in your **Netstreet Africa client area**: go to **Products → VPS → [your VPS] → Product Notes**.
+
+---
+
+## Part 1: Core installation
+
+### Step 1 — Connect to your server
+
+Log in to your VPS as root via SSH:
+
+```bash
+ssh root@your-server-ip
+```
+
+---
+
+### Step 2 — Install Homebrew
+
+Homebrew is a package manager that OpenClaw uses to install optional skills and dependencies. Run the official installation script:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Follow the on-screen prompts. When installation is complete, follow any instructions Homebrew gives you to add it to your shell's `PATH`.
+
+---
+
+### Step 3 — Create a dedicated OpenClaw user
+
+Create a new system user specifically for running OpenClaw, and grant it sudo access:
+
+```bash
+adduser openclaw
+usermod -aG sudo openclaw
+```
+
+Set a strong password for the new user when prompted.
+
+---
+
+### Step 4 — Switch to the openclaw user and run the installer
+
+Switch to the new user account, then download and execute the OpenClaw installation script:
+
+```bash
+su - openclaw
+curl -fsSL https://openclaw.ai/install.sh | bash
+```
+
+The installation script will:
+1. Check that your server meets minimum requirements
+2. Install Node.js if it is not already present
+3. Install the OpenClaw application
+
+<Note>
+  The installer checks for Node.js before proceeding. If Node.js is already
+  installed on your server, the installer will use the existing version.
+</Note>
+
+---
+
+## Part 2: Onboarding wizard
+
+Once installation completes, the OpenClaw onboarding wizard starts automatically. Use the **arrow keys** to navigate options and **Enter** to select.
+
+### Step 5 — Accept the security notice
+
+Read and accept the security notice to proceed.
+
+---
+
+### Step 6 — Choose your setup mode
+
+You will be presented with two options:
+
+<Tabs>
+  <Tab title="QuickStart (Recommended)">
+    **QuickStart** is the recommended option for most users. It configures a local-only setup with sensible defaults. You can change any settings later using:
+
+    ```bash
+    openclaw configure
+    ```
+
+    After selecting QuickStart, the wizard displays your **Gateway information** — note the port number, bind address, and token type shown. You will need the port number if it differs from the default `18789` when setting up Nginx later.
+  </Tab>
+  <Tab title="Manual Setup">
+    **Manual setup** lets you choose the Gateway port, network exposure settings, Tailscale integration, and authentication method during the initial setup. Choose this option only if you have specific networking requirements.
+  </Tab>
+</Tabs>
+
+---
+
+### Step 7 — Connect an AI model provider
+
+The wizard will display a list of supported AI model providers. Select the one you want to use:
+
+| Provider | Authentication method |
+|---|---|
+| OpenAI (ChatGPT / Codex) | Sign-in or API key |
+| Anthropic (Claude) | CLI + API key |
+| xAI (Grok) | API key or browser OAuth |
+| Google (Gemini) | API key + OAuth |
+| OpenRouter | OAuth or API key |
+| More… | Lists all available models |
+
+<Steps>
+  <Step title="Select your provider">
+    Use the arrow keys to highlight your chosen provider and press **Enter**. For this guide we use **Google (Gemini)**.
+  </Step>
+  <Step title="Choose authentication method">
+    Select **API key** when prompted. You can generate a Gemini API key at [https://aistudio.google.com/app/api-keys](https://aistudio.google.com/app/api-keys).
+  </Step>
+  <Step title="Enter your API key">
+    Paste your API key into the prompt and press **Enter**.
+  </Step>
+  <Step title="Select a model">
+    The wizard suggests a default model. You can accept it, or type a model name manually (e.g. `google/gemini-2.5-flash`).
+  </Step>
+</Steps>
+
+<Note>
+  If you run into issues connecting to a model after onboarding is complete, you
+  can list available models and switch without going through the wizard again:
+
+  ```bash
+  # List available models for a provider
+  openclaw models list --provider google
+
+  # Set the active model
+  openclaw models set google/gemini-2.5-flash
+  ```
+</Note>
+
+---
+
+### Step 8 — Configure a communication channel
+
+The wizard asks how you would like to communicate with your AI agent (e.g. Slack, Telegram). This is optional — you can skip it and set it up later:
+
+```bash
+openclaw channels add
+```
+
+If you skip this step, you can still interact with the agent directly over SSH by running `openclaw` and then selecting **"talk to agent"**.
+
+---
+
+### Step 9 — Configure web search
+
+Select a web search engine for the agent to use when browsing the internet. You can also skip this step and configure it later:
+
+```bash
+openclaw configure --section web
+```
+
+---
+
+### Step 10 — Configure skills
+
+Skills customise how the agent handles memory, speed, and search. The wizard will use **Homebrew** to install any missing skill dependencies.
+
+- Press **Space** to select the skills you want to enable
+- Press **Enter** to confirm your selection
+- Enter any required API keys for the selected skills when prompted
+
+<Note>
+  Available skills differ depending on your chosen AI model provider. The list
+  you see will show only compatible skills for your selected provider.
+</Note>
+
+---
+
+### Step 11 — Configure lifecycle hooks
+
+The wizard presents a set of hooks that define how the agent behaves on startup, shutdown, and memory operations. These are model-dependent and optional — you can configure them later.
+
+---
+
+### Step 12 — Finalise installation
+
+Installation and onboarding are now complete. The wizard will display your **ControlUI** URL (localhost only by default). You can start interacting with your agent immediately:
+
+```bash
+openclaw
+```
+
+Type your first prompt and the agent will respond. A status line below each response shows the number of tokens used and which model is active.
+
+---
+
+## Part 3: Exposing the ControlUI to the public internet
+
+By default, the ControlUI is only accessible from `localhost`. To access it from a browser anywhere in the world, you need to set up an Nginx reverse proxy with a free Let's Encrypt SSL certificate. The steps below are for **Ubuntu 24.04**.
+
+<Warning>
+  Before proceeding, make sure you have a domain name (e.g.
+  `openclaw.yourdomain.co.za`) with an **A record** pointing to your VPS IP
+  address. Let's Encrypt cannot issue a certificate for a domain that does not
+  resolve correctly.
+</Warning>
+
+### Step 1 — Install Nginx and Certbot
+
+```bash
+sudo apt install -y nginx certbot python3-certbot-nginx
+```
+
+---
+
+### Step 2 — Create the Nginx site configuration
+
+```bash
+nano /etc/nginx/sites-available/openclaw
+```
+
+Paste the following configuration block, replacing `your-domain.com` with your actual domain:
+
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:18789;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 86400;
+    }
+}
+```
+
+<Note>
+  If the OpenClaw Gateway port shown during onboarding was different from
+  `18789`, update the `proxy_pass` line to match your actual port number.
+</Note>
+
+Save and exit (`Ctrl + X`, then `Y`, then `Enter`), then enable the site and test the Nginx configuration:
+
+```bash
+ln -s /etc/nginx/sites-available/openclaw /etc/nginx/sites-enabled/
+nginx -t
+systemctl reload nginx
+```
+
+---
+
+### Step 3 — Open firewall ports
+
+```bash
+ufw allow 80/tcp
+ufw allow 443/tcp
+ufw allow 22/tcp
+ufw allow from YOUR.OWN.IP.ADDRESS
+ufw enable
+```
+
+<Warning>
+  Make sure to allow port 22 (SSH) **and** your own IP address before enabling
+  the firewall, or you may lock yourself out of the server.
+</Warning>
+
+---
+
+### Step 4 — Obtain an SSL certificate
+
+```bash
+certbot --nginx -d your-domain.com
+```
+
+Certbot will automatically update your Nginx configuration and set up auto-renewal through Let's Encrypt.
+
+---
+
+### Step 5 — Update the OpenClaw configuration
+
+Find the location of your OpenClaw config file:
+
+```bash
+openclaw config file
+```
+
+The output will be a path like `~/.openclaw/openclaw.json`. Open it for editing:
+
+```bash
+nano ~/.openclaw/openclaw.json
+```
+
+In the **Gateway** section, add the following line inside the existing object:
+
+```json
+"trustedProxies": ["127.0.0.1"],
+```
+
+In the **ControlUi** section, add:
+
+```json
+"controlUi": {
+  "allowInsecureAuth": true,
+  "allowedOrigins": [
+    "https://your-domain.com"
+  ]
+}
+```
+
+Save and exit the file.
+
+---
+
+### Step 6 — Restart the OpenClaw Gateway
+
+```bash
+openclaw gateway stop
+openclaw gateway start
+```
+
+---
+
+### Step 7 — Open the ControlUI
+
+Retrieve your access token from the config file:
+
+```bash
+grep -o '"token": "[^"]*"' ~/.openclaw/openclaw.json
+```
+
+Then open the following URL in your browser:
+
+```
+https://your-domain.com/#token=YOUR_TOKEN_HERE
+```
+
+---
+
+### Step 8 — Approve your device
+
+On the first visit, the ControlUI will ask you to approve your device. On the server, list pending device requests:
+
+```bash
+openclaw devices list
+```
+
+Copy the request ID and approve it:
+
+```bash
+openclaw devices approve <request-id>
+```
+
+<Tip>
+  If you want to skip device approval (not recommended for public-facing
+  deployments), you can disable device authentication:
+
+  ```bash
+  openclaw config set gateway.controlUi.dangerouslyDisableDeviceAuth true
+  ```
+
+  Anyone who knows your domain URL will be able to use your agent without
+  authentication if this is enabled.
+</Tip>
+
+---
+
+## Further reading
+
+For more information on customising and extending OpenClaw, visit the official documentation at [https://docs.openclaw.ai](https://docs.openclaw.ai).
+
+If you need help with your Netstreet Africa VPS infrastructure, open a support ticket in your [client area](https://my.netstreet.co.za).

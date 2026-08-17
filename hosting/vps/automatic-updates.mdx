@@ -1,0 +1,236 @@
+---
+title: "Automatic Updates for Your Unmanaged VPS"
+sidebarTitle: "Automatic Updates"
+description: "Learn how automatic OS updates work on Netstreet Africa Unmanaged VPS plans, how to view update logs, roll back changes, and how to opt out if needed."
+---
+
+Keeping your server's software up to date is one of the most important things you can do to protect it from security vulnerabilities and ensure stable operation. On Netstreet Africa Unmanaged VPS plans, operating system updates are installed automatically by default — this policy has been in place since mid-June 2024 and applies to all newly provisioned VPS accounts. This page explains how automatic updates work, how to monitor what has been installed, how to roll back an update if needed, and how to opt out if your workflow requires it.
+
+<Info>
+  Automatic updates on Netstreet Africa VPS plans cover **operating system
+  packages** only. Updates to your own applications (WordPress plugins, custom
+  scripts, etc.) remain your responsibility.
+</Info>
+
+---
+
+## Why automatic updates matter
+
+Security vulnerabilities are discovered and publicly disclosed every day. Once a vulnerability is known, attackers begin scanning for unpatched servers almost immediately. By automatically applying OS updates, Netstreet Africa helps ensure that your server is protected against the most recently disclosed threats — even if you are busy or unavailable to apply patches manually.
+
+<Warning>
+  Opting out of automatic updates places the full responsibility for patching
+  security vulnerabilities on you. If you choose to manage updates manually,
+  make sure you have a reliable process in place to check for and apply patches
+  regularly.
+</Warning>
+
+---
+
+## Viewing update logs
+
+You can review a history of automatically installed updates at any time by logging in to your VPS via SSH and running the appropriate command for your Linux distribution.
+
+<Steps>
+  <Step title="Log in to your VPS via SSH">
+    ```bash
+    ssh your-user@your-server-ip
+    ```
+  </Step>
+  <Step title="View the update log for your distribution">
+    <Tabs>
+      <Tab title="Ubuntu / Debian">
+        ```bash
+        more /var/log/apt/history.log
+        ```
+
+        This log shows all packages installed, upgraded, and removed, along with timestamps. Press `Space` to scroll forward and `q` to quit.
+      </Tab>
+      <Tab title="AlmaLinux">
+        ```bash
+        more /var/log/yum.log
+        ```
+
+        This file lists every package transaction managed by `yum`, including automated updates.
+      </Tab>
+    </Tabs>
+  </Step>
+</Steps>
+
+---
+
+## Rolling back a recently installed update
+
+Occasionally, a package update may introduce a conflict with your application. If you need to revert a recently installed update, the method depends on your Linux distribution:
+
+<Tabs>
+  <Tab title="Ubuntu / Debian">
+    On Debian-based systems, you need to manually install a specific older version of the package. First, identify the available versions:
+
+    ```bash
+    apt-cache showpkg package-name
+    ```
+
+    Then install the specific version you want:
+
+    ```bash
+    apt-get install package-name=version-number
+    ```
+
+    To prevent the package from being automatically upgraded again in future, you can hold it:
+
+    ```bash
+    apt-mark hold package-name
+    ```
+
+    To release the hold later:
+
+    ```bash
+    apt-mark unhold package-name
+    ```
+  </Tab>
+  <Tab title="AlmaLinux">
+    Use the `yum history undo` command to revert a specific transaction. First, find the transaction ID:
+
+    ```bash
+    yum history list
+    ```
+
+    Then undo the transaction:
+
+    ```bash
+    yum history undo <transaction-id>
+    ```
+
+    Replace `<transaction-id>` with the numeric ID shown in the history list.
+  </Tab>
+</Tabs>
+
+<Note>
+  If rolling back a package causes further dependency issues, please open a
+  support ticket with Netstreet Africa. Our team can assist with infrastructure
+  and OS-level issues on Unmanaged VPS plans.
+</Note>
+
+---
+
+## Configuring automatic updates manually (advanced)
+
+If you want finer-grained control over how automatic updates are applied — for example, limiting updates to security patches only — you can configure the relevant tool for your distribution directly.
+
+<Tabs>
+  <Tab title="Ubuntu / Debian (unattended-upgrades)">
+    The `unattended-upgrades` package handles automatic updates on Debian-based systems. Install it if it is not already present:
+
+    ```bash
+    apt-get install unattended-upgrades
+    ```
+
+    The main configuration file is located at:
+
+    ```
+    /etc/apt/apt.conf.d/50unattended-upgrades
+    ```
+
+    Open it in a text editor:
+
+    ```bash
+    nano /etc/apt/apt.conf.d/50unattended-upgrades
+    ```
+
+    To restrict automatic updates to **security updates only**, ensure the following line is uncommented and all others are commented out:
+
+    ```
+    Unattended-Upgrade::Allowed-Origins {
+        "${distro_id}:${distro_codename}-security";
+    //  "${distro_id}:${distro_codename}-updates";
+    };
+    ```
+
+    To enable automatic reboots when required (e.g. after a kernel update):
+
+    ```
+    Unattended-Upgrade::Automatic-Reboot "true";
+    Unattended-Upgrade::Automatic-Reboot-Time "02:00";
+    ```
+
+    Save the file and verify the configuration with:
+
+    ```bash
+    unattended-upgrades --dry-run --debug
+    ```
+  </Tab>
+  <Tab title="AlmaLinux (dnf-automatic)">
+    On AlmaLinux, the `dnf-automatic` package provides automatic update functionality:
+
+    ```bash
+    yum install dnf-automatic
+    ```
+
+    The configuration file is at:
+
+    ```
+    /etc/dnf/automatic.conf
+    ```
+
+    Open it for editing:
+
+    ```bash
+    nano /etc/dnf/automatic.conf
+    ```
+
+    Key settings in the `[commands]` section:
+
+    ```ini
+    # What to upgrade: default, security, minimal, minimal-security
+    upgrade_type = security
+
+    # Apply updates automatically
+    apply_updates = yes
+    ```
+
+    Enable and start the timer:
+
+    ```bash
+    systemctl enable --now dnf-automatic.timer
+    ```
+
+    Check the timer status:
+
+    ```bash
+    systemctl status dnf-automatic.timer
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Opting out of automatic updates
+
+If you prefer to manage all updates manually, you can opt out of Netstreet Africa's automatic update system by creating a flag file on your VPS:
+
+<Steps>
+  <Step title="Log in to your VPS via SSH" />
+  <Step title="Create the opt-out flag file">
+    ```bash
+    sudo mkdir -p /opt
+    sudo touch /opt/.noautoupdates
+    ```
+
+    Once this file exists, the automatic update process will skip your VPS.
+  </Step>
+</Steps>
+
+<Warning>
+  Netstreet Africa strongly recommends **against** opting out of automatic
+  updates. Unpatched servers are a primary target for automated exploits. If you
+  opt out, you must implement your own reliable patch management process to keep
+  your server protected.
+</Warning>
+
+---
+
+## Related guides
+
+- [Securing Your Unmanaged VPS](/hosting/vps/securing-your-server)
+- [Managed vs Unmanaged VPS](/hosting/vps/managed-vs-unmanaged)

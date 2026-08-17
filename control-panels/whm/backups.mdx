@@ -1,0 +1,202 @@
+---
+title: "Backups and Restores in WebHost Manager (WHM)"
+sidebarTitle: "Backups"
+description: "Configure, schedule, and restore backups for cPanel accounts on your Netstreet Africa reseller or VPS plan using WebHost Manager's backup tools."
+---
+
+Maintaining reliable backups is one of the most important responsibilities of any hosting account holder or reseller. WebHost Manager (WHM) on Netstreet Africa includes a built-in backup system that lets you schedule automatic backups of all cPanel accounts on your server, store them locally or on remote destinations, and restore individual accounts or specific components when needed. This guide covers how to configure the backup system, create manual backups, and restore data.
+
+---
+
+## Understanding WHM backup types
+
+WHM supports two main backup configurations:
+
+<CardGroup cols={2}>
+  <Card title="Legacy Backup" icon="box-archive">
+    The original cPanel backup system. Creates full or incremental compressed backups of cPanel accounts on a configurable schedule. Supported by most hosting environments.
+  </Card>
+  <Card title="Backup Configuration (JetBackup / cPanel Backup)" icon="shield-check">
+    The modern cPanel backup interface that provides granular scheduling, multiple retention policies, and support for remote backup destinations including FTP, SFTP, and S3-compatible storage.
+  </Card>
+</CardGroup>
+
+<Note>
+  The exact backup tools available on your account depend on your Netstreet Africa plan. If you are unsure which backup system is active, open a support ticket at [my.netstreet.co.za](https://my.netstreet.co.za) and our team will confirm the setup.
+</Note>
+
+---
+
+## Configuring the backup schedule
+
+<Steps>
+  <Step title="Log in to WHM">
+    Log in to WHM using any of the methods described in [Accessing WHM](/control-panels/whm/accessing-whm).
+  </Step>
+  <Step title="Search for Backup Configuration">
+    In the WHM search box, type **backup** and click **Backup Configuration**.
+  </Step>
+  <Step title="Enable backups">
+    Make sure the **Backup Status** toggle is set to **Enabled**.
+  </Step>
+  <Step title="Choose backup type">
+    Select whether to run **Compressed** or **Uncompressed** backups. Compressed backups use less storage but take slightly longer to create and restore. For most resellers, compressed is the better choice.
+  </Step>
+  <Step title="Set the schedule">
+    Choose how often backups run:
+
+    | Schedule | Recommended for |
+    |---|---|
+    | **Daily** | Actively updated sites — e-commerce, blogs, CMS |
+    | **Weekly** | Mostly static sites with occasional content changes |
+    | **Monthly** | Archived or rarely-changing sites |
+
+    You can also set the **day of week** for weekly backups and the **day of month** for monthly backups.
+  </Step>
+  <Step title="Set retention">
+    Configure how many backup copies to retain. For example, keeping 7 daily backups gives you one week of recovery points. Older backups are automatically deleted as new ones are created.
+  </Step>
+  <Step title="Select what to back up">
+    Choose which components to include:
+    - **Accounts** — All cPanel account data (files, email, databases)
+    - **System files** — Configuration files (recommended for VPS and dedicated server customers)
+    - **Databases** — MySQL databases (can be backed up independently as SQL files)
+  </Step>
+  <Step title="Save your settings">
+    Click **Save Configuration** at the bottom of the page. WHM will now run backups automatically according to your schedule.
+  </Step>
+</Steps>
+
+---
+
+## Configuring a remote backup destination
+
+Storing backups only on the same server as your websites is risky — if the server fails, you lose both the sites and the backups. Netstreet Africa strongly recommends configuring an off-server backup destination.
+
+<Steps>
+  <Step title="Open Additional Destinations">
+    In WHM's Backup Configuration page, scroll to the **Additional Destinations** section and click **Create new destination**.
+  </Step>
+  <Step title="Choose the destination type">
+    Select from the available destination types:
+
+    | Type | Description |
+    |---|---|
+    | **FTP** | Back up to an FTP server |
+    | **SFTP** | Back up to an SFTP server (more secure than FTP) |
+    | **S3** | Back up to Amazon S3 or any S3-compatible storage (e.g. Backblaze B2, Wasabi) |
+    | **Custom** | A custom backup destination using a script |
+  </Step>
+  <Step title="Enter the destination credentials">
+    Fill in the hostname, username, password (or SSH key for SFTP), and the target directory path for the remote destination.
+  </Step>
+  <Step title="Test the connection">
+    Click **Save and Validate Destination** to verify the connection before committing to it. WHM will test the credentials and confirm whether the destination is accessible.
+  </Step>
+</Steps>
+
+<Tip>
+  S3-compatible storage is an excellent remote backup destination — services like Backblaze B2 and Wasabi offer very affordable storage pricing and work seamlessly with WHM's backup system. Contact Netstreet Africa support if you need help setting this up.
+</Tip>
+
+---
+
+## Creating a manual backup
+
+In addition to scheduled backups, you can trigger a manual backup at any time — for example, before making major changes to a website.
+
+<Steps>
+  <Step title="Search for Backup in WHM">
+    In the WHM search box, type **backup** and click **Backup** under the cPanel section, or find the **Run a Backup** option.
+  </Step>
+  <Step title="Select the account(s)">
+    Choose which cPanel accounts to include in the manual backup.
+  </Step>
+  <Step title="Start the backup">
+    Click **Generate Backup**. WHM creates the backup in the background. For large accounts, this may take several minutes.
+  </Step>
+</Steps>
+
+---
+
+## Restoring a cPanel account from backup
+
+If a client's files, emails, or database have been lost or corrupted, you can restore their account from a backup using WHM.
+
+<Steps>
+  <Step title="Search for Restore">
+    In the WHM search box, type **restore** and click **Restore a Full Backup/cpmove File**.
+  </Step>
+  <Step title="Select the backup file">
+    Browse to the backup file for the account you want to restore. If your backups are stored locally, WHM will list them. If they are on a remote destination, you may need to download the backup file first.
+  </Step>
+  <Step title="Choose restore options">
+    Select whether to restore the account with its original username or to a new username (useful if the original account still exists).
+  </Step>
+  <Step title="Complete the restore">
+    Click **Restore**. WHM restores the cPanel account, including all files, databases, and email data contained in the backup.
+  </Step>
+</Steps>
+
+---
+
+## Client-level restores from cPanel
+
+Your clients can also restore their own backups directly from cPanel, without needing to contact you. From inside cPanel, they can:
+
+1. Go to **Files → Backup** to download full or partial backups of their account
+2. Go to **Files → Backup Wizard** for a guided backup or restore experience
+3. Restore individual components — home directory files, MySQL databases, or email forwarders — independently
+
+<Info>
+  Encouraging your clients to take periodic backups from cPanel — especially before making major changes to their websites — is a good practice that reduces the need for full server-level restores.
+</Info>
+
+---
+
+## Resetting the MySQL root password
+
+If you ever need to reset the MySQL root password on your server — for example after the password has been lost — you can do this directly in WHM without command-line access.
+
+<Steps>
+  <Step title="Search for MySQL Root Password">
+    In the WHM search box, start typing **mysql root** and click **MySQL Root Password** when it appears.
+  </Step>
+  <Step title="Enter the new password">
+    Type your new password in both the **Password** and **Password (again)** fields. Alternatively, click **Password Generator** to have WHM generate a strong random password for you.
+  </Step>
+  <Step title="Click Change Password">
+    Click **Change Password**. The new MySQL root password takes effect immediately.
+  </Step>
+</Steps>
+
+<Warning>
+  The MySQL root password is different from your server's root SSH password. Changing one does not affect the other. The MySQL root password grants access to all databases on the server — keep it secure and do not share it with clients.
+</Warning>
+
+---
+
+## Backup best practices for Netstreet Africa resellers
+
+Follow these recommendations to keep your clients' data safe:
+
+<CardGroup cols={2}>
+  <Card title="Use daily backups" icon="calendar-day">
+    For any site that is updated regularly — WordPress, e-commerce, or business sites — run daily backups with at least 7 days of retention.
+  </Card>
+  <Card title="Store backups off-server" icon="cloud-arrow-up">
+    Always configure a remote backup destination. A local-only backup strategy is vulnerable to the same hardware failure that it is designed to protect against.
+  </Card>
+  <Card title="Test your restores" icon="rotate-right">
+    Periodically perform a test restore on a non-production account to confirm that your backups are valid and recoverable before you actually need them.
+  </Card>
+  <Card title="Back up before changes" icon="floppy-disk">
+    Trigger a manual backup before performing major website changes, cPanel upgrades, or server migrations — even if an automatic backup is scheduled for later.
+  </Card>
+</CardGroup>
+
+---
+
+## Need help?
+
+If your backup configuration is not working as expected, you need help with a restore, or you want to discuss off-server backup strategies for your reseller plan, the Netstreet Africa support team is available at [my.netstreet.co.za](https://my.netstreet.co.za).

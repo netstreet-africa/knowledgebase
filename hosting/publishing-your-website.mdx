@@ -1,0 +1,129 @@
+---
+title: "Publishing Your Website to Netstreet Africa Hosting"
+sidebarTitle: "Publishing"
+description: "Learn how to upload and publish your website to Netstreet Africa using FTP, your control panel file manager, or popular web design tools."
+---
+
+Publishing your website is the final step in getting your online presence live. Netstreet Africa supports several methods to transfer your finished website files to the server, from drag-and-drop uploading in your control panel to dedicated FTP clients and popular web design software. Once your files are in the correct directory, your site is immediately accessible at your domain.
+
+## Where to upload your files
+
+Regardless of the method you use, all files intended for your main domain should be uploaded to the **public_html** directory (also called the document root). Any file named `index.html` or `index.php` in that directory becomes the default home page of your site.
+
+<Note>
+  If you are hosting multiple domains on the same account, each addon domain has its own subdirectory inside `public_html`. For example, files for `otherdomain.com` would go in `public_html/otherdomain.com`.
+</Note>
+
+## Uploading via the File Manager
+
+The File Manager in your control panel lets you upload files directly from your browser — no extra software required.
+
+<Tabs>
+  <Tab title="cPanel File Manager">
+    <Steps>
+      <Step title="Open the File Manager">
+        Log in to cPanel, then in the **Files** section click **File Manager**.
+      </Step>
+      <Step title="Navigate to public_html">
+        In the left directory tree, click **public_html**. This is the root folder for your website.
+      </Step>
+      <Step title="Upload your files">
+        Click **Upload** in the toolbar. In the upload dialog, click **Select File** (or drag and drop files directly) to upload your HTML, CSS, images, and other assets.
+      </Step>
+      <Step title="Verify the upload">
+        After the upload completes, click **Go Back to** to return to the File Manager and confirm your files appear in the directory. Open your domain in a browser to verify the site loads correctly.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Enhance File Manager">
+    <Steps>
+      <Step title="Log in to the Hosting Panel">
+        Go to [my.netstreet.co.za](https://my.netstreet.co.za) and log in. Under **Products & Services**, click **Manage** next to your hosting account, then click **Login to Control Panel**.
+      </Step>
+      <Step title="Open your website">
+        In the left sidebar, click **Websites**, then click the site you want to manage.
+      </Step>
+      <Step title="Access the File Manager">
+        Click the **Files** tab, then click **File Manager**.
+      </Step>
+      <Step title="Upload your files">
+        Navigate to the **public_html** folder and use the **Upload** button to transfer your files. You can upload individual files or entire folder structures.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Uploading via FTP
+
+FTP (File Transfer Protocol) is the most reliable method for uploading large numbers of files or entire websites. You will need an FTP client such as [FileZilla](https://filezilla-project.org/) (free, Windows/macOS/Linux) to connect.
+
+<Steps>
+  <Step title="Gather your FTP credentials">
+    Your FTP credentials are available in your control panel. In cPanel, go to **Files → FTP Accounts** to find or create an account. You will need:
+    - **Host**: your domain name or server IP address (e.g., `ftp.yourdomain.com`)
+    - **Username**: your FTP username
+    - **Password**: your FTP password
+    - **Port**: `21` (standard FTP) or `22` (SFTP for encrypted transfers)
+  </Step>
+  <Step title="Connect to your server">
+    Open your FTP client. Enter your host, username, password, and port, then click **Connect** or **Quickconnect**.
+  </Step>
+  <Step title="Navigate to public_html">
+    In the remote site panel (the server side), navigate to the `public_html` directory.
+  </Step>
+  <Step title="Upload your files">
+    In the local site panel, browse to where your website files are stored on your computer. Select all the files you want to upload, right-click, and choose **Upload**. For large uploads, ensure your FTP client is set to retry on failure to handle any connection drops.
+  </Step>
+</Steps>
+
+<Tip>
+  Use **SFTP** (port 22) instead of plain FTP whenever possible. SFTP encrypts your login credentials and file transfers, keeping your account secure.
+</Tip>
+
+## Publishing from web design applications
+
+Many popular desktop web design applications can publish directly to your Netstreet Africa hosting account using FTP or SFTP. When prompted for publishing settings, use the same FTP credentials described above and set the remote path to `/public_html/`.
+
+<CardGroup cols={2}>
+  <Card title="Adobe Dreamweaver" icon="code">
+    Go to **Site → Manage Sites**, create a new site, and enter your FTP details under the **Servers** tab.
+  </Card>
+  <Card title="Sublime Text / VS Code" icon="file-code">
+    Install an FTP extension such as **SFTP** (VS Code) or **FTP-Simple**, then configure it with your server credentials.
+  </Card>
+  <Card title="RapidWeaver" icon="globe">
+    Under **Publishing Settings**, choose FTP/SFTP as the publishing method and enter your Netstreet Africa FTP credentials.
+  </Card>
+  <Card title="Dreamweaver / Pinegrow" icon="paint-brush">
+    Both applications support direct FTP publishing. Point the remote path to `/public_html/` on your server.
+  </Card>
+</CardGroup>
+
+## Using Git for deployment
+
+If your website is managed in a Git repository, you can deploy files to your hosting account using Git over SSH.
+
+<Steps>
+  <Step title="Enable SSH access">
+    In your control panel, ensure SSH access is enabled for your account. You may need to add your public SSH key under **Security → SSH Keys**.
+  </Step>
+  <Step title="Clone or push your repository">
+    Connect to your server via SSH and clone your repository into the `public_html` directory, or configure a post-receive hook to automatically deploy when you push changes.
+  </Step>
+  <Step title="Pull updates">
+    After your initial setup, run `git pull` from within the `public_html` directory each time you want to deploy new changes.
+  </Step>
+</Steps>
+
+## Verifying your live site
+
+After uploading, open a browser and visit your domain to confirm everything is working:
+
+- Check that your home page loads correctly.
+- Test navigation between pages and verify all links work.
+- Confirm images, stylesheets, and JavaScript files load without errors.
+- If you see a default "Coming Soon" or placeholder page, make sure your files are in the correct directory and that your `index.html` or `index.php` file is present.
+
+<Warning>
+  If you recently registered your domain or updated your nameservers, DNS propagation can take up to 48 hours. During this time, your site may not be accessible to all visitors worldwide. This is normal and not an indication that your upload failed.
+</Warning>

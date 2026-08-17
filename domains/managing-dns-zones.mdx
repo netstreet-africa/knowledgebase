@@ -1,0 +1,194 @@
+---
+title: "Managing DNS Zones in Your Netstreet Client Area"
+sidebarTitle: "Managing DNS Zones"
+description: "Learn how to view, add, edit, delete, and export DNS records for your domains using the Netstreet Africa DNS editor at my.netstreet.co.za."
+---
+
+A DNS zone is the collection of DNS records that controls how your domain name resolves across the internet — where your website is hosted, where your email is delivered, and how other services connect to your domain. Netstreet Africa provides a built-in DNS editor in the client area that lets you manage all your DNS records without needing to touch a command line. This guide walks you through everything you can do in the DNS editor.
+
+<Note>
+  The DNS editor in the client area is available for standalone domains (domains without an associated hosting product). If your domain is linked to a cPanel or other hosting package, DNS records are managed within that control panel instead. See the [DNS Overview](/domains/dns-overview) for more context.
+</Note>
+
+## Accessing the DNS editor
+
+<Steps>
+  <Step title="Log in to your client area">
+    Go to [my.netstreet.co.za](https://my.netstreet.co.za) and sign in.
+  </Step>
+  <Step title="Navigate to DNS settings">
+    In the left sidebar, under **Products & Services**, click **DNS**. The DNS settings page displays a list of your domains with the following columns:
+    - **Domain** — The domain name
+    - **Active Zone** — Which DNS provider is currently managing the zone
+    - **Name Servers** — The current nameserver status
+    - **DNS Records** — A link to open the DNS editor for that domain
+  </Step>
+  <Step title="Open the DNS editor">
+    Locate the domain you want to manage and click **DNS Records** to open the DNS editor for that domain.
+  </Step>
+</Steps>
+
+## Creating a new DNS zone
+
+If you have a domain registered with Netstreet Africa but have not yet created a DNS zone for it, the client area will prompt you to do so the first time you visit the DNS section.
+
+<Steps>
+  <Step title="Select your domain">
+    On the DNS settings page, use the **Select a domain** drop-down list to choose the domain for which you want to create a zone.
+  </Step>
+  <Step title="Click Create zone">
+    Click **Create zone**. The client area will provision a new DNS zone on Netstreet's nameservers.
+  </Step>
+</Steps>
+
+<Warning>
+  If you see a **Zone already exists** message after clicking Create zone, the domain already has a DNS zone on our nameservers. This usually means the domain is linked to a hosting product. DNS for that domain should be managed from within the associated control panel.
+</Warning>
+
+## Viewing existing records
+
+Once inside the DNS editor, you can see all current records in the zone including their type, name, value, and TTL. The editor displays:
+
+- **Type** — The record type (A, AAAA, CNAME, MX, TXT, SRV, NS, etc.)
+- **Name** — The hostname or subdomain the record applies to
+- **Value / Content** — The record's data (IP address, target hostname, text string, etc.)
+- **TTL** — How long the record is cached by resolvers, in seconds
+
+## Adding a new DNS record
+
+<Steps>
+  <Step title="Open the DNS editor">
+    From the DNS settings page, click **DNS Records** next to the domain you want to modify.
+  </Step>
+  <Step title="Click Add New Record">
+    Click the **Add New Record** button in the DNS editor.
+  </Step>
+  <Step title="Fill in the record details">
+    Select the record type from the drop-down list, then complete the relevant fields. The exact fields depend on the record type — for example:
+    - **A record**: Name (e.g. `www`) and IPv4 address
+    - **MX record**: Priority and mail server hostname
+    - **TXT record**: Name and text string value
+    - **CNAME record**: Name (alias) and target hostname
+  </Step>
+  <Step title="Set the TTL">
+    Leave the TTL at the default value (typically 3600 seconds / 1 hour) unless you have a specific reason to change it.
+  </Step>
+  <Step title="Save the record">
+    Click **Create** to save the new record. It will appear in the list immediately but may take time to propagate across the internet.
+  </Step>
+</Steps>
+
+<Tip>
+  If you are preparing for a migration, set new records with a low TTL (e.g. 300 seconds) first. This means your changes will propagate faster when you are ready to cut over.
+</Tip>
+
+## Common DNS records and their typical values
+
+| Record type | Name field | Value field | Common use |
+|------------|-----------|-------------|-----------|
+| **A** | `@` or `www` | `196.22.140.10` | Point domain/subdomain to a server IP |
+| **AAAA** | `@` or `www` | `2001:db8::1` | IPv6 equivalent of the A record |
+| **CNAME** | `mail` | `mail.googlemail.com` | Alias one name to another hostname |
+| **MX** | `@` | `10 mail.netstreet.co.za` | Direct email to a mail server |
+| **TXT** | `@` | `v=spf1 include:spf.netstreet.co.za ~all` | SPF, DKIM, domain verification |
+| **SRV** | `_sip._tcp` | `10 20 5060 sip.yourdomain.co.za` | Service location (VoIP, XMPP) |
+
+<Info>
+  The `@` symbol in the **Name** field represents the root domain itself (e.g. `yourdomain.co.za`). Using `www` in the Name field creates or modifies the `www.yourdomain.co.za` subdomain record.
+</Info>
+
+## Editing an existing record
+
+<Steps>
+  <Step title="Locate the record">
+    In the DNS editor, find the record you want to change.
+  </Step>
+  <Step title="Click Edit">
+    Click **Edit** next to the record.
+  </Step>
+  <Step title="Make your changes">
+    Update the fields as needed — you can change the value, TTL, or other record-specific settings.
+  </Step>
+  <Step title="Save changes">
+    Click **Save Changes** to apply the update.
+  </Step>
+</Steps>
+
+## Deleting a record
+
+<Steps>
+  <Step title="Locate the record">
+    In the DNS editor, find the record you want to remove.
+  </Step>
+  <Step title="Click Delete">
+    Click **Delete** next to the record. Confirm the deletion when prompted.
+  </Step>
+</Steps>
+
+<Warning>
+  Deleting a DNS record is immediate. If you delete an A record that your website depends on, your site will stop resolving. Always double-check before deleting records.
+</Warning>
+
+## Changing the DNS master (active zone)
+
+Your domain can draw its DNS zone from either the Netstreet Africa client area or from an associated hosting product. You can switch between these sources using the **Change Active Product** option.
+
+<Steps>
+  <Step title="Go to DNS settings">
+    Log in to [my.netstreet.co.za](https://my.netstreet.co.za) and navigate to the **DNS** section.
+  </Step>
+  <Step title="Open the domain menu">
+    Locate the domain you want to change and click the three-dot menu (**⋯**) next to it.
+  </Step>
+  <Step title="Select Change Active Product">
+    Click **Change Active Product**.
+  </Step>
+  <Step title="Choose the DNS source">
+    Select whether you want DNS managed from the client area or by a specific hosting product, then confirm.
+  </Step>
+</Steps>
+
+<Note>
+  If you have more than one hosting package and need to switch which package manages the DNS zone, you can do this from **Change Active Product** by selecting the correct package.
+</Note>
+
+## Exporting your DNS zone
+
+You can download a copy of your DNS zone file at any time. This is useful for backups, auditing your DNS configuration, or migrating to another provider.
+
+<Steps>
+  <Step title="Open the DNS editor">
+    From the DNS settings page, click **DNS Records** for the relevant domain.
+  </Step>
+  <Step title="Click Export Zone">
+    Click the **Export Zone** button in the DNS editor toolbar.
+  </Step>
+  <Step title="Save the file">
+    A standard BIND-format zone file will be downloaded to your computer.
+  </Step>
+</Steps>
+
+<Warning>
+  The exported zone file only reflects the records stored in the **client area DNS zone**. If your domain is currently using a hosting product's DNS (e.g. cPanel) or external nameservers, those records are not included in the export.
+</Warning>
+
+## Delegated DNS access
+
+If you have granted another user delegated access to your Netstreet Africa account, that user can manage DNS records just like the primary account holder — as long as the DNS zone is properly configured. This makes it easy to allow a developer or IT team member to manage DNS without giving them full account ownership.
+
+## Related topics
+
+<CardGroup cols={2}>
+  <Card title="DNS Overview" href="/domains/dns-overview" icon="network-wired">
+    Learn what each DNS record type does and how DNS propagation works.
+  </Card>
+  <Card title="Adding SRV Records" href="/domains/adding-srv-records" icon="server">
+    Step-by-step guide to configuring SRV records for services like SIP and XMPP.
+  </Card>
+  <Card title="Wildcard DNS" href="/domains/wildcard-dns" icon="asterisk">
+    Handle requests for any subdomain with a single wildcard DNS entry.
+  </Card>
+  <Card title="Domain Management" href="/domains/domain-management" icon="sliders">
+    Update nameservers and manage your domain registration settings.
+  </Card>
+</CardGroup>

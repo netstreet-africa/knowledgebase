@@ -1,0 +1,190 @@
+---
+title: "Adding SRV Records to Your Domain at Netstreet Africa"
+sidebarTitle: "SRV Records"
+description: "Learn what SRV records are, when you need one, and how to add an SRV record to your domain via cPanel or the Netstreet Africa client area."
+---
+
+SRV (Service) records are a specialised type of DNS record that tell clients which server and port to use for a specific service on your domain. Unlike A or CNAME records — which simply point a name to an address — SRV records encode the service name, protocol, priority, weight, and port number all in one record. They are widely used for VoIP (SIP/RTP), instant messaging (XMPP), Microsoft services like Teams and Exchange, and gaming services.
+
+## When do you need an SRV record?
+
+You will typically need to add an SRV record when:
+
+- Configuring a **VoIP/SIP** phone system or PBX
+- Setting up **Microsoft 365 / Exchange** federation or Skype for Business
+- Connecting a **Minecraft** or other game server
+- Using **XMPP/Jabber** for instant messaging
+- A third-party service provider specifically instructs you to add one
+
+## SRV record format
+
+Every SRV record follows a precise format. Understanding the format will help you fill in the fields correctly regardless of which tool you use.
+
+```
+_service._protocol.name  TTL  class  SRV  priority  weight  port  target
+```
+
+| Field | Description | Example |
+|-------|------------|---------|
+| `_service` | Symbolic name of the service, prefixed with an underscore | `_sip`, `_xmpp-client`, `_minecraft` |
+| `_protocol` | Transport protocol, prefixed with an underscore | `_tcp`, `_udp`, `_tls` |
+| `name` | The domain name the record is valid for | `yourdomain.co.za` |
+| `TTL` | Time to live in seconds | `3600` |
+| `class` | Always `IN` (internet) | `IN` |
+| `priority` | Lower values are tried first (like MX priority) | `10` |
+| `weight` | Used to load-balance among records with equal priority; higher = more traffic | `20` |
+| `port` | TCP/UDP port number the service listens on | `5060` |
+| `target` | Fully qualified hostname of the server providing the service | `sip.yourdomain.co.za.` |
+
+### Example: SIP over TCP
+
+```
+_sip._tcp.yourdomain.co.za.  3600  IN  SRV  10  20  5060  sip.yourdomain.co.za.
+```
+
+This record tells SIP clients to connect to `sip.yourdomain.co.za` on TCP port `5060`, with a priority of `10` and a weight of `20`.
+
+### Example: XMPP client connections
+
+```
+_xmpp-client._tcp.yourdomain.co.za.  3600  IN  SRV  5  0  5222  xmpp.yourdomain.co.za.
+```
+
+<Info>
+  The target hostname in an SRV record must be a fully qualified domain name (FQDN) that resolves to an A or AAAA record. You cannot use an IP address directly as the target.
+</Info>
+
+## Adding an SRV record in cPanel
+
+If your domain is hosted on a Netstreet Africa plan that includes cPanel access, use the Zone Editor in cPanel to add SRV records.
+
+<Steps>
+  <Step title="Log in to cPanel">
+    Access cPanel through your Netstreet Africa client area or directly via your hosting panel link.
+  </Step>
+  <Step title="Open the Zone Editor">
+    In the **Domains** section of the cPanel home screen, click **Zone Editor**.
+  </Step>
+  <Step title="Manage your domain's zone">
+    Locate the domain for which you want to add an SRV record and click **Manage**.
+  </Step>
+  <Step title="Add a new SRV record">
+    Click **Add Record**, then in the **Type** drop-down list, select **SRV**.
+  </Step>
+  <Step title="Fill in the Name field">
+    In the **Name** text box, enter the service and protocol in the format `_service._protocol.domain`, for example:
+
+    ```
+    _sip._tcp.yourdomain.co.za
+    ```
+
+    - Replace `_sip` with the service name your provider specifies
+    - Replace `_tcp` with `_tcp` or `_udp` as required
+    - Replace `yourdomain.co.za` with your actual domain
+  </Step>
+  <Step title="Set the TTL">
+    In the **TTL** text box, enter a TTL value in seconds. The default value of `14400` (4 hours) is suitable for most cases.
+  </Step>
+  <Step title="Set Priority">
+    In the **Priority** text box, enter the priority value. If you only have one SRV record for this service, use `10`. If your provider specifies a value, use that.
+  </Step>
+  <Step title="Set Weight">
+    In the **Weight** text box, enter the weight value. Use `20` if unsure. If you only have one server for this service, any value works.
+  </Step>
+  <Step title="Set Port">
+    In the **Port** text box, enter the port number the service uses (provided by your service provider).
+  </Step>
+  <Step title="Set Target">
+    In the **Target** text box, enter the fully qualified hostname of the server that provides the service, for example `sip.yourdomain.co.za`.
+  </Step>
+  <Step title="Save the record">
+    Click **Add Record**. cPanel adds the SRV record to your DNS zone file immediately.
+  </Step>
+</Steps>
+
+## Adding an SRV record via the client area DNS editor
+
+If your domain is a standalone domain (without a hosting product), you can add SRV records through the DNS editor in your Netstreet Africa client area.
+
+<Steps>
+  <Step title="Log in to your client area">
+    Go to [my.netstreet.co.za](https://my.netstreet.co.za) and sign in.
+  </Step>
+  <Step title="Navigate to DNS">
+    In the left sidebar, under **Products & Services**, click **DNS**.
+  </Step>
+  <Step title="Open the DNS editor">
+    Locate your domain and click **DNS Records**.
+  </Step>
+  <Step title="Add a new record">
+    Click **Add New Record** and select **SRV** as the record type.
+  </Step>
+  <Step title="Complete the SRV fields">
+    Fill in the service, protocol, priority, weight, port, and target fields as provided by your service or application documentation.
+  </Step>
+  <Step title="Save">
+    Click **Create** to save the record.
+  </Step>
+</Steps>
+
+## Adding an SRV record via WHM (reseller accounts)
+
+If you manage customer domains through WebHost Manager (WHM) as a reseller, you can add SRV records from the WHM DNS Zone editor.
+
+<Steps>
+  <Step title="Log in to WebHost Manager">
+    Access WHM using your reseller credentials.
+  </Step>
+  <Step title="Open the DNS Zone editor">
+    From the WHM home screen, click **DNS Functions**, then click **Edit DNS Zone**.
+  </Step>
+  <Step title="Select the domain">
+    In the list, select the customer domain you want to modify and click **Edit**.
+  </Step>
+  <Step title="Scroll to the add section">
+    Scroll down to the **Add New Entries Below this Line** section.
+  </Step>
+  <Step title="Enter the service and protocol">
+    In the first text box, type the service name and protocol (for example, `_sip._tcp`).
+  </Step>
+  <Step title="Select SRV as the type">
+    In the **Select** drop-down, choose **SRV**. Four additional fields will appear.
+  </Step>
+  <Step title="Fill in Priority, Weight, Port, and Hostname">
+    - **Priority** — Enter the priority value (use `0` if unsure)
+    - **Weight** — Enter the weight value (use `0` if unsure)
+    - **Port** — Enter the TCP/UDP port the service uses
+    - **Hostname** — Enter the FQDN of the server (e.g. `sip.yourdomain.co.za`)
+  </Step>
+  <Step title="Save">
+    Click **Save** at the bottom of the page to apply the changes.
+  </Step>
+</Steps>
+
+## Troubleshooting SRV records
+
+<CardGroup cols={2}>
+  <Card title="Service not connecting" icon="triangle-exclamation">
+    Verify that the target hostname resolves to a valid IP address. The target must have its own A or AAAA record — you cannot use a bare IP address.
+  </Card>
+  <Card title="Record not taking effect" icon="clock">
+    DNS changes propagate over time. Wait up to 48 hours before concluding a record is incorrect. You can check propagation using a tool like [dnschecker.org](https://dnschecker.org).
+  </Card>
+  <Card title="Multiple SRV records" icon="list">
+    If you need redundancy, add multiple SRV records with the same service/protocol but different priorities or weights. Clients will try the lowest-priority value first.
+  </Card>
+  <Card title="Wrong format" icon="code">
+    Double-check that the `_service` and `_protocol` fields each start with an underscore. A missing underscore is a common cause of SRV records not being recognised.
+  </Card>
+</CardGroup>
+
+## Related topics
+
+<CardGroup cols={2}>
+  <Card title="Managing DNS Zones" href="/domains/managing-dns-zones" icon="list">
+    Add, edit, and delete all types of DNS records in the client area.
+  </Card>
+  <Card title="DNS Overview" href="/domains/dns-overview" icon="network-wired">
+    Reference table of all supported DNS record types and their purposes.
+  </Card>
+</CardGroup>

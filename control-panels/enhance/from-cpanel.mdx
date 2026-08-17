@@ -1,0 +1,171 @@
+---
+title: "From cPanel to Enhance: Everything You Need to Know"
+sidebarTitle: "From cPanel"
+description: "A practical transition guide for cPanel users moving to Enhance on Netstreet Africa — covering terminology, workflows, and day-to-day operations."
+---
+
+Enhance is built for today's hosting professional. It is quicker, more intuitive, and gives you tools that cPanel never offered — like self-service site imports, built-in Cloudflare syncing, one-click WordPress during site creation, and real-time Slack notifications for your business. There is a short familiarisation period, as with any new tool, but most users are running comfortably within a day. This guide walks you through the key differences so you can hit the ground running from day one on Netstreet Africa.
+
+---
+
+## Terminology comparison
+
+The language has changed slightly between cPanel and Enhance. Here is a quick reference so you know exactly what to look for:
+
+| cPanel / WHM term | Enhance equivalent | Notes |
+|---|---|---|
+| **WHM** | **Primary Panel** | Your reseller-level control panel where you manage all customer accounts |
+| **cPanel accounts** | **Customers** | The individual accounts that sit under your Primary Panel |
+| **Packages** | **Packages** | Same name, same concept — no change here |
+| **"Log in as" a cPanel account** | **Impersonate** | How you access a customer's control panel from your Primary Panel |
+| **Port 2083 login** | **Custom panel domain** | Customers log in via a branded URL you set (e.g. `cp.yourdomain.co.za`) |
+| **Addon domains** | **Websites** | Each domain is its own website under a customer account |
+
+---
+
+## Setting up your customer login URL
+
+In cPanel, your customers accessed their accounts via port 2083 (e.g. `yourdomain.co.za:2083`) or a redirect to `/cpanel`. Enhance works differently — there are no port-based logins. Instead, you set a branded control panel URL that your customers use to log in, giving your hosting business a professional appearance from day one.
+
+<Steps>
+  <Step title="Log in to your Primary Panel">
+    Log in to your Enhance Primary Panel through the Netstreet Africa client area at [my.netstreet.co.za](https://my.netstreet.co.za).
+  </Step>
+  <Step title="Set your control panel domain">
+    Navigate to **Settings → Platform → Control Panel Domain** and enter the URL your customers will use — for example, `cp.yourdomain.co.za`. You can use any subdomain you like; `cp` is simply a common convention.
+  </Step>
+  <Step title="Point your DNS">
+    Create a DNS A record for that subdomain pointing to your server's IP address. Once DNS propagates, customers can visit that URL and log in with the credentials you assigned when creating their account.
+  </Step>
+</Steps>
+
+<Warning>
+  If you have not set a control panel domain yet, your customers will not have a URL to log in to. Set this up before onboarding your first customer to ensure a seamless experience from the start.
+</Warning>
+
+---
+
+## Adding a new customer — three steps, not one
+
+This is the day-to-day task you will run most often, and it is the biggest structural difference between cPanel and Enhance. In WHM, creating a new account was a single form: domain, password, package, create — done. In Enhance, the process is broken into three separate steps.
+
+This feels like more work at first, but it is actually more flexible. You can onboard a customer before they have picked a domain, change packages independently of websites, and add additional websites under the same customer later without any extra setup.
+
+<Steps>
+  <Step title="Create a package">
+    Before onboarding your first customer, create at least one package. Go to **Settings → Packages → Add a Package**. Define the disk space, bandwidth, number of websites, email accounts, databases, and feature toggles for this plan. Click **Add** when done.
+
+    <Info>
+      If you have already created your packages, skip this step and proceed directly to creating the customer.
+    </Info>
+  </Step>
+  <Step title="Create the customer account">
+    Go to **Customers → Add Customer** in the left-hand panel. Fill in the customer's name, email address, and password. No website or domain data goes here — this step just creates the account and assigns a package.
+  </Step>
+  <Step title="Add the website">
+    Once the customer account exists, click **Impersonate** to enter their control panel. Then click **Add Website**, enter the domain name, and choose whether to create an empty website or install WordPress immediately.
+
+    <Tip>
+      If your client does not have their domain registered yet, you can skip this step entirely for now. The customer and package are ready — come back and add the website whenever the domain is live, or hand the login details to the client so they can add their own website.
+    </Tip>
+  </Step>
+</Steps>
+
+---
+
+## Impersonating a customer
+
+When you need to log in to a customer's account to install WordPress, set up email, check files, or troubleshoot — impersonation is the Enhance equivalent of clicking the cPanel icon in WHM.
+
+<Steps>
+  <Step title="Find the customer">
+    In your Primary Panel, go to **Customers** and locate the customer you want to access.
+  </Step>
+  <Step title="Click Impersonate">
+    Click the **Impersonate** button next to the customer's name.
+  </Step>
+  <Step title="Work in their account">
+    You will see a **yellow banner** across the top of the screen confirming that you are inside a customer's account. A **Return to Admin** button in the top-right takes you back to your Primary Panel whenever you are done.
+  </Step>
+</Steps>
+
+---
+
+## Daily operations: files, email, databases, and more
+
+Once you are impersonating a customer (or logged in to your own account), the left-hand menu gives you everything needed for day-to-day work. Here is how your familiar cPanel tasks map across:
+
+| What you did in cPanel | Where to find it in Enhance |
+|---|---|
+| File Manager | **Websites → [site] → Files** |
+| phpMyAdmin / MySQL databases | **Websites → [site] → Databases** |
+| Email accounts | **Websites → [site] → Emails** |
+| SSL / TLS certificates | **Websites → [site] → Security** |
+| PHP version & settings | **Websites → [site] → Advanced → Developer Tools** |
+| Cron jobs | **Websites → [site] → Advanced → Developer Tools** |
+| FTP accounts | **Websites → [site] → Advanced → FTP** |
+| Redirects | **Websites → [site] → Advanced → Redirects** |
+| Backup & restore | **Websites → [site] → Backups** |
+| Analytics / bandwidth | **Websites → [site] → Analytics** |
+| Addon domains / subdomains | **Websites → [site] → Domains** |
+| Cloudflare integration | **Integrations → Cloudflare** |
+
+---
+
+## Self-service site imports
+
+One of the biggest benefits in Enhance is the ability to import your existing cPanel sites yourself — no ticket required. The built-in cPanel importer transfers your website files, databases, email accounts, and passwords automatically, either through the panel UI or via SCP.
+
+<Steps>
+  <Step title="Open the import tool">
+    In your Enhance panel, go to **Websites → Add Website** and choose the **Import from cPanel** option.
+  </Step>
+  <Step title="Provide your cPanel credentials">
+    Enter the source server's hostname, your cPanel username, and password (or an SCP path if importing via command line). Enhance handles the rest automatically.
+  </Step>
+  <Step title="Verify the import">
+    Once the import completes, visit the website to confirm everything transferred correctly. Check your email accounts, databases, and files.
+  </Step>
+</Steps>
+
+<Note>
+  For larger or more complex migrations — such as moving multiple accounts at once — the Netstreet Africa support team can handle the full migration on your behalf. Open a ticket at [my.netstreet.co.za](https://my.netstreet.co.za) and our migrations team will take it from there.
+</Note>
+
+---
+
+## Migrating multiple domains from a single cPanel account
+
+When you migrate a hosting account from cPanel to Enhance, any subdomains, addon domains, and aliases are grouped under the primary domain as mapped domains. You can only clone and stage sites on the primary domain — not on mapped domains. To unlock staging and cloning for each site individually, you need to separate mapped domains into individual websites.
+
+<Warning>
+  Even though the panel may show you as using only 1 of your 10 website slots, every imported site (including mapped domains) counts towards your total. Separate your mapped domains to avoid unexpectedly running out of website slots.
+</Warning>
+
+<Steps>
+  <Step title="Back up each site">
+    Before making any changes, create a full backup of each site. For WordPress sites, use a plugin such as UpdraftPlus or Duplicator and download the backup files to your local computer.
+  </Step>
+  <Step title="Remove the mapped domains">
+    In the Enhance panel, go to **Websites** and click the primary website. Open the **Files** tab, locate the directory for each mapped domain, note any associated database names, and then delete the files and databases for the mapped domain.
+  </Step>
+  <Step title="Add each domain as a separate website">
+    Click **Websites → Add Website → Production website**, enter the domain name, and click **Add**. If it is a WordPress site, go to the **Apps** tab and install a fresh WordPress instance. Repeat for each domain.
+  </Step>
+  <Step title="Restore each site from backup">
+    Log in to WordPress as an administrator, install your backup plugin, and restore the site from the backup file you downloaded in step 1.
+  </Step>
+  <Step title="Update DNS if needed">
+    If you are using Cloudflare or a third-party DNS provider, check each new site's IP address in the **At a glance** section and update the A record accordingly.
+  </Step>
+</Steps>
+
+---
+
+## When you need Netstreet Africa support
+
+If something is not behaving the way you expect, or you cannot find the cPanel equivalent of a feature you rely on — do not struggle with it alone.
+
+- **General help**: Open a support ticket from your client area at [my.netstreet.co.za](https://my.netstreet.co.za). Our team is fluent in both panels.
+- **Migration help**: Open a ticket and our migrations team will handle the full transfer for you.
+- **Feature requests**: If a feature you relied on in cPanel is missing from Enhance, let us know and we will advise the best alternative.

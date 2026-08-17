@@ -1,0 +1,189 @@
+---
+title: "Setting Up Email on Your Netstreet Africa Hosting Account"
+sidebarTitle: "Setting Up Email"
+description: "Learn how to create email accounts, access webmail, and configure email clients like Outlook and Thunderbird with correct IMAP, POP3, and SMTP settings."
+---
+
+Once your Netstreet Africa hosting plan is active, you can create professional email addresses that use your own domain name — for example, `info@yourdomain.co.za` or `sales@yourdomain.co.za`. Email accounts are managed directly through your hosting control panel, and you can access your messages via webmail in a browser or configure a desktop or mobile email client like Microsoft Outlook, Mozilla Thunderbird, or Apple Mail. This guide covers all three approaches.
+
+---
+
+## Creating an email account
+
+<Steps>
+  <Step title="Log in to the Netstreet Africa Hosting Panel">
+    Visit [my.netstreet.co.za](https://my.netstreet.co.za) and log in with your account credentials.
+  </Step>
+  <Step title="Navigate to your hosting account">
+    In the left sidebar, under **Products & Services**, click **Hosting & Servers**. Locate your hosting plan and click **Manage**.
+  </Step>
+  <Step title="Open your control panel">
+    From the Overview page, click the link to open **cPanel** or your assigned control panel (e.g. Enhance).
+  </Step>
+  <Step title="Create a new email account">
+    In the **Email** section of your control panel, click **Email Accounts**. Click **Create**, then enter:
+
+    - **Username** — the part before the `@` symbol (e.g. `info`)
+    - **Domain** — your domain name (selected from the drop-down)
+    - **Password** — use a strong, unique password
+    - **Storage quota** — set an appropriate mailbox size limit
+
+    Click **Create** to save the new account.
+  </Step>
+</Steps>
+
+<Tip>
+  You can create as many email accounts as your hosting plan allows. Check your
+  plan details in the Netstreet Africa client area for the maximum number of
+  mailboxes included.
+</Tip>
+
+---
+
+## Accessing email via webmail
+
+Webmail lets you read, send, and manage your email directly in a web browser without installing any additional software. This is handy when you are travelling or using a shared computer.
+
+<Steps>
+  <Step title="Open the webmail login page">
+    Navigate to `https://webmail.yourdomain.co.za` in your browser, replacing `yourdomain.co.za` with your actual domain name. Alternatively, you can access webmail via the **Email Accounts** section of your control panel.
+  </Step>
+  <Step title="Log in with your email credentials">
+    Enter your **full email address** (e.g. `info@yourdomain.co.za`) and the **password** you set when creating the account.
+  </Step>
+  <Step title="Choose a webmail client">
+    Netstreet Africa hosting accounts using cPanel offer access to **Roundcube**, a modern and user-friendly webmail interface. Select it and click **Open** to start reading your email.
+  </Step>
+</Steps>
+
+---
+
+## Configuring an email client (IMAP / POP3 / SMTP)
+
+You can add your Netstreet Africa email account to any standard email client. You will need your incoming and outgoing server settings.
+
+### Connection settings
+
+| Setting | Value |
+|---|---|
+| **Incoming mail server (IMAP)** | `mail.yourdomain.co.za` |
+| **IMAP port (SSL)** | `993` |
+| **Incoming mail server (POP3)** | `mail.yourdomain.co.za` |
+| **POP3 port (SSL)** | `995` |
+| **Outgoing mail server (SMTP)** | `mail.yourdomain.co.za` |
+| **SMTP port (SSL/TLS)** | `465` |
+| **SMTP port (STARTTLS)** | `587` |
+| **Username** | Your full email address (e.g. `info@yourdomain.co.za`) |
+| **Password** | The password you set for the account |
+| **Authentication** | Normal password / plain |
+
+<Note>
+  Netstreet Africa supports **TLS encryption** for all email protocols (IMAP,
+  POP3, and SMTP). Always use an encrypted connection to protect your login
+  credentials and message content.
+</Note>
+
+### IMAP vs POP3 — which should you use?
+
+<CardGroup cols={2}>
+  <Card title="IMAP (recommended)" icon="cloud">
+    IMAP keeps your emails on the server and syncs them across all your devices. Emails you read on your phone will also appear as read on your laptop. Use IMAP if you access your email from more than one device.
+  </Card>
+  <Card title="POP3" icon="download">
+    POP3 downloads emails to your device and (by default) removes them from the server. This is useful if you only check email from one device and want to save server storage, but it is not ideal for multi-device use.
+  </Card>
+</CardGroup>
+
+### Setup instructions for popular clients
+
+<Tabs>
+  <Tab title="Microsoft Outlook">
+    <Steps>
+      <Step title="Open Account Settings">
+        Go to **File → Add Account**.
+      </Step>
+      <Step title="Enter your email address">
+        Type your full email address and click **Connect**.
+      </Step>
+      <Step title="Choose IMAP">
+        Select **IMAP** when prompted to choose the account type.
+      </Step>
+      <Step title="Enter incoming server settings">
+        - Server: `mail.yourdomain.co.za`
+        - Port: `993`
+        - Encryption: `SSL/TLS`
+      </Step>
+      <Step title="Enter outgoing server settings">
+        - Server: `mail.yourdomain.co.za`
+        - Port: `587`
+        - Encryption: `STARTTLS`
+      </Step>
+      <Step title="Enter your password and click Connect">
+        Outlook will test the connection and add the account.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Mozilla Thunderbird">
+    <Steps>
+      <Step title="Add a new account">
+        Go to **File → New → Existing Mail Account**.
+      </Step>
+      <Step title="Enter your details">
+        Type your name, full email address, and password, then click **Continue**.
+      </Step>
+      <Step title="Configure manually if needed">
+        Thunderbird may auto-detect your settings. If not, click **Manual Config** and enter the IMAP/SMTP details from the table above.
+      </Step>
+      <Step title="Click Done">
+        Thunderbird will verify the connection and add the account.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Apple Mail (macOS / iOS)">
+    <Steps>
+      <Step title="Open Mail Preferences">
+        On macOS, go to **Mail → Preferences → Accounts → +**. On iOS, go to **Settings → Mail → Accounts → Add Account → Other**.
+      </Step>
+      <Step title="Select Other">
+        Choose **Add Mail Account** and enter your name, email address, password, and a description.
+      </Step>
+      <Step title="Enter server details">
+        Enter the IMAP incoming and SMTP outgoing server details from the table above. Use port `993` for IMAP with SSL and port `587` for SMTP with STARTTLS.
+      </Step>
+      <Step title="Save the account">
+        Apple Mail will test the connection and save the account.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+---
+
+## Troubleshooting common issues
+
+<Accordion title="I can receive email but cannot send (SMTP authentication failed)">
+  Make sure your email client is configured to use **authentication** on the
+  outgoing SMTP server, using your **full email address** as the username and
+  your mailbox password. Some clients have a separate setting for SMTP
+  authentication — ensure it is turned on.
+</Accordion>
+
+<Accordion title="My email client shows an SSL certificate warning">
+  If you see a certificate warning when connecting, try using
+  `mail.yourdomain.co.za` as the server address and ensure your domain has a
+  valid SSL certificate installed. Alternatively, use the server hostname
+  provided in your Netstreet Africa hosting panel (under Account Overview →
+  Control Panel) as the mail server address.
+</Accordion>
+
+<Accordion title="Emails sent to my address are bouncing">
+  Check that your domain's MX records are correctly configured to point to the
+  Netstreet Africa mail servers. See our [DNS Settings for Email](/email/dns-settings-for-email)
+  guide for details.
+</Accordion>
+
+<Accordion title="I am not receiving all emails — some may be going to spam">
+  Log in to webmail and check your spam or junk folder. You can configure spam
+  filtering behaviour in cPanel using SpamAssassin — see our
+  [Managing Spam](/email/managing-spam) guide.
+</Accordion>

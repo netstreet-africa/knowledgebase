@@ -1,0 +1,162 @@
+---
+title: "SSL/TLS Certificates: What They Are and Why You Need One"
+sidebarTitle: "SSL Overview"
+description: "Learn what SSL and TLS certificates are, why your website needs one, and understand the differences between DV, OV, EV, and free Let's Encrypt certificates."
+---
+
+If you have ever noticed the padlock icon in your browser's address bar, you have already seen SSL in action. SSL (Secure Sockets Layer) — and its modern successor, TLS (Transport Layer Security) — are the security protocols that protect the connection between your website and its visitors. Every Netstreet Africa hosting account supports SSL, and installing a certificate on your site is one of the most important steps you can take to protect your visitors and your reputation. This page explains what SSL/TLS is, why it matters, and which type of certificate is right for your needs.
+
+---
+
+## What SSL/TLS actually does
+
+SSL/TLS provides two critical security functions:
+
+<CardGroup cols={2}>
+  <Card title="Encryption" icon="lock">
+    All data transmitted between your web server and a visitor's browser is
+    encrypted. This means that even if someone intercepts the traffic, they
+    cannot read it. This is essential for any site that accepts login
+    credentials, form submissions, or payment information.
+  </Card>
+  <Card title="Authentication" icon="badge-check">
+    An SSL certificate proves to visitors that your site is genuinely operated
+    by you — not an impersonator. Certificates are issued by trusted Certificate
+    Authorities (CAs) that have verified your ownership of the domain (and, for
+    higher-level certificates, your organisation's identity).
+  </Card>
+</CardGroup>
+
+When a visitor connects to your site over HTTPS (`https://`), their browser and your server perform an **SSL/TLS handshake** — exchanging keys and verifying the certificate — before any data is transmitted. This happens transparently in a fraction of a second.
+
+---
+
+## Why your website needs an SSL certificate
+
+<Warning>
+  Modern web browsers such as Chrome and Firefox actively **warn visitors** when
+  they connect to a site without SSL. A "Not Secure" warning in the address bar
+  damages visitor trust and can significantly reduce conversions and traffic.
+</Warning>
+
+You need an SSL certificate if your site:
+
+- Accepts **login credentials** (username and password)
+- Processes **payments** or handles financial information
+- Collects **personal data** via forms (names, addresses, phone numbers, etc.)
+- Sends or receives **sensitive business information**
+
+Beyond security, SSL also has practical benefits:
+
+- **SEO advantage** — Google uses HTTPS as a ranking signal. Sites with SSL rank slightly higher than equivalent sites without it.
+- **Browser compatibility** — Some browser features (service workers, geolocation, web push notifications) only work over HTTPS.
+- **POPIA compliance** — South Africa's Protection of Personal Information Act requires appropriate technical measures to protect personal data in transit.
+
+---
+
+## Types of SSL certificates
+
+Not all SSL certificates are equal. They differ in how thoroughly the issuing Certificate Authority verifies your identity, and in what they protect.
+
+### By validation level
+
+<Tabs>
+  <Tab title="Domain Validation (DV)">
+    **Domain Validation (DV)** certificates are the most basic type. The Certificate Authority verifies only that you control the domain — no identity verification of you or your organisation takes place.
+
+    - **Issued in:** Minutes to hours
+    - **Best for:** Personal sites, blogs, development environments, small business sites
+    - **Displays:** Padlock icon in the browser
+    - **Example providers:** Let's Encrypt (free), Sectigo, Comodo
+
+    <Note>
+      **Let's Encrypt certificates** are DV certificates and are completely
+      free. Netstreet Africa automatically provisions Let's Encrypt (or cPanel
+      SSL) certificates for all new hosting accounts.
+    </Note>
+  </Tab>
+  <Tab title="Organisation Validation (OV)">
+    **Organisation Validation (OV)** certificates require the Certificate Authority to verify your organisation's legal identity, physical address, and phone number before issuing the certificate.
+
+    - **Issued in:** 1–3 business days
+    - **Best for:** Business websites, intranets, portals where organisational trust matters
+    - **Displays:** Padlock + verified organisation details visible in certificate info
+    - **Example providers:** DigiCert, Sectigo, GlobalSign
+  </Tab>
+  <Tab title="Extended Validation (EV)">
+    **Extended Validation (EV)** certificates involve the most rigorous identity verification process, including legal existence verification, physical address confirmation, and phone verification.
+
+    - **Issued in:** 1–5 business days
+    - **Best for:** Banks, large eCommerce sites, government portals, high-value transactions
+    - **Displays:** Padlock + organisation name prominently displayed (in some browsers)
+    - **Example providers:** DigiCert, Entrust, GlobalSign
+  </Tab>
+</Tabs>
+
+### By coverage
+
+| Certificate type | What it protects |
+|---|---|
+| **Single domain** | One domain only (e.g. `yourdomain.co.za`) |
+| **Wildcard** | One domain and all its subdomains (e.g. `*.yourdomain.co.za`) |
+| **Multi-domain (SAN)** | Multiple different domains in a single certificate |
+
+---
+
+## Let's Encrypt vs paid certificates
+
+Netstreet Africa automatically provisions **free SSL certificates** for all new hosting accounts. Here is how free and paid certificates compare:
+
+| Feature | Let's Encrypt / cPanel SSL (Free) | Paid SSL Certificate |
+|---|---|---|
+| Cost | Free | From ~R300/year |
+| Validation type | Domain Validation (DV) | DV, OV, or EV |
+| Browser trust | ✅ Fully trusted | ✅ Fully trusted |
+| Auto-renewal | ✅ Automatic (every 90 days) | ❌ Manual renewal required |
+| Wildcard support | ✅ Available | ✅ Available |
+| Organisation name in cert | ❌ | ✅ (OV/EV only) |
+| Warranty | ❌ No warranty | ✅ Included (varies by CA) |
+| Site seal | ❌ | ✅ Static or dynamic seal |
+| Best for | Most websites | eCommerce, banks, high-trust sites |
+
+<Tip>
+  For the vast majority of websites — including business sites, blogs, and
+  small eCommerce stores — a free Let's Encrypt or cPanel SSL certificate
+  provides exactly the same encryption strength as a paid certificate. The
+  primary reasons to buy a paid certificate are if you need OV/EV validation,
+  a warranty, or a dynamic site seal.
+</Tip>
+
+---
+
+## How to get an SSL certificate on your Netstreet Africa account
+
+<CardGroup cols={2}>
+  <Card title="Free SSL (automatic)" icon="rotate" href="/security/lets-encrypt">
+    All new Netstreet Africa hosting accounts come with a free SSL certificate
+    automatically installed. No action is required. See our Let's Encrypt guide
+    for details on how this works and how to troubleshoot issues.
+  </Card>
+  <Card title="Purchase a paid SSL certificate" icon="credit-card">
+    If you need an OV, EV, Wildcard, or multi-domain certificate, you can
+    purchase one through the Netstreet Africa client area. Our team will assist
+    with installation once you complete the verification process.
+  </Card>
+</CardGroup>
+
+---
+
+## Self-signed certificates
+
+A self-signed certificate provides encryption but **no authentication** — it is signed by you rather than by a trusted Certificate Authority. Browsers will display a security warning when visitors try to access a site using a self-signed certificate, which will deter most users.
+
+Self-signed certificates are only appropriate for:
+- Internal development environments
+- Testing before obtaining a real certificate
+- Internal servers not accessed by the public
+
+<Warning>
+  Never use a self-signed certificate on a production website. The browser
+  warnings they generate will erode visitor trust and may cause most users to
+  leave your site immediately.
+</Warning>

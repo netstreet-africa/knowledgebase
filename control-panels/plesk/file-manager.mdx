@@ -1,0 +1,189 @@
+---
+title: "Using the Plesk File Manager on Netstreet Africa"
+sidebarTitle: "File Manager"
+description: "A complete guide to the Plesk File Manager — browse, create, upload, edit, copy, move, rename, and delete website files directly in your browser."
+---
+
+The Plesk File Manager lets you work with your website's files and folders entirely from within your browser — no FTP client or SSH access required. Whether you need to upload a new image, edit a configuration file, reorganise a directory, or delete outdated content, the File Manager gives you a straightforward interface to get it done directly on your Netstreet Africa hosting account.
+
+## Opening the File Manager
+
+<Steps>
+  <Step title="Log in to Plesk">
+    Access Plesk through the Netstreet Africa client area or at `https://yourdomain.com:8443`. See [Logging In to Plesk](/control-panels/plesk/logging-in) if you need help.
+  </Step>
+  <Step title="Open File Manager for your domain">
+    On the Plesk dashboard, locate the domain whose files you want to manage, then click **File Manager** next to that domain. The File Manager opens and displays the file and directory structure for that domain.
+  </Step>
+</Steps>
+
+<Note>
+  Each domain on your Netstreet Africa Plesk account has its own File Manager view, scoped to that domain's root directory. This keeps each site's files neatly separated.
+</Note>
+
+## Navigating the file system
+
+The File Manager displays your files in two panes: a collapsible directory tree on the left and a file listing panel on the right.
+
+- **Click a folder name** to open it and view its contents in the right panel
+- **Click the up-arrow icon** to move up one level in the directory hierarchy
+- **Click the `+` icon** next to a folder in the tree view to expand it without navigating away
+- **Click the `−` icon** to collapse an expanded folder in the tree view
+
+<Tip>
+  Your website's publicly accessible files live in the `httpdocs` directory (or a similarly named document root). This is where you upload HTML files, images, CSS, JavaScript, and CMS files such as WordPress's `wp-content` folder.
+</Tip>
+
+## Creating new folders and files
+
+### Creating a folder
+
+<Steps>
+  <Step title="Navigate to the parent directory">
+    In the File Manager, browse to the location where you want to create the new folder.
+  </Step>
+  <Step title="Click New → Create Directory">
+    Click the **New** button in the File Manager toolbar, then select **Create Directory** from the dropdown.
+  </Step>
+  <Step title="Name the folder">
+    In the **Directory name** text box, type a name for the new folder. Use lowercase letters and hyphens rather than spaces to keep paths clean and compatible with all systems.
+  </Step>
+  <Step title="Confirm">
+    Click **OK**. Plesk creates the folder in the current directory.
+  </Step>
+</Steps>
+
+### Creating a file
+
+<Steps>
+  <Step title="Navigate to the target directory">
+    Browse to the location where you want the new file to appear.
+  </Step>
+  <Step title="Click New → Create File">
+    Click the **New** button in the toolbar, then select **Create File**.
+  </Step>
+  <Step title="Name the file">
+    In the **File name** text box, type a name including its extension — for example, `index.html` or `config.php`.
+
+    If you are creating an HTML file, you can tick the **Use the HTML template** check box to pre-populate it with standard HTML5 boilerplate markup.
+  </Step>
+  <Step title="Confirm">
+    Click **OK**. Plesk creates the file and opens it ready for editing.
+  </Step>
+</Steps>
+
+## Editing a file
+
+<Steps>
+  <Step title="Locate the file">
+    Browse to the file you want to edit in the File Manager.
+  </Step>
+  <Step title="Open the editor">
+    Click the file name. Plesk opens the built-in code editor where you can view and modify the file's contents.
+  </Step>
+  <Step title="Make your changes">
+    Edit the file directly in the editor. The editor supports syntax highlighting for common web languages including HTML, CSS, PHP, and JavaScript.
+  </Step>
+  <Step title="Save the file">
+    Click **Save** when you are done. Your changes are applied immediately.
+  </Step>
+</Steps>
+
+<Warning>
+  Before editing any live website file — particularly PHP configuration files or CMS core files — create a backup copy of the original. A typo in a configuration file can take your site offline.
+</Warning>
+
+## Copying, moving, renaming, and deleting files
+
+All four operations follow a similar pattern — select the file(s) first, then choose the action.
+
+### Copying files
+
+<Steps>
+  <Step title="Select the file(s)">
+    Tick the check box next to each file or folder you want to copy.
+  </Step>
+  <Step title="Click Copy">
+    Click the **Copy** button in the toolbar.
+  </Step>
+  <Step title="Choose the destination">
+    In the dialog that appears, select or type the path of the destination directory.
+
+    <Tip>
+      Tick the **Replace existing files** check box if you want to overwrite any files with the same name in the destination folder.
+    </Tip>
+  </Step>
+  <Step title="Confirm">
+    Click **OK**. Plesk copies the selected files to the destination.
+  </Step>
+</Steps>
+
+### Moving files
+
+<Steps>
+  <Step title="Select the file(s)">
+    Tick the check box next to each file or folder you want to move.
+  </Step>
+  <Step title="Click Move">
+    Click the **Move** button in the toolbar.
+  </Step>
+  <Step title="Choose the destination">
+    In the dialog, select or type the destination directory path.
+  </Step>
+  <Step title="Confirm">
+    Click **OK**. The files are moved and no longer appear in their original location.
+  </Step>
+</Steps>
+
+### Renaming a file
+
+<Steps>
+  <Step title="Find the rename option">
+    Click the dropdown arrow icon (▾) next to the file you want to rename, then select **Rename** from the menu.
+  </Step>
+  <Step title="Enter the new name">
+    In the **New name** text box, type the new filename including its extension.
+  </Step>
+  <Step title="Confirm">
+    Click **OK**. The file is renamed immediately.
+  </Step>
+</Steps>
+
+### Deleting files
+
+<Steps>
+  <Step title="Select the file(s)">
+    Tick the check box next to each file or folder you want to delete.
+  </Step>
+  <Step title="Click Remove">
+    Click the **Remove** button in the toolbar.
+  </Step>
+  <Step title="Confirm deletion">
+    Click **Yes** in the confirmation dialog. Plesk permanently deletes the selected files.
+  </Step>
+</Steps>
+
+<Warning>
+  File deletion in Plesk's File Manager is **permanent** — there is no recycle bin or undo function. Always confirm you have a backup before deleting files, particularly on production websites.
+</Warning>
+
+## Uploading files
+
+<Steps>
+  <Step title="Navigate to the destination folder">
+    In the File Manager, browse to the directory where you want to upload your files.
+  </Step>
+  <Step title="Click Upload">
+    Click the **Upload** button in the toolbar.
+  </Step>
+  <Step title="Select files from your computer">
+    In the upload dialog, click **Choose files** (or drag and drop files into the upload area), then select the files from your local machine.
+  </Step>
+  <Step title="Wait for the upload to complete">
+    Plesk uploads the files and they appear in the current directory once complete.
+  </Step>
+</Steps>
+
+<Tip>
+  For large batches of files or entire directory structures, consider using an FTP client such as FileZilla, which is faster and more reliable for bulk transfers than the browser-based File Manager.
+</Tip>

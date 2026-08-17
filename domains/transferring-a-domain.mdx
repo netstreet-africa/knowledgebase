@@ -1,0 +1,159 @@
+---
+title: "Transferring a Domain to or from Netstreet Africa"
+sidebarTitle: "Transfer a Domain"
+description: "Step-by-step guide for transferring a domain name to Netstreet Africa, or moving your domain away to a different registrar."
+---
+
+Transferring a domain means moving it from one registrar to another. You might transfer a domain to Netstreet Africa to consolidate all your services in one place, or transfer away when switching providers. This guide covers both scenarios — transferring a domain in to Netstreet Africa, and transferring one out — as well as the specific steps required for UK domains.
+
+<Info>
+  Domain transfers must comply with ICANN's transfer policy. Most generic TLD domains (`.com`, `.net`, `.org`, etc.) require that the domain has been registered or last transferred more than **60 days** ago before a new transfer can be initiated.
+</Info>
+
+## Transferring a domain to Netstreet Africa
+
+Bringing your domain to Netstreet Africa lets you manage your hosting and domain from a single client area at [my.netstreet.co.za](https://my.netstreet.co.za).
+
+### What you will need
+
+Before starting the transfer, gather the following from your current registrar:
+
+- **EPP code** (also called an Auth-Info code, transfer secret, or EPP key)
+- **Registrar unlock** — the registrar lock (transfer lock) must be disabled
+- Access to the **registrant email address** on file for the domain (you will receive a transfer approval email)
+
+<Warning>
+  If the registrar lock is still enabled, your transfer will be rejected. Unlock the domain at your current registrar before proceeding.
+</Warning>
+
+### Initiating the transfer
+
+<Steps>
+  <Step title="Log in to your client area">
+    Go to [my.netstreet.co.za](https://my.netstreet.co.za) and sign in.
+  </Step>
+  <Step title="Start a domain transfer">
+    In the navigation, click **Domains**, then select **Transfer a Domain**. Enter the domain name you wish to transfer and click **Check Transfer**.
+  </Step>
+  <Step title="Enter your EPP code">
+    When prompted, paste in the EPP code provided by your current registrar.
+  </Step>
+  <Step title="Select transfer period and add-ons">
+    Choose the transfer registration period (most transfers include one year of renewal). Optionally add Domain Privacy protection.
+  </Step>
+  <Step title="Review and pay">
+    Review the order summary and complete payment. Netstreet Africa will initiate the transfer request with the registry.
+  </Step>
+  <Step title="Approve the transfer">
+    Watch your registrant email inbox for a transfer authorisation email. Click the approval link to confirm. If you do not approve or reject within the allowed window (typically 5–7 days), most registrars auto-approve the transfer.
+  </Step>
+</Steps>
+
+<Note>
+  Domain transfers for most TLDs take **5–7 business days** to complete. During the transfer, your domain and DNS settings continue to function normally — there is no downtime.
+</Note>
+
+### After the transfer completes
+
+Once the transfer is complete:
+
+- Your domain appears in your client area under **Domains**.
+- Your existing DNS records are preserved (they transfer with the domain).
+- You can now manage renewal, nameservers, and DNS settings from [my.netstreet.co.za](https://my.netstreet.co.za).
+- We recommend enabling **auto-renewal** immediately to prevent accidental expiry.
+
+## Transferring a domain away from Netstreet Africa
+
+If you are moving your domain to a different registrar, Netstreet Africa makes the process straightforward.
+
+### Step 1 — Disable the registrar lock
+
+<Steps>
+  <Step title="Log in and open the domain">
+    Go to [my.netstreet.co.za](https://my.netstreet.co.za), navigate to **Domains**, and click the domain you are transferring.
+  </Step>
+  <Step title="Click Lock/Unlock">
+    Click **Lock/Unlock** on the domain detail page.
+  </Step>
+  <Step title="Uncheck the Locked checkbox">
+    Deselect the **Locked** checkbox in the dialog and click **Submit**.
+  </Step>
+</Steps>
+
+### Step 2 — Obtain your EPP code
+
+<Steps>
+  <Step title="Open the domain detail page">
+    From **Domains**, click the domain you are transferring out.
+  </Step>
+  <Step title="Request the EPP code">
+    Click **Get EPP Code (Non-UK Domains)**.
+  </Step>
+  <Step title="Check your registrant email">
+    The EPP code is sent to the registrant email address associated with the domain. Retrieve it and provide it to your new registrar when prompted.
+  </Step>
+</Steps>
+
+<Info>
+  The EPP code is typically valid for a limited time (often 72 hours, though this varies by registry). Initiate the transfer at your new registrar promptly after receiving the code.
+</Info>
+
+### Step 3 — Initiate the transfer at your new registrar
+
+Follow your new registrar's process for incoming domain transfers. You will typically need to provide:
+
+1. The domain name
+2. The EPP code
+3. Access to the registrant email for the approval message
+
+### Step 4 — Approve the transfer
+
+Watch your registrant email for a transfer approval request from Netstreet Africa or the domain registry. Approve it to allow the transfer to proceed. If you take no action, the transfer will typically auto-approve after 5–7 days.
+
+<Warning>
+  Do **not** renew a domain immediately before transferring it. Some registries lock domains for 60 days after a renewal, which would block your transfer.
+</Warning>
+
+## Transferring UK domains (.co.uk, .org.uk, .me.uk)
+
+UK domains registered with Nominet use a different transfer mechanism. Instead of an EPP code, transfers are handled by updating the **IPS (Internet Provider Security) tag**.
+
+<Steps>
+  <Step title="Get the new registrar's IPS tag">
+    Contact the registrar you are moving to and ask for their Nominet IPS tag.
+  </Step>
+  <Step title="Open the domain detail page">
+    Log in to [my.netstreet.co.za](https://my.netstreet.co.za), go to **Domains**, and click your UK domain.
+  </Step>
+  <Step title="Click Update IPS Tag">
+    Click **Update IPS Tag (UK Domain Release)**.
+  </Step>
+  <Step title="Enter the new tag and submit">
+    Type the IPS tag in the **New IPS Tag** text box and click **Submit**.
+  </Step>
+</Steps>
+
+<Warning>
+  Updating the IPS tag on a UK domain is immediate. Once the tag is updated to another registrar's tag, the domain is released and control passes to them. Only do this when you are ready to complete the transfer.
+</Warning>
+
+## Common transfer issues and solutions
+
+| Issue | Likely cause | Solution |
+|-------|-------------|----------|
+| Transfer rejected | Registrar lock is enabled | Unlock the domain at the losing registrar |
+| Transfer rejected | Domain registered/transferred less than 60 days ago | Wait until the 60-day lock period has expired |
+| EPP code not accepted | Code has expired | Request a fresh EPP code from your current registrar |
+| No approval email received | Wrong registrant email on file | Update the registrant contact email before requesting the transfer |
+| Transfer taking longer than expected | Registry processing delays | Allow up to 7 business days; contact support if it exceeds this |
+
+## Related topics
+
+<CardGroup cols={2}>
+  <Card title="Domain Management" href="/domains/domain-management" icon="sliders">
+    Manage nameservers, EPP codes, and registrant contact information.
+  </Card>
+  <Card title="Managing DNS Zones" href="/domains/managing-dns-zones" icon="list">
+    Add and edit DNS records once your domain is with Netstreet Africa.
+  </Card>
+</CardGroup>

@@ -1,0 +1,212 @@
+---
+title: "DNS Settings for Professional Email: MX, SPF, DKIM & DMARC"
+sidebarTitle: "DNS Settings"
+description: "Understand and configure MX, SPF, DKIM, and DMARC DNS records for your Netstreet Africa domain to ensure reliable email delivery and prevent spoofing."
+---
+
+Correct DNS configuration is the foundation of reliable, trustworthy email. When you send an email from your domain, the receiving mail server performs a series of DNS lookups to verify that your message is legitimate and that it was sent from an authorised server. If these DNS records are missing or misconfigured, your emails may be rejected, sent to spam folders, or your domain may be spoofed by attackers. This guide explains each of the four critical email DNS record types — MX, SPF, DKIM, and DMARC — and how to configure them for your Netstreet Africa domain.
+
+---
+
+## Viewing your email DNS settings in the Hosting Panel
+
+If you have a Netstreet Africa Professional or Business Email account, you can view the pre-configured DNS record values you need to add directly from the Hosting Panel.
+
+<Steps>
+  <Step title="Log in to the Netstreet Africa Hosting Panel">
+    Go to [my.netstreet.co.za](https://my.netstreet.co.za) and log in.
+  </Step>
+  <Step title="Navigate to Email & Office Tools">
+    In the left sidebar, under **Products & Services**, click **Email & Office Tools**.
+  </Step>
+  <Step title="Open your email account settings">
+    Locate your email account and click **Manage**.
+  </Step>
+  <Step title="View DNS record values">
+    On the **Overview** tab, you will see the required values for:
+    - **MX** record
+    - **SPF** record
+    - **DMARC** record
+    - **DKIM** record
+
+    Copy each value and add it to your domain's DNS zone as described below.
+  </Step>
+</Steps>
+
+---
+
+## MX Records — routing incoming email
+
+An **MX (Mail Exchanger) record** tells other mail servers where to deliver email sent to your domain. Without a correctly configured MX record, no-one can send email to `@yourdomain.co.za`.
+
+### What an MX record looks like
+
+```
+Type:     MX
+Host:     yourdomain.co.za
+Value:    mail.yourdomain.co.za
+Priority: 10
+TTL:      3600
+```
+
+- **Host** — your domain name (or `@` as a shorthand in some DNS panels)
+- **Value** — the hostname of the mail server that accepts your email
+- **Priority** — lower numbers have higher priority; use `10` for a single mail server
+- **TTL** — time-to-live in seconds; `3600` (1 hour) is standard
+
+<Note>
+  If you are using Netstreet Africa email hosting, the MX record values are
+  provided in your Hosting Panel. If you have migrated email to an external
+  provider (e.g. Google Workspace or Microsoft 365), those providers will give
+  you their own MX record values.
+</Note>
+
+---
+
+## SPF Records — authorising sending servers
+
+An **SPF (Sender Policy Framework) record** is a DNS TXT record that lists the mail servers that are authorised to send email on behalf of your domain. When a receiving server gets a message claiming to be from `@yourdomain.co.za`, it checks the SPF record to confirm that the sending server is on the approved list.
+
+### Why SPF matters
+
+Without an SPF record, spammers can easily send email that appears to come from your domain. This is known as **email spoofing** and can seriously damage your domain's reputation.
+
+### What an SPF record looks like
+
+```
+Type:  TXT
+Host:  yourdomain.co.za
+Value: v=spf1 include:netstreet.co.za ~all
+TTL:   3600
+```
+
+SPF record syntax explained:
+
+| Part | Meaning |
+|---|---|
+| `v=spf1` | Declares this as an SPF record |
+| `include:netstreet.co.za` | Authorises Netstreet Africa's mail servers |
+| `mx` | Authorises servers listed in your MX record |
+| `a` | Authorises the IP address of your domain's A record |
+| `ip4:x.x.x.x` | Explicitly authorises a specific IPv4 address |
+| `~all` | Soft fail — mark unauthorised senders as suspicious |
+| `-all` | Hard fail — reject unauthorised senders outright |
+
+<Tip>
+  Use `~all` (soft fail) while testing, and switch to `-all` (hard fail) once
+  you are confident all your legitimate sending servers are included. A
+  misconfigured `-all` can cause your own legitimate emails to be rejected.
+</Tip>
+
+<Note>
+  Netstreet Africa supports SPF records. You can add a custom SPF record to your
+  DNS zone via the Hosting Panel. If you need assistance, open a support ticket
+  at [my.netstreet.co.za](https://my.netstreet.co.za) and specify the exact
+  record you want added.
+</Note>
+
+---
+
+## DKIM — cryptographic email signing
+
+**DKIM (DomainKeys Identified Mail)** adds a cryptographic digital signature to every outgoing email. The private key lives on the mail server; the corresponding public key is published in a DNS TXT record. When a receiving mail server gets your message, it looks up the public key in DNS and uses it to verify the signature. If the signature is valid, the server knows the message was genuinely sent by your mail server and has not been tampered with in transit.
+
+### What a DKIM DNS record looks like
+
+```
+Type:  TXT
+Host:  default._domainkey.yourdomain.co.za
+Value: v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNA...
+TTL:   3600
+```
+
+- The **Host** follows the format `selector._domainkey.yourdomain.co.za`. The selector is typically `default` or a custom name provided by your email service.
+- The **Value** contains your public key. This is generated automatically by your mail server — do not try to create it manually.
+
+### Enabling DKIM via cPanel
+
+<Steps>
+  <Step title="Log in to cPanel">
+    Access cPanel from your Netstreet Africa Hosting Panel.
+  </Step>
+  <Step title="Open Email Deliverability">
+    In the **Email** section, click **Email Deliverability**.
+  </Step>
+  <Step title="Check DKIM status">
+    The Email Deliverability page shows the status of DKIM (and SPF) for each domain. If DKIM is not installed, click **Repair** or **Install** to enable it.
+  </Step>
+</Steps>
+
+---
+
+## DMARC — policy enforcement and reporting
+
+**DMARC (Domain-based Message Authentication, Reporting, and Conformance)** builds on SPF and DKIM by telling receiving mail servers what to do when an email fails both checks. It also provides a mechanism for receiving daily reports about messages that claim to be from your domain.
+
+DMARC requires both SPF and DKIM to be configured first. It then adds a policy layer:
+
+| DMARC Policy | Effect |
+|---|---|
+| `p=none` | Monitor only — do not reject or quarantine |
+| `p=quarantine` | Send failing messages to the spam folder |
+| `p=reject` | Reject failing messages outright |
+
+### What a DMARC record looks like
+
+```
+Type:  TXT
+Host:  _dmarc.yourdomain.co.za
+Value: v=DMARC1; p=quarantine; rua=mailto:dmarc-reports@yourdomain.co.za; pct=100
+TTL:   3600
+```
+
+DMARC record syntax explained:
+
+| Tag | Meaning |
+|---|---|
+| `v=DMARC1` | Declares this as a DMARC record |
+| `p=quarantine` | Policy: quarantine failing messages |
+| `rua=mailto:...` | Send aggregate reports to this email address |
+| `ruf=mailto:...` | Send forensic reports to this email address (optional) |
+| `pct=100` | Apply the policy to 100% of messages |
+
+### Recommended rollout approach
+
+<Steps>
+  <Step title="Start with p=none">
+    Deploy a monitoring-only policy first. This lets you receive reports without affecting email delivery:
+
+    ```
+    v=DMARC1; p=none; rua=mailto:dmarc-reports@yourdomain.co.za
+    ```
+  </Step>
+  <Step title="Review your DMARC reports">
+    After a week or two, review the aggregate reports sent to your reporting address. Identify any legitimate sending sources that are failing DMARC and ensure they have correct SPF/DKIM configuration.
+  </Step>
+  <Step title="Move to p=quarantine">
+    Once you are confident all legitimate senders are covered, change the policy to `p=quarantine`.
+  </Step>
+  <Step title="Move to p=reject">
+    After another period of monitoring, move to `p=reject` for the strongest protection.
+  </Step>
+</Steps>
+
+---
+
+## Summary: required DNS records for email
+
+| Record | Type | Purpose |
+|---|---|---|
+| `yourdomain.co.za` | MX | Routes incoming mail to your mail server |
+| `yourdomain.co.za` | TXT (SPF) | Authorises which servers may send email for your domain |
+| `default._domainkey.yourdomain.co.za` | TXT (DKIM) | Publishes your public key for email signature verification |
+| `_dmarc.yourdomain.co.za` | TXT (DMARC) | Defines policy for failed SPF/DKIM checks and reporting |
+
+<Info>
+  DNS changes can take up to 24–48 hours to propagate worldwide. After adding or
+  updating DNS records, use a tool like
+  [MXToolbox](https://mxtoolbox.com) to verify that your records are resolving
+  correctly.
+</Info>
+
+If you need help adding DNS records for your domain at Netstreet Africa, please open a support ticket in the [client area](https://my.netstreet.co.za).

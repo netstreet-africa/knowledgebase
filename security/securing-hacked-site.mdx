@@ -1,0 +1,253 @@
+---
+title: "Recovering and Securing a Hacked Website: Step-by-Step"
+sidebarTitle: "Securing Hacked Site"
+description: "Step-by-step guide to recovering your Netstreet Africa website after a hack: change passwords, remove malware, fix permissions, and request a Google review."
+---
+
+Discovering that your website has been hacked is alarming — but it is a recoverable situation if you act quickly and methodically. Most website hacks exploit one of a small number of well-known vulnerabilities: a weak or compromised FTP/SSH password, insecure file permissions, or an out-of-date application or plugin with a known security flaw. This guide walks you through the full recovery process: identifying the cause, stopping the attack, cleaning up the damage, and hardening your site against future intrusions.
+
+<Note>
+  If you are not comfortable managing a website recovery yourself, or simply do
+  not have the time, please open a support ticket at
+  [my.netstreet.co.za](https://my.netstreet.co.za) and ask about our
+  **1-Time Website Cleanup** service. Our team will clean, secure, and optimise
+  your site for you.
+</Note>
+
+---
+
+## Step 1 — Determine how the hack occurred
+
+Understanding the entry point is essential before you begin cleaning up. Otherwise, the attacker may regain access as soon as you remove the malicious files. Most website hacks happen in one of three ways:
+
+<CardGroup cols={3}>
+  <Card title="Compromised password" icon="key">
+    Your FTP or SSH password was guessed, brute-forced, or stolen — giving the
+    attacker direct access to upload and modify files.
+  </Card>
+  <Card title="Vulnerable application" icon="bug">
+    An out-of-date CMS (WordPress, Joomla, etc.), plugin, or theme contained a
+    known vulnerability that was exploited by an automated scanning tool.
+  </Card>
+  <Card title="Insecure file permissions" icon="folder-open">
+    Files or directories in `public_html` had permissions set to `777`
+    (world-writable), allowing attackers to modify or overwrite them.
+  </Card>
+</CardGroup>
+
+### Checking for a compromised password
+
+<Steps>
+  <Step title="Connect via SSH">
+    ```bash
+    ssh yourusername@yourdomain.co.za
+    ```
+  </Step>
+  <Step title="Review command history">
+    ```bash
+    history
+    ```
+
+    Review the last 1000 commands for any you did not run. Suspicious commands — especially those downloading files, modifying `.htaccess`, or creating new users — are red flags.
+  </Step>
+  <Step title="Check the last login IP">
+    ```bash
+    cat ~/.lastlogin
+    ```
+
+    Compare the IP address shown with your own IP (visit [ipfinder.us](http://ipfinder.us) to check your current IP). An unfamiliar IP indicates unauthorised access.
+  </Step>
+</Steps>
+
+If you find evidence of unauthorised access:
+- **Change your cPanel, FTP, and SSH passwords immediately**
+- **Stop using plain FTP** — it transmits your password in unencrypted plaintext. Use SFTP or SSH instead
+- **Scan all computers** you have used to access the account for malware
+
+### Checking for a vulnerable application
+
+Review every application installed on your site — WordPress, Joomla, Drupal, plugins, themes, image galleries, shopping carts, and any other scripts. For each one:
+
+1. Check the currently installed version
+2. Visit the developer's website to find the latest version
+3. Update immediately if you are not running the latest version
+4. For WordPress plugins: search the plugin name plus "vulnerability" to check for known issues
+5. Check cPanel's **Error Log** (under Metrics) for recent PHP or application errors — these often point directly to the vulnerable file
+
+---
+
+## Step 2 — Stop any malicious processes still running
+
+Before cleaning files, ensure there are no malicious processes actively running on your account. Otherwise the attacker's code will simply re-infect files you have cleaned.
+
+<Steps>
+  <Step title="Connect via SSH and list running processes">
+    ```bash
+    ps faux
+    ```
+  </Step>
+  <Step title="Identify suspicious processes">
+    Look for any unfamiliar processes. Normal processes will include your shell session (`bash`) and the `ps` command itself — these are safe. Look for unexpected processes such as PHP scripts, IRC bots, or cryptocurrency miners.
+  </Step>
+  <Step title="Kill any suspicious processes">
+    Note the PID (process ID) of any suspicious process and terminate it:
+
+    ```bash
+    kill PROCESS_ID
+    ```
+
+    Replace `PROCESS_ID` with the actual number shown in the PID column.
+  </Step>
+</Steps>
+
+<Note>
+  If you are uncomfortable identifying suspicious processes, please open a
+  support ticket at [my.netstreet.co.za](https://my.netstreet.co.za). Our team
+  can assist with this step.
+</Note>
+
+---
+
+## Step 3 — Find and remove hacked files
+
+With malicious processes stopped, you can now locate and remove infected files.
+
+### Finding recently modified files
+
+Look for files that were modified around the time the hack occurred. To find all files in `public_html` modified within the last three days:
+
+```bash
+cd ~/public_html
+find . -mtime -3
+```
+
+Adjust the `-3` value to search further back in time if needed (e.g. `-7` for seven days).
+
+### Searching for common malware patterns
+
+Attackers often inject malicious PHP code into existing files. Search for common patterns:
+
+```bash
+# Look for PHP files containing base64-encoded payloads (common in malware)
+grep -rl "base64_decode" ~/public_html --include="*.php"
+
+# Look for eval() calls (often used to execute obfuscated code)
+grep -rl "eval(" ~/public_html --include="*.php"
+
+# Look for files with suspicious content
+grep -rl "FilesMan" ~/public_html
+```
+
+Review each file found. If it contains code you did not write, either restore it from a clean backup or delete it.
+
+### Showing hidden files
+
+Make sure you can see hidden files when browsing via FTP or SSH. In SSH, use the `-a` flag with `ls`:
+
+```bash
+ls -la
+```
+
+Malicious files often have names beginning with `.` to hide from casual observation.
+
+---
+
+## Step 4 — Fix file permissions
+
+Overly permissive file permissions are both a cause and a consequence of hacks. Reset all permissions to secure defaults:
+
+```bash
+cd ~/public_html
+
+# Set all directories to 755
+find . -type d -exec chmod -c 755 {} \;
+
+# Set all files to 644
+find . -type f -exec chmod -c 644 {} \;
+```
+
+<Note>
+  After resetting permissions, some applications may require specific files to
+  have adjusted permissions (e.g. WordPress's `wp-config.php` should be `600` or
+  `640`). Check your application's documentation and make individual adjustments
+  as needed.
+</Note>
+
+---
+
+## Step 5 — Restore from backup
+
+If the hack has extensively modified your files, restoring from a clean backup taken before the attack is often faster and more reliable than trying to clean every infected file manually.
+
+### Using Server Rewind in cPanel
+
+You can use the **Server Rewind** feature in cPanel to restore files from your home directory that were modified or deleted within the past month:
+
+1. Log in to cPanel
+2. In the **Files** section, click **Server Rewind** (or **Backup** depending on your control panel version)
+3. Select the date you want to restore from and follow the prompts
+
+For database restoration (particularly important after SQL injection attacks on Joomla or WordPress sites), select a backup from before the attack and restore through cPanel's **phpMyAdmin** or **Backup & Restore** tool.
+
+---
+
+## Step 6 — Harden WordPress (if applicable)
+
+If your site runs WordPress, additional steps are required after a hack:
+
+<Steps>
+  <Step title="Update WordPress core, all themes, and all plugins">
+    Log in to **wp-admin → Dashboard → Updates** and install all available updates.
+  </Step>
+  <Step title="Reset WordPress security keys">
+    Generate new secret keys at [https://api.wordpress.org/secret-key/1.1/salt/](https://api.wordpress.org/secret-key/1.1/salt/) and replace the existing keys in your `wp-config.php` file. This invalidates all existing login sessions.
+  </Step>
+  <Step title="Change all WordPress user passwords">
+    Go to **Users → All Users** and update the password for every account, especially Administrator accounts.
+  </Step>
+  <Step title="Delete any unfamiliar admin accounts">
+    Attackers sometimes create hidden admin accounts to maintain access. Remove any users you do not recognise.
+  </Step>
+  <Step title="Install a security plugin">
+    Consider installing a reputable WordPress security plugin (e.g. Wordfence or Solid Security) to add ongoing malware scanning, login protection, and file integrity monitoring.
+  </Step>
+</Steps>
+
+---
+
+## Step 7 — Request a review from Google
+
+If Google has detected your hacked site, it may display a **"Deceptive site ahead"** warning to visitors in Chrome, or your site may be penalised in search rankings. Once you are confident the site is clean and secure:
+
+1. Verify your site in [Google Search Console](https://search.google.com/search-console)
+2. Check the **Security Issues** report to see what Google flagged
+3. Follow Google's instructions to request a security review
+4. Google will re-evaluate your site and remove warnings once it determines the site is safe
+
+For detailed instructions on requesting a Google review, visit [web.dev/articles/request-a-review](https://web.dev/articles/request-a-review).
+
+---
+
+## Step 8 — Prevent future attacks
+
+Once your site is clean, take the following steps to reduce the risk of future compromise:
+
+<Steps>
+  <Step title="Change all passwords">
+    Update your cPanel, FTP, SSH, database, and application passwords to new, strong, unique passwords. See our [Choosing Strong Passwords](/security/choosing-strong-passwords) guide.
+  </Step>
+  <Step title="Enable two-factor authentication">
+    Turn on 2FA for your Netstreet Africa client area and cPanel account.
+  </Step>
+  <Step title="Keep all software updated">
+    Set up automatic updates for your CMS and plugins, or check for updates at least weekly.
+  </Step>
+  <Step title="Consider enabling Cloudflare">
+    Cloudflare's CDN and Web Application Firewall (WAF) can block many automated attacks before they reach your server. Sign up directly at [cloudflare.com](https://www.cloudflare.com).
+  </Step>
+  <Step title="Set up regular backups">
+    Ensure cPanel's backup features are configured and that recent backups are being created. For VPS customers, configure a backup solution via your Netstreet Africa client area.
+  </Step>
+</Steps>
+
+If you need further assistance recovering from a hack or securing your site, please open a support ticket at [my.netstreet.co.za](https://my.netstreet.co.za).

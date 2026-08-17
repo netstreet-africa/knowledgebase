@@ -1,0 +1,168 @@
+---
+title: "Backing Up and Restoring Your Site in Plesk"
+sidebarTitle: "Backups"
+description: "How to manually back up, schedule automatic backups, and restore your websites and databases using the Plesk Backup Manager on Netstreet Africa."
+---
+
+Regular backups are one of the most important practices for any website owner. Even on a well-maintained hosting account, unexpected events — a failed update, an accidental file deletion, a database corruption, or a security incident — can cause data loss. The Plesk Backup Manager on your Netstreet Africa account gives you full control over backups: you can run them manually at any time, schedule them to run automatically, and restore your site or database with just a few clicks.
+
+<Info>
+  Netstreet Africa may retain server-level backups as part of your hosting plan, but these are not a substitute for your own backups. You are responsible for maintaining current backups of your websites and data. Use the Backup Manager regularly.
+</Info>
+
+## Manual site backup
+
+Running a manual backup is useful before making significant changes to your website — such as upgrading a CMS, installing a plugin, or editing critical configuration files.
+
+<Steps>
+  <Step title="Log in to Plesk">
+    Access Plesk through the Netstreet Africa client area or at `https://yourdomain.com:8443`. See [Logging In to Plesk](/control-panels/plesk/logging-in) if needed.
+  </Step>
+  <Step title="Go to Websites & Domains">
+    In the left sidebar, click **Websites & Domains**.
+  </Step>
+  <Step title="Open Backup Manager">
+    In the right sidebar (or within the domain's tools section), click **Backup Manager**.
+  </Step>
+  <Step title="Start a backup">
+    On the **Backup Manager** page, click the **Back Up** button.
+  </Step>
+  <Step title="Choose what to back up">
+    Under **Backup content**, in the **Back up** section, select what you want to include:
+    - **Domain configuration** — settings for your domain (DNS, hosting configuration)
+    - **Mail configuration and content** — email account settings and stored messages
+    - **Website files** — all files in your domain's document root
+    - **Databases** — all databases associated with the domain
+  </Step>
+  <Step title="Select the backup type">
+    In the **Type** section, choose between:
+    - **Full** — backs up all selected content from scratch. Takes more time and storage, but is completely self-contained
+    - **Incremental** — only backs up data that has changed since the last backup. Faster and smaller, but relies on a previous full backup to be useful
+  </Step>
+  <Step title="Adjust backup settings">
+    Under **Backup settings**, you can:
+    - Add a note or label to help identify this backup later
+    - Choose whether to send an email notification when the backup completes
+  </Step>
+  <Step title="Run the backup">
+    Click **OK**. Plesk starts the backup immediately. For large sites, this may take several minutes. A progress indicator appears on the Backup Manager page.
+  </Step>
+</Steps>
+
+<Tip>
+  Always create a full manual backup before any major change — a CMS upgrade, a theme switch, or a database migration. Label the backup clearly (for example, "Before WP 6.5 upgrade") so you can find it quickly if something goes wrong.
+</Tip>
+
+## Scheduled automatic backups
+
+Setting up a scheduled backup means Plesk will back up your site automatically at regular intervals without any action on your part. This is the best way to ensure you always have a recent restore point available.
+
+<Steps>
+  <Step title="Open Backup Manager">
+    In Plesk, click **Websites & Domains** in the left sidebar, then click **Backup Manager** in the right sidebar.
+  </Step>
+  <Step title="Click Schedule">
+    On the **Backup Manager** page, click the **Schedule** button.
+  </Step>
+  <Step title="Set the backup schedule">
+    On the **Scheduled Backup Settings** page, under **Schedule**, select how often you want backups to run:
+
+    | Frequency | Best for |
+    |---|---|
+    | **Daily** | Actively updated sites (blogs, e-commerce stores, booking systems) |
+    | **Weekly** | Sites updated a few times per week |
+    | **Monthly** | Largely static sites with infrequent content changes |
+
+    Also set the time of day for the backup to run. Choosing an off-peak hour (such as 2:00 AM) minimises any performance impact on your live site.
+  </Step>
+  <Step title="Choose full or incremental">
+    Select whether each scheduled run should be a **Full** backup or an **Incremental** backup. For most accounts, running a weekly full backup with daily incremental backups between them is a good balance of thoroughness and storage efficiency.
+  </Step>
+  <Step title="Set a retention policy">
+    Specify how many backup copies to keep. Older backups are automatically deleted once the limit is reached. Keeping at least **four to seven** copies gives you a rolling window of recent restore points without consuming too much storage.
+  </Step>
+  <Step title="Configure backup content and settings">
+    Under **Backup settings**, select what to include (files, databases, mail, configuration) and whether to enable email notifications for scheduled backup results.
+  </Step>
+  <Step title="Save the schedule">
+    Click **OK**. Plesk saves the schedule and will run backups automatically going forward.
+  </Step>
+</Steps>
+
+<Note>
+  Scheduled backups are stored on your hosting account's server by default, which means they consume part of your disk quota. Monitor your storage usage in the Plesk statistics panel to ensure you do not run out of space.
+</Note>
+
+## Restoring your site from a backup
+
+If something goes wrong with your website, you can restore it from any backup stored in the Backup Manager.
+
+<Steps>
+  <Step title="Open Backup Manager">
+    In Plesk, click **Websites & Domains** in the left sidebar, then click **Backup Manager**.
+  </Step>
+  <Step title="Select the backup to restore">
+    The Backup Manager lists all available backups with their date, type (full or incremental), and size. Click the backup you want to restore from.
+  </Step>
+  <Step title="Choose what to restore">
+    Under **Backup content**, next to **What do you want to restore?**, select one of the following:
+    - **Selected objects** — choose specific components (files, databases, mail, or configuration) to restore selectively. Use this when you only need to recover a particular file or database rather than rolling back everything.
+    - **All objects (entire system)** — restores the complete snapshot of your site as it was at the time of the backup. Use this after a major failure or security incident.
+  </Step>
+  <Step title="Configure restoration options">
+    Under **Restoration options**, you can adjust settings such as whether to overwrite existing files and databases. The default settings work for most restore scenarios.
+  </Step>
+  <Step title="Click Restore">
+    Click **Restore**. Plesk begins the restoration process. A progress indicator shows the status. Do not close your browser until the restore is complete.
+  </Step>
+</Steps>
+
+<Warning>
+  Restoring a full backup overwrites your current live site files and databases with the backed-up versions. Any changes made after the backup was taken will be lost. If you are unsure, use **Selected objects** to restore only the specific part of your site that needs to be recovered.
+</Warning>
+
+## Backing up and restoring databases
+
+Databases can also be backed up and restored independently of a full site backup — useful when you want a quick database snapshot before running a database migration or upgrade.
+
+### Backing up a database
+
+<Steps>
+  <Step title="Open the Databases section">
+    In the Plesk left sidebar, click **Databases**.
+  </Step>
+  <Step title="Export the database">
+    Locate the database you want to back up and click **Export Dump** next to its name. Plesk exports the database as an SQL file.
+  </Step>
+  <Step title="Choose a destination and filename">
+    In the dialog that appears, select the directory where the export file should be saved, and enter a filename for the backup.
+
+    <Tip>
+      Tick the **Automatically download dump after creation** check box to have Plesk download the SQL file to your local computer as soon as it is created. This gives you an off-server copy as an extra safety net.
+    </Tip>
+  </Step>
+  <Step title="Confirm">
+    Click **OK**. Plesk creates the database export file.
+  </Step>
+</Steps>
+
+### Restoring a database
+
+<Steps>
+  <Step title="Create a safety backup first">
+    Before restoring, export a fresh copy of the current database (see above). This protects your current data in case the restore does not produce the result you expected.
+  </Step>
+  <Step title="Open the Databases section">
+    In the Plesk left sidebar, click **Databases**.
+  </Step>
+  <Step title="Import the backup">
+    Locate the database you want to restore and click **Import Dump** next to its name.
+  </Step>
+  <Step title="Select the backup file">
+    In the dialog, browse to the location of the SQL backup file you want to restore from, select it, and click **OK**. Plesk imports the database from the file and overwrites the existing data.
+  </Step>
+</Steps>
+
+<Warning>
+  Importing a database dump **replaces all existing data** in that database. Always export a current backup to a separate filename before importing a previous one, so you have a way to recover if the import does not go as planned.
+</Warning>

@@ -1,0 +1,184 @@
+---
+title: "Managed WordPress Hosting on Netstreet Africa"
+sidebarTitle: "Managed WordPress"
+description: "Create, manage, and scale WordPress sites on Netstreet Africa Managed WordPress — with built-in CDN, staging, automated backups, and Cloudflare Enterprise."
+---
+
+Netstreet Africa Managed WordPress is a fully optimised hosting environment built specifically for WordPress. Unlike standard shared hosting, every layer of the stack — server software, caching, CDN, security, and backups — is tuned for WordPress performance and reliability. You can create a new WordPress site in minutes, push changes safely through a staging environment, and trust that your files and database are backed up automatically every day.
+
+## What's included with Managed WordPress
+
+<CardGroup cols={2}>
+  <Card title="Global CDN" icon="globe">
+    Your site's content is distributed across a global CDN network powered by Cloudflare Enterprise, ensuring fast load times for visitors worldwide.
+  </Card>
+  <Card title="Automated daily backups" icon="database">
+    Daily automated backups are retained so you can restore your site to any recent point if something goes wrong.
+  </Card>
+  <Card title="Staging environment" icon="code-branch">
+    Create a one-click staging copy of your live site to safely develop and test changes before pushing them live.
+  </Card>
+  <Card title="Automatic updates" icon="rotate">
+    Keep WordPress core, themes, and plugins up to date automatically — reducing your security exposure without manual effort.
+  </Card>
+  <Card title="Malware protection" icon="shield">
+    Built-in security monitoring scans for malware and suspicious activity, with immediate alerting if issues are detected.
+  </Card>
+  <Card title="WP-CLI access" icon="terminal">
+    Manage WordPress from the command line via WP-CLI, directly from the dashboard or via SSH.
+  </Card>
+</CardGroup>
+
+## Creating your first WordPress site
+
+<Steps>
+  <Step title="Log in to your Netstreet Africa account">
+    Go to [my.netstreet.co.za](https://my.netstreet.co.za) and log in with your credentials.
+  </Step>
+  <Step title="Locate your Managed WordPress plan">
+    Under **Products & Services**, find your Managed WordPress plan and click **Login to Control Panel**.
+  </Step>
+  <Step title="Add a new site">
+    In the control panel, click **Add site** or **Create new site**. Enter your domain name and choose whether to create a fresh WordPress installation or import an existing one.
+  </Step>
+  <Step title="Complete the WordPress setup">
+    Once the site is created, click **Login to admin** to open the WordPress administration area. Complete the basic site configuration: set your site title, admin email, and timezone under **Settings → General**.
+  </Step>
+  <Step title="Point your domain">
+    If you registered your domain elsewhere, update its nameservers to point to Netstreet Africa's nameservers (or update the A record to your server's IP). Instructions for specific registrars are available in the Netstreet Africa Help Centre.
+  </Step>
+</Steps>
+
+<Tip>
+  If you are launching a new site, use the AI Website Builder to get a fully designed, content-populated WordPress site in minutes. See the [AI Website Builder](/hosting/wordpress/ai-website-builder) guide for details.
+</Tip>
+
+## Logging in to your WordPress admin
+
+After your site is created, you can log in to the WordPress administration area at any time.
+
+<Steps>
+  <Step title="Open your site in the control panel">
+    From the control panel, click **Websites** in the left sidebar, then click your site.
+  </Step>
+  <Step title="Click Login to admin">
+    In the **Applications installed** section, locate your WordPress installation and click **Manage**, then click **Login to admin**.
+  </Step>
+</Steps>
+
+Alternatively, you can always log in directly by visiting `https://yourdomain.com/wp-admin` in your browser and entering your WordPress username and password.
+
+## Setting up staging
+
+A staging site is an identical copy of your live site where you can safely test changes — new plugins, theme updates, code customisations — without any risk to your live visitors.
+
+<Steps>
+  <Step title="Open your site settings">
+    In the control panel, click the site you want to create a staging environment for.
+  </Step>
+  <Step title="Create a staging copy">
+    Look for the **Staging** section or button and click **Create staging site**. The system creates a full copy of your site (files and database) at a temporary staging URL.
+  </Step>
+  <Step title="Make and test changes">
+    Log in to your staging site's WordPress admin and make your changes. Test thoroughly to confirm everything works as expected.
+  </Step>
+  <Step title="Push to live">
+    When you are happy with your changes, use the **Push to live** option to overwrite your production site with the staging version. Review what will be overwritten before confirming, as this action is not reversible.
+  </Step>
+</Steps>
+
+<Warning>
+  Pushing staging to live overwrites your production site's files and/or database depending on the options you select. Always generate a manual backup of your live site before performing a push.
+</Warning>
+
+## CDN and caching
+
+Your Managed WordPress site benefits from Cloudflare Enterprise CDN, which caches and delivers your pages and assets from data centres close to your visitors. This dramatically reduces Time to First Byte (TTFB) and page load times globally.
+
+**Your site does not need a separate caching plugin.** The built-in caching layer handles page-level caching automatically. Adding an additional caching plugin may conflict with the built-in cache and cause unexpected behaviour.
+
+To manually purge the CDN cache (for example, after making changes that are not appearing for visitors):
+
+<Steps>
+  <Step title="Open your site in the control panel">
+    Navigate to the site you want to manage.
+  </Step>
+  <Step title="Purge the cache">
+    Look for the **Cache** or **CDN** section and click **Purge cache**. The CDN will fetch fresh content from your origin server on the next request.
+  </Step>
+</Steps>
+
+## Backups and restores
+
+Managed WordPress includes automated daily backups stored securely in the cloud. You can restore your site to any available backup point from within the control panel.
+
+<Tabs>
+  <Tab title="Restore from automated backup">
+    <Steps>
+      <Step title="Open backup settings">
+        In the control panel, navigate to your site and look for the **Backups** section.
+      </Step>
+      <Step title="Select a restore point">
+        Browse the list of available automated backups. Each entry shows a date and time stamp.
+      </Step>
+      <Step title="Restore">
+        Click **Restore** next to the backup you want to recover. Confirm the action and wait for the restoration to complete.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Generate a manual backup">
+    <Steps>
+      <Step title="Open backup settings">
+        In the control panel, navigate to your site's **Backups** section.
+      </Step>
+      <Step title="Generate a backup">
+        Click **Generate backup** or **Create full backup**. Once complete, a download link is available so you can save a local copy.
+      </Step>
+    </Steps>
+    <Tip>
+      Always generate a manual backup before making significant changes — installing a new major plugin, updating WordPress to a new major version, or pushing staging to live.
+    </Tip>
+  </Tab>
+  <Tab title="Back up and restore the database">
+    <Steps>
+      <Step title="Access phpMyAdmin">
+        In the control panel, go to your site's database settings and click **Open phpMyAdmin**.
+      </Step>
+      <Step title="Export the database">
+        In phpMyAdmin, select your WordPress database, click **Export**, choose **Quick** export method, and click **Go** to download a `.sql` file.
+      </Step>
+      <Step title="Restore the database">
+        To restore, click **Import** in phpMyAdmin, upload your `.sql` file, and click **Go**.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Enabling automatic updates
+
+Keeping WordPress core, themes, and plugins updated is one of the most effective security measures you can take. Managed WordPress lets you automate this process.
+
+<Steps>
+  <Step title="Open update settings">
+    In the control panel, navigate to your site and find the **Updates** or **Auto-updates** section.
+  </Step>
+  <Step title="Enable automatic updates">
+    Toggle on automatic updates for **WordPress core**, **themes**, and **plugins** separately. You can choose to enable all three or only the categories you are comfortable automating.
+  </Step>
+</Steps>
+
+<Note>
+  Automatic plugin and theme updates are applied incrementally. If an update causes an issue, your most recent automated backup gives you a restore point. For mission-critical sites, consider testing plugin updates on your staging site first.
+</Note>
+
+## Managing plugins and themes
+
+You can install, activate, deactivate, and update plugins and themes directly from the WordPress admin dashboard, or from within the Netstreet Africa control panel.
+
+- To install a plugin from the WordPress admin: go to **Plugins → Add New**, search for the plugin, and click **Install Now**, then **Activate**.
+- To install a theme: go to **Appearance → Themes → Add New**, find a theme, and click **Install** then **Activate**.
+- To upload a premium plugin or theme you purchased elsewhere: use **Plugins → Add New → Upload Plugin** (or **Appearance → Themes → Add New → Upload Theme**) and select the `.zip` file.
+
+<Warning>
+  Some plugins are not permitted on Managed WordPress environments because they conflict with built-in caching or security systems. If a plugin you want to install is blocked, contact Netstreet Africa support to discuss alternative solutions.
+</Warning>

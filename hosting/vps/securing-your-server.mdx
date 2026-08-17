@@ -1,0 +1,322 @@
+---
+title: "Securing Your Unmanaged VPS: A Complete Guide"
+sidebarTitle: "Securing Your Server"
+description: "Learn how to harden your Netstreet Africa Unmanaged VPS with SSH hardening, fail2ban, iptables firewall rules, and regular software updates."
+---
+
+Running an Unmanaged VPS at Netstreet Africa gives you total freedom over your server environment — but that freedom comes with responsibility. Because you have root access, you can install anything, configure anything, and run anything you like. However, if you do not actively secure your server, you leave it open to attack by malicious actors. A minor attack could be a brief annoyance; a major one could wipe out your entire server configuration and data. This guide walks you through the most important steps you should take to harden a new Unmanaged VPS.
+
+<Warning>
+  You must have root (or sudo) access to your VPS to follow the procedures on
+  this page. All commands below assume you are logged in as root or are
+  prefixing commands with `sudo`.
+</Warning>
+
+---
+
+## 1. Connect to your server via SSH
+
+Before you can harden your server, you need to connect to it. Netstreet Africa provides your root credentials in the **Product Notes** section of your client area.
+
+<Tabs>
+  <Tab title="Linux / macOS">
+    Open a terminal and run:
+
+    ```bash
+    ssh root@your-server-ip
+    ```
+
+    To connect on a non-standard port (e.g. 7822):
+
+    ```bash
+    ssh -p 7822 root@your-server-ip
+    ```
+  </Tab>
+  <Tab title="Windows (PuTTY)">
+    1. Download and open [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/).
+    2. Enter your server's IP address in **Host Name (or IP address)**.
+    3. Set **Port** to `22` (or your custom SSH port).
+    4. Ensure **Connection type** is set to **SSH**.
+    5. Click **Open** and log in with your root credentials.
+  </Tab>
+</Tabs>
+
+---
+
+## 2. Use strong passwords
+
+Weak passwords are the easiest way for an attacker to break into your server. Every account on your VPS — root, system users, database users, and control panel accounts — should use a strong, unique password.
+
+<Tip>
+  A strong password is at least 16 characters long and includes a mix of
+  uppercase letters, lowercase letters, numbers, and symbols. Consider using a
+  password manager such as Bitwarden or 1Password to generate and store
+  credentials securely.
+</Tip>
+
+See our [Choosing Strong Passwords](/security/choosing-strong-passwords) guide for detailed guidance.
+
+---
+
+## 3. Disable root SSH login
+
+The `root` account is all-powerful on any Linux system. Allowing direct root login over SSH means that any attacker who discovers your password gains complete control of the server. The safer approach is to create a regular user account with sudo privileges and then disable SSH root login entirely.
+
+<Steps>
+  <Step title="Create a new user with sudo access">
+    ```bash
+    adduser netstreet
+    usermod -aG sudo netstreet
+    ```
+
+    Replace `netstreet` with your preferred username. Set a strong password when prompted.
+  </Step>
+  <Step title="Test the new user in a separate session">
+    Open a **new** SSH session and log in as your new user before making any further changes. Confirm you can run `sudo su -` to switch to root. This prevents you from locking yourself out.
+  </Step>
+  <Step title="Disable root SSH login">
+    Edit the SSH daemon configuration file:
+
+    ```bash
+    nano /etc/ssh/sshd_config
+    ```
+
+    Find the line that reads `PermitRootLogin yes` and change it to:
+
+    ```
+    PermitRootLogin no
+    ```
+
+    Save the file and restart SSH:
+
+    ```bash
+    systemctl restart sshd
+    ```
+  </Step>
+</Steps>
+
+<Warning>
+  Always test that your new sudo user can connect before closing your existing
+  root session. If you lock yourself out, you will need to use the emergency
+  console in the Netstreet Africa client area to recover access.
+</Warning>
+
+---
+
+## 4. Keep your software updated
+
+Security vulnerabilities are discovered constantly. Keeping your server's packages up to date ensures that known exploits are patched before attackers can use them against you.
+
+<Tabs>
+  <Tab title="Ubuntu / Debian">
+    ```bash
+    apt-get update && apt-get upgrade -y
+    ```
+
+    To view recent update history:
+
+    ```bash
+    more /var/log/apt/history.log
+    ```
+  </Tab>
+  <Tab title="AlmaLinux / CentOS">
+    ```bash
+    yum update -y
+    ```
+
+    To view recent update history:
+
+    ```bash
+    more /var/log/yum.log
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+  Netstreet Africa enables automatic OS updates on all Unmanaged VPS plans by
+  default (as of mid-2024). You can opt out if needed — see our
+  [Automatic Updates](/hosting/vps/automatic-updates) guide for details — but we
+  strongly recommend keeping automatic updates enabled.
+</Note>
+
+---
+
+## 5. Configure a firewall with iptables
+
+A firewall lets you control exactly which network traffic is allowed to reach your server. The `iptables` tool is included in virtually every major Linux distribution and gives you precise rule-based control over incoming and outgoing packets.
+
+### 5.1 View the current ruleset
+
+On a fresh VPS, there are no firewall rules by default:
+
+```bash
+iptables -L
+```
+
+You should see empty `INPUT`, `FORWARD`, and `OUTPUT` chains with a policy of `ACCEPT`.
+
+### 5.2 Add a baseline ruleset
+
+The following commands create a sensible baseline that allows loopback traffic, established connections, and SSH — while dropping everything else:
+
+```bash
+# Allow loopback interface (many programs depend on this)
+iptables -A INPUT -i lo -j ACCEPT
+
+# Allow established and related connections
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+# Allow incoming SSH on port 22
+iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+
+# Drop all other incoming traffic
+iptables -A INPUT -j DROP
+```
+
+<Warning>
+  Make sure you use the correct SSH port number. Some Netstreet Africa VPS plans
+  use a non-standard SSH port. Check your product notes before applying the DROP
+  rule, or you may lock yourself out.
+</Warning>
+
+### 5.3 Open additional ports
+
+If you plan to run a web server, you will need to allow HTTP (port 80) and HTTPS (port 443). Insert rules **before** the DROP rule:
+
+```bash
+# Allow HTTP
+iptables -I INPUT 4 -p tcp -m tcp --dport 80 -j ACCEPT
+
+# Allow HTTPS
+iptables -I INPUT 5 -p tcp -m tcp --dport 443 -j ACCEPT
+```
+
+To check your current line numbers:
+
+```bash
+iptables -L --line-numbers
+```
+
+### 5.4 Block a specific IP address
+
+If you notice repeated brute-force attempts from a specific IP in your logs, you can block it immediately:
+
+```bash
+# Block all traffic from a specific IP
+iptables -I INPUT 1 -s 203.0.113.99 -j DROP
+```
+
+### 5.5 Save your firewall rules
+
+iptables rules are stored in memory and will be lost on reboot unless you save them:
+
+<Tabs>
+  <Tab title="Ubuntu / Debian">
+    ```bash
+    apt-get install iptables-persistent
+    # During installation, accept the prompt to save IPv4 rules
+
+    # For future rule changes:
+    iptables-save > /etc/iptables/rules.v4
+    ```
+  </Tab>
+  <Tab title="AlmaLinux / CentOS">
+    ```bash
+    /sbin/service iptables save
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## 6. Install and configure fail2ban
+
+Even with a strong password and SSH hardening in place, automated bots constantly scan the internet trying to brute-force SSH logins. `fail2ban` monitors your log files and automatically blocks IP addresses that exceed a configurable number of failed login attempts.
+
+### 6.1 Install fail2ban
+
+<Tabs>
+  <Tab title="Ubuntu / Debian">
+    ```bash
+    apt-get install fail2ban
+    ```
+  </Tab>
+  <Tab title="AlmaLinux / CentOS">
+    ```bash
+    # Ensure the EPEL repository is enabled first
+    yum install epel-release
+    yum install fail2ban
+    ```
+  </Tab>
+</Tabs>
+
+### 6.2 Configure fail2ban
+
+Always edit a local copy of the configuration — the default `jail.conf` file may be overwritten during updates:
+
+```bash
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+nano /etc/fail2ban/jail.local
+```
+
+Locate the `[DEFAULT]` section and adjust the following key settings:
+
+| Setting | Description | Recommended value |
+|---|---|---|
+| `ignoreip` | IP addresses fail2ban will never block | Add your own IP address |
+| `bantime` | How long (seconds) to ban an offending IP | `3600` (1 hour) |
+| `maxretry` | Failed attempts before banning | `5` |
+| `findtime` | Window (seconds) in which retries are counted | `600` (10 minutes) |
+
+Example `[DEFAULT]` block:
+
+```ini
+[DEFAULT]
+ignoreip = 127.0.0.1/8 YOUR.HOME.IP.ADDRESS
+bantime  = 3600
+maxretry = 5
+findtime = 600
+```
+
+### 6.3 Enable the SSH jail
+
+Find the `[sshd]` (or `[ssh-iptables]`) section and ensure it is enabled:
+
+```ini
+[sshd]
+enabled = true
+port    = ssh
+```
+
+### 6.4 Start and enable fail2ban
+
+```bash
+systemctl enable fail2ban
+service fail2ban restart
+```
+
+To see which IPs are currently banned:
+
+```bash
+iptables -S | grep fail2ban
+```
+
+<Note>
+  fail2ban significantly reduces risk from scripted attacks and botnets, but it
+  is not a silver bullet. Always combine it with strong passwords, disabled root
+  login, and a properly configured firewall.
+</Note>
+
+---
+
+## Summary checklist
+
+<Steps>
+  <Step title="Connect via SSH using your Netstreet Africa root credentials" />
+  <Step title="Create a non-root sudo user and disable root SSH login" />
+  <Step title="Run system updates and keep them current" />
+  <Step title="Configure iptables firewall rules and save them" />
+  <Step title="Install and configure fail2ban to block brute-force attempts" />
+</Steps>
+
+If you need further assistance hardening your VPS, please open a support ticket in the [Netstreet Africa client area](https://my.netstreet.co.za).

@@ -1,0 +1,224 @@
+---
+title: "WordPress Security Best Practices on Netstreet Africa"
+sidebarTitle: "Security"
+description: "Protect your WordPress site with strong passwords, regular updates, brute force defences, malware scanning, and backup strategies on Netstreet Africa."
+---
+
+WordPress powers a significant portion of the world's websites, which also makes it a popular target for hackers, bots, and malicious scripts. The good news is that most successful attacks exploit preventable issues — outdated software, weak passwords, and unused plugins. By following the practices in this guide, you can dramatically reduce the risk of your Netstreet Africa WordPress site being compromised.
+
+## Essential security measures
+
+### Use strong, unique passwords
+
+Every WordPress administrator account on your site should use a strong password that is not used anywhere else. A strong password:
+
+- Is at least 16 characters long.
+- Contains a mix of uppercase letters, lowercase letters, numbers, and special characters.
+- Is not based on dictionary words, names, or dates.
+
+WordPress includes a built-in password generator in **Users → Your Profile** — use it when creating or changing passwords. Consider using a password manager to store and generate credentials securely.
+
+<Warning>
+  If your site has been compromised, changing your password alone is not enough. An attacker may still hold a valid login cookie. You must also regenerate the **WordPress security keys** in your `wp-config.php` file to invalidate all active sessions. Generate new keys at [https://api.wordpress.org/secret-key/1.1/salt/](https://api.wordpress.org/secret-key/1.1/salt/) and replace the existing key definitions in `wp-config.php`.
+</Warning>
+
+### Use a unique admin username
+
+The default WordPress administrator username is `admin` — and attackers know this. If your admin username is `admin`, change it immediately:
+
+<Steps>
+  <Step title="Create a new administrator account">
+    In the WordPress admin, go to **Users → Add New**. Create a new user with a different username and assign the **Administrator** role.
+  </Step>
+  <Step title="Log in as the new administrator">
+    Log out of WordPress and log back in using the new administrator account.
+  </Step>
+  <Step title="Delete the old admin account">
+    Go to **Users → All Users**, hover over the old `admin` account, and click **Delete**. When prompted, choose to attribute its posts to your new administrator account.
+  </Step>
+</Steps>
+
+### Keep WordPress, plugins, and themes updated
+
+Outdated software is the most common entry point for attackers. WordPress releases regular security updates, and plugins and themes are frequently updated to address newly discovered vulnerabilities.
+
+<Steps>
+  <Step title="Check for updates">
+    In the WordPress admin, click the **Updates** link in the left sidebar (the number badge indicates pending updates). Review all available updates for WordPress core, plugins, and themes.
+  </Step>
+  <Step title="Apply updates">
+    Click **Update Now** for WordPress core, or select all plugins/themes and click **Update**. Review the changelog for major updates before applying them to a live site.
+  </Step>
+  <Step title="Enable automatic updates">
+    For added convenience and security, enable automatic background updates. On Netstreet Africa Managed WordPress, you can enable automatic updates from the control panel. On standard hosting, add the following to `wp-config.php` to enable automatic minor core updates:
+    ```php
+    define('WP_AUTO_UPDATE_CORE', true);
+    ```
+  </Step>
+</Steps>
+
+<Tip>
+  Before updating WordPress or major plugins on your live site, test the updates on a staging copy first. This lets you catch any compatibility issues before they affect your visitors.
+</Tip>
+
+### Delete unused plugins and themes
+
+Inactive plugins and themes still exist as code on your server, and that code is visible and exploitable by attackers — even if the plugin or theme is deactivated. Delete anything you are not actively using.
+
+<Steps>
+  <Step title="Deactivate and delete unused plugins">
+    Go to **Plugins → Installed Plugins**. For any plugin you are not using, click **Deactivate** and then **Delete**. Confirm the deletion when prompted.
+  </Step>
+  <Step title="Delete unused themes">
+    Go to **Appearance → Themes**. Click on any theme you are not using and click **Delete**. Keep only your active theme and one default WordPress theme as a fallback.
+  </Step>
+</Steps>
+
+## Regular backups
+
+Backups are your safety net. They do not prevent a site from being compromised, but they let you restore your site quickly if something goes wrong — whether due to a hack, a failed update, or accidental deletion.
+
+<CardGroup cols={2}>
+  <Card title="Automated backups (Managed WordPress)" icon="database">
+    Netstreet Africa Managed WordPress includes automated daily backups. Go to your site's **Backups** section in the control panel to view and restore from any available backup point.
+  </Card>
+  <Card title="Plugin-based backups (cPanel hosting)" icon="plug">
+    Use a plugin such as **UpdraftPlus** to schedule automatic backups of your WordPress files and database. Store backups in an offsite location such as Google Drive or Dropbox.
+  </Card>
+  <Card title="Softaculous backups (cPanel)" icon="rotate">
+    On cPanel accounts, Softaculous can back up, restore, and clone WordPress installations. Open Softaculous from cPanel and go to **My Apps → Backup**.
+  </Card>
+  <Card title="Manual database backups" icon="table">
+    Use **phpMyAdmin** to export your WordPress database manually. Go to your control panel, open phpMyAdmin, select your WordPress database, click **Export**, and save the `.sql` file.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Aim for a backup strategy that follows the **3-2-1 rule**: 3 copies of your data, on 2 different types of media, with 1 copy offsite (for example, in cloud storage).
+</Tip>
+
+## Defending against brute force attacks
+
+A brute force attack is when an automated script tries thousands of username and password combinations against your WordPress login page. These attacks can slow your site significantly and, if successful, grant an attacker full administrative access.
+
+### Method 1: Password-protect the WordPress login page
+
+Adding a second layer of HTTP authentication to `wp-login.php` means attackers must pass two separate login prompts before reaching WordPress.
+
+<Steps>
+  <Step title="Generate a hashed password">
+    Visit [https://www.htaccesstools.com/htpasswd-generator/](https://www.htaccesstools.com/htpasswd-generator/), enter a username and password, and click **Create .htpasswd file**. Copy the resulting line of text (it looks like `username:$apr1$...`).
+  </Step>
+  <Step title="Create a .wp-password file">
+    Using the File Manager in cPanel or an SSH/SFTP connection, create a file named `.wp-password` in your account's home directory (the directory above `public_html`, typically `/home/yourusername/`). Paste the line of text from the previous step into this file.
+  </Step>
+  <Step title="Update your .htaccess file">
+    Open the `.htaccess` file in your `public_html` directory and add the following block:
+
+    ```apache
+    # Protect wp-login.php:
+    <Files wp-login.php>
+      AuthUserFile /home/USERNAME/.wp-password
+      AuthName "Please log in"
+      AuthType Basic
+      require user WP-USERNAME
+    </Files>
+    ```
+
+    Replace `USERNAME` with your cPanel account username and `WP-USERNAME` with the username you chose in step 1.
+  </Step>
+  <Step title="Test the login page">
+    Visit `https://yourdomain.com/wp-admin`. You should be prompted for the HTTP credentials first, and then the normal WordPress login form appears.
+  </Step>
+</Steps>
+
+### Method 2: Block or restrict access by IP address
+
+If you access your WordPress admin from a fixed IP address (for example, at your office), you can block all other IP addresses from reaching the login page.
+
+Add the following to your `.htaccess` file, replacing `xxx.xxx.xxx.xxx` with your IP address:
+
+```apache
+<Files wp-login.php>
+  order deny,allow
+  allow from xxx.xxx.xxx.xxx
+  deny from all
+</Files>
+```
+
+To allow multiple IP addresses, add one `allow from` line per IP.
+
+<Warning>
+  If you are using Cloudflare with IP address blocking, test your login thoroughly after configuration. On some setups, Cloudflare's IP forwarding can interfere with IP-based rules.
+</Warning>
+
+### Method 3: Change the WordPress login URL
+
+The WordPress login page is always at `/wp-login.php` by default. Changing this URL to something non-standard means automated brute force scripts — which are programmed to target `/wp-login.php` — will hit a 404 error instead.
+
+Install the **Rename wp-login.php** plugin:
+
+<Steps>
+  <Step title="Install the plugin">
+    In the WordPress admin, go to **Plugins → Add New**, search for `Rename wp-login.php`, install it, and click **Activate Plugin**.
+  </Step>
+  <Step title="Set a custom login URL">
+    After activation, go to **Settings → Permalinks**. Under **Login**, enter a new login slug in the **Rename wp-login.php** field (for example, `my-secure-login`).
+  </Step>
+  <Step title="Save and test">
+    Click **Save Changes**. Your new WordPress login URL is now `https://yourdomain.com/my-secure-login`. Accessing `/wp-login.php` or `/wp-admin` directly returns a 404 error.
+  </Step>
+</Steps>
+
+### Method 4: Enable Cloudflare
+
+Cloudflare provides network-level filtering that can block malicious requests before they reach your server at all. Cloudflare-enabled sites are significantly better protected against brute force attacks and bots.
+
+See the [Cloudflare](/hosting/cloudflare) guide to activate Cloudflare on your Netstreet Africa site.
+
+## Scanning for malware
+
+If you suspect your site has been compromised, or as a routine health check, scan your WordPress installation for malware and suspicious file modifications.
+
+<CardGroup cols={2}>
+  <Card title="Wordfence Security" icon="shield-halved" href="https://wordpress.org/plugins/wordfence/">
+    A comprehensive security plugin offering a malware scanner, firewall, and login protection. The free version is highly capable. Run a scan from **Wordfence → Scan** in the WordPress admin.
+  </Card>
+  <Card title="Sucuri Security" icon="bug" href="https://wordpress.org/plugins/sucuri-scanner/">
+    Monitors your site for file integrity changes, blacklist status, and security hardening. Includes a remote malware scanner that checks your site from the outside.
+  </Card>
+</CardGroup>
+
+If a scan finds malware or infected files, see our guide on [securing a hacked site](/security/securing-hacked-site) for steps to clean up and recover your site.
+
+## Security hardening checklist
+
+Use this checklist to evaluate the security posture of your WordPress site:
+
+<Accordion title="Passwords and accounts">
+  - [ ] All administrator accounts use strong, unique passwords (minimum 16 characters)
+  - [ ] No account uses the username `admin`
+  - [ ] Unused administrator accounts have been removed
+  - [ ] Two-factor authentication (2FA) is enabled for all administrators (use a plugin such as **Google Authenticator** or **Wordfence Login Security**)
+  - [ ] WordPress security keys in `wp-config.php` are unique and not the default values
+</Accordion>
+
+<Accordion title="Software updates">
+  - [ ] WordPress core is running the latest stable version
+  - [ ] All active plugins are up to date
+  - [ ] All active themes are up to date
+  - [ ] All unused plugins and themes have been deleted (not just deactivated)
+</Accordion>
+
+<Accordion title="Login protection">
+  - [ ] Login attempts are rate-limited (via Wordfence, or an equivalent security plugin)
+  - [ ] `wp-login.php` is password-protected or the login URL has been changed
+  - [ ] XML-RPC is disabled if not required (`xmlrpc.php`)
+</Accordion>
+
+<Accordion title="File and database security">
+  - [ ] `wp-config.php` has restricted file permissions (should be `440` or `400`)
+  - [ ] The WordPress database uses a non-default table prefix (not `wp_`)
+  - [ ] Directory listing is disabled in `.htaccess`
+  - [ ] Regular backups are scheduled and stored offsite
+</Accordion>

@@ -1,0 +1,114 @@
+---
+title: "Logging In and Out of Plesk — Netstreet Africa"
+sidebarTitle: "Logging In"
+description: "How to log in to and out of your Plesk control panel on Netstreet Africa, including direct access, client area access, and changing your password."
+---
+
+Logging in to Plesk is the first step to managing your Netstreet Africa hosting account. You can access Plesk in two ways: through the Netstreet Africa client area (which logs you in automatically) or directly through your browser using your domain or server address. This article covers both methods, explains how to log out safely, and walks you through changing your Plesk password.
+
+## Method 1 — Access Plesk through the Netstreet Africa client area
+
+Logging in through the client area is the easiest approach because it handles authentication for you automatically — no separate password is required.
+
+<Steps>
+  <Step title="Log in to the Netstreet Africa client area">
+    Open your browser and go to [https://my.netstreetafrica.com](https://my.netstreetafrica.com). Enter your Netstreet Africa email address and password to sign in.
+  </Step>
+  <Step title="Navigate to your hosting account">
+    In the left sidebar, under **Products & Services**, click **Hosting & Servers**.
+  </Step>
+  <Step title="Manage your account">
+    Find the hosting account that uses Plesk, click **Manage**, and then click **Login to Control Panel**. Plesk opens in a new browser tab and you are signed in automatically.
+  </Step>
+</Steps>
+
+<Tip>
+  Using this method means you do not need to remember your Plesk username and password separately. It is particularly convenient if you manage multiple Netstreet Africa hosting accounts.
+</Tip>
+
+## Method 2 — Access Plesk directly via your browser
+
+You can also access Plesk by entering its URL directly in a browser. This is useful when you are working away from the client area or accessing Plesk from a device where you are not signed in to Netstreet Africa.
+
+<Steps>
+  <Step title="Enter the Plesk URL">
+    In your browser's address bar, type one of the following:
+    - `https://yourdomain.com:8443` — replace `yourdomain.com` with your actual domain name
+    - `https://serverhostname:8443` — replace `serverhostname` with your server's hostname
+
+    Plesk uses port **8443** by default. Make sure your browser does not block this port.
+  </Step>
+  <Step title="Enter your login credentials">
+    On the Plesk login page, enter your Plesk username and password in the provided fields.
+  </Step>
+  <Step title="Click Log in">
+    Click the **Log in** button. You are taken to the Plesk dashboard.
+  </Step>
+</Steps>
+
+<Note>
+  Your Plesk username and password are separate from your Netstreet Africa client area credentials. If you are unsure what your Plesk credentials are, you can view or reset them from the **Manage** section of your hosting account in the Netstreet Africa client area.
+</Note>
+
+## Logging out of Plesk
+
+Always log out when you have finished working in Plesk to prevent unauthorised access to your account.
+
+<Steps>
+  <Step title="Click your username">
+    In the top navigation bar on any Plesk page, click your username (displayed in the top-right corner of the screen).
+  </Step>
+  <Step title="Click Log out">
+    Select **Log out** from the dropdown menu. Your session ends and you are returned to the Plesk login page.
+  </Step>
+</Steps>
+
+<Warning>
+  Closing the browser window without logging out does not immediately end your Plesk session. If you are using a shared or public computer, always click **Log out** explicitly. Plesk will eventually time out an idle session, but it is safer to log out manually.
+</Warning>
+
+## Changing your Plesk password
+
+You should change your Plesk password regularly to keep your hosting account secure, and whenever you suspect it may have been compromised.
+
+<Steps>
+  <Step title="Log in to Plesk">
+    Sign in using either method described above.
+  </Step>
+  <Step title="Open your profile">
+    In the top navigation bar, click your username, then select **Edit Profile** from the dropdown menu. This opens your **My Profile** page.
+  </Step>
+  <Step title="Enter your new password">
+    In the **Password** text box, type the new password you want to use.
+
+    <Tip>
+      Click the **Generate** button next to the password field and Plesk will create a strong, random password for you. Copy it to a secure password manager before saving.
+    </Tip>
+  </Step>
+  <Step title="Confirm the new password">
+    In the **Confirm password** text box, re-enter the password you typed in the previous step.
+  </Step>
+  <Step title="Save your changes">
+    Click **OK**. The new password takes effect immediately. Your current session remains active, but you will need to use the new password the next time you log in.
+  </Step>
+</Steps>
+
+<Warning>
+  After changing your Plesk password, remember to update it in any tools or applications — such as FTP clients, deployment scripts, or remote management tools — that authenticate using your Plesk credentials.
+</Warning>
+
+## Resetting a forgotten Plesk password
+
+If you cannot log in because you have forgotten your password, you can reset it from the Netstreet Africa client area:
+
+<Steps>
+  <Step title="Log in to the client area">
+    Go to [https://my.netstreetafrica.com](https://my.netstreetafrica.com) and sign in with your client area credentials.
+  </Step>
+  <Step title="Locate your Plesk account">
+    Under **Products & Services → Hosting & Servers**, find your Plesk hosting account and click **Manage**.
+  </Step>
+  <Step title="Reset the password">
+    Look for the **Change Password** or **Reset Password** option and follow the on-screen instructions. If you cannot find this option, contact Netstreet Africa support and we will assist you promptly.
+  </Step>
+</Steps>

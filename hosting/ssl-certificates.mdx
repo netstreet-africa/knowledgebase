@@ -1,0 +1,199 @@
+---
+title: "SSL Certificates on Netstreet Africa Hosting"
+sidebarTitle: "SSL Certificates"
+description: "Understand SSL certificate types, install a free or paid SSL on your Netstreet Africa site, and redirect all visitors to HTTPS automatically."
+---
+
+An SSL (Secure Sockets Layer) certificate is a digital credential that does two critical things for your website: it **encrypts** all data exchanged between your server and your visitors' browsers, and it **authenticates** your site so that visitors know they are connecting to the real you and not an impostor. Sites secured with SSL show a padlock icon in the browser address bar and use `https://` in their URL. Without SSL, data transmitted through your site — including login credentials, form submissions, and payment details — can be intercepted in plain text.
+
+<Note>
+  Google uses HTTPS as a ranking signal, and modern browsers actively warn users when they visit a non-HTTPS site. Installing an SSL certificate is essential for any website that collects data, runs an online shop, or requires user logins.
+</Note>
+
+## Types of SSL certificate
+
+Netstreet Africa supports several certificate types to match every need and budget:
+
+<CardGroup cols={2}>
+  <Card title="Free SSL (Let's Encrypt / cPanel)" icon="lock">
+    Automatically provisioned and renewed for all hosted domains. Provides full encryption and browser trust. Best for most websites, blogs, and small businesses.
+  </Card>
+  <Card title="Single Domain SSL" icon="certificate">
+    A paid certificate from a recognised certificate authority (CA), covering one domain. Includes a warranty and a site seal you can display for added visitor trust.
+  </Card>
+  <Card title="Wildcard SSL" icon="asterisk">
+    Covers your domain and all its subdomains (e.g., `*.yourdomain.com`) with a single certificate. Ideal for businesses running multiple subdomains.
+  </Card>
+  <Card title="Premium / EV SSL" icon="shield-check">
+    Extended Validation certificates require full business verification. They offer the highest trust level and include a dynamic site seal showing your company details.
+  </Card>
+</CardGroup>
+
+### Choosing between free and paid
+
+| Feature | Free SSL (Let's Encrypt / cPanel) | Paid SSL |
+|---|---|---|
+| Encryption | ✅ Full | ✅ Full |
+| Browser trust | ✅ Yes | ✅ Yes |
+| Auto-renewal | ✅ Yes | ⚠️ Manual or semi-automatic |
+| Warranty | ❌ None | ✅ Yes |
+| Site seal | ❌ No | ✅ Static or dynamic |
+| Business validation | ❌ No | ✅ Optional (OV/EV) |
+| Wildcard support | ❌ No (single domain) | ✅ Available |
+
+## Installing a free SSL certificate
+
+Netstreet Africa automatically installs a free SSL certificate on new hosting accounts. In most cases you do not need to do anything — the certificate is generated and renewed for you automatically.
+
+<Tabs>
+  <Tab title="cPanel (Automatic)">
+    On cPanel-based hosting accounts, SSL certificates are provisioned automatically using cPanel's built-in SSL service. To verify your certificate is active:
+
+    <Steps>
+      <Step title="Open SSL/TLS in cPanel">
+        Log in to cPanel. In the **Security** section, click **SSL/TLS**.
+      </Step>
+      <Step title="Check installed certificates">
+        Under **Certificates (CRT)**, click **Generate, view, upload, or delete SSL certificates**. Look for an entry in the **Certificates on Server** list. The **Issuer** column shows which authority issued the certificate.
+      </Step>
+      <Step title="Certificate not present?">
+        New domains can take up to four hours to receive their certificate. If yours has not appeared after that time, contact Netstreet Africa support from the client area and we will assist you.
+      </Step>
+    </Steps>
+
+    <Note>
+      cPanel SSL certificates automatically renew every 90 days. You will never need to manually renew a free certificate on cPanel hosting.
+    </Note>
+  </Tab>
+  <Tab title="Plesk (Let's Encrypt)">
+    <Steps>
+      <Step title="Log in to Plesk">
+        Access Plesk from your Netstreet Africa client area.
+      </Step>
+      <Step title="Open Websites & Domains">
+        In the left sidebar, click **Websites & Domains**.
+      </Step>
+      <Step title="Install Let's Encrypt">
+        Click the **Let's Encrypt** icon next to your domain.
+      </Step>
+      <Step title="Configure the certificate">
+        Enter a valid email address in the email field. To protect both `yourdomain.com` and `www.yourdomain.com` with a single certificate, select the **Include www.yourdomain.com as an alternative domain name** checkbox.
+      </Step>
+      <Step title="Install">
+        Click **Install**. When complete, you will see a success message confirming the certificate is installed.
+      </Step>
+    </Steps>
+
+    <Note>
+      Plesk automatically renews Let's Encrypt certificates monthly. Manual renewal is available by returning to the Let's Encrypt page and clicking **Renew**.
+    </Note>
+  </Tab>
+  <Tab title="Enhance (Hosting Panel)">
+    On Enhance-based accounts, free SSL is enabled automatically for all domains. A custom certificate can also be installed manually if needed.
+
+    <Steps>
+      <Step title="Log in to the Hosting Panel">
+        Go to [my.netstreet.co.za](https://my.netstreet.co.za), then click **Login to Control Panel** for your hosting account.
+      </Step>
+      <Step title="Open your website">
+        In the left sidebar, click **Websites**, then click your site.
+      </Step>
+      <Step title="Go to the Security tab">
+        Click the **Security** tab to view SSL certificate status for your domain.
+      </Step>
+      <Step title="Install a custom SSL (if needed)">
+        If you have purchased a paid certificate, click **Install custom SSL**. Select your domain, paste the certificate (CRT) and private key text into the fields provided, and click **Upload**.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Installing a paid SSL certificate
+
+If you have purchased an SSL certificate from Netstreet Africa or a third-party provider such as Sectigo or DigiCert, follow these steps to install it.
+
+<Steps>
+  <Step title="Generate a Certificate Signing Request (CSR)">
+    You need a CSR to order most paid SSL certificates. In Plesk, go to **Websites & Domains → SSL/TLS Certificates → Add SSL/TLS Certificate** and complete the form. Copy the generated CSR text.
+
+    In cPanel, go to **Security → SSL/TLS → Generate an SSL certificate signing request (CSR)** and fill in your domain and contact details.
+  </Step>
+  <Step title="Submit the CSR to your certificate authority">
+    Paste the CSR into your SSL order form (on the Netstreet Africa website or at your chosen provider). Select your web server type and complete the domain validation step, which typically involves clicking a link in an email sent to your domain's registered address.
+  </Step>
+  <Step title="Receive and install your certificate">
+    Once the CA validates and issues your certificate, you will receive it by email. Install it using the method for your control panel (see the tabs above). In Plesk, paste the certificate text in **Websites & Domains → SSL/TLS Certificates → [your certificate name]**. In cPanel, use **Security → SSL/TLS → Install and Manage SSL → Manage SSL Sites**.
+  </Step>
+  <Step title="Enable SSL for your domain">
+    After installation, confirm SSL is enabled. In Plesk, go to **Hosting Settings** and tick **SSL/TLS support**, selecting your new certificate in the **Certificate** list. In cPanel, this is handled automatically after installation.
+  </Step>
+</Steps>
+
+## Redirecting HTTP to HTTPS
+
+Once your SSL certificate is installed, you should redirect all HTTP traffic to HTTPS so that every visitor always uses the encrypted connection.
+
+<Tabs>
+  <Tab title="Plesk">
+    <Steps>
+      <Step title="Open Hosting Settings">
+        In Plesk, go to **Websites & Domains**, locate your domain, and click **Hosting Settings**.
+      </Step>
+      <Step title="Enable the redirect">
+        Under **Security**, tick both **SSL/TLS support** and **Permanent SEO-safe 301 redirect from HTTP to HTTPS**.
+      </Step>
+      <Step title="Select your certificate">
+        In the **Certificate** dropdown, select the SSL certificate you installed.
+      </Step>
+      <Step title="Save">
+        Click **OK**. All HTTP requests to your site will now be permanently redirected to HTTPS.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title=".htaccess (cPanel / Apache)">
+    Add the following rules to your `.htaccess` file in the `public_html` directory:
+
+    ```apache
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    ```
+
+    <Warning>
+      If you are using Cloudflare, set the Cloudflare SSL mode to **Full** or **Full (Strict)** before adding this redirect rule. Mixing an HTTP-to-HTTPS redirect with Cloudflare's flexible SSL mode can cause an infinite redirect loop.
+    </Warning>
+  </Tab>
+  <Tab title="WordPress">
+    For WordPress sites, you can force HTTPS directly in your WordPress settings:
+
+    <Steps>
+      <Step title="Update WordPress Address and Site Address">
+        In your WordPress admin, go to **Settings → General**. Update both the **WordPress Address (URL)** and the **Site Address (URL)** fields to start with `https://`.
+      </Step>
+      <Step title="Add .htaccess rules">
+        Add the redirect rules shown in the `.htaccess` tab above to your `public_html/.htaccess` file.
+      </Step>
+      <Step title="Update mixed content">
+        Use a plugin such as **Really Simple SSL** to automatically fix any mixed-content warnings caused by internal links or images still using `http://`.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Troubleshooting SSL issues
+
+<Accordion title="Certificate not showing / padlock missing">
+  The padlock may be absent due to mixed content — some resources on your page (images, scripts, or stylesheets) are still being loaded over HTTP. Use your browser's developer tools (F12 → Console) to identify which resources are insecure, then update those URLs to use HTTPS.
+</Accordion>
+
+<Accordion title="SSL certificate not generated for a new domain">
+  DNS propagation must complete before a Let's Encrypt or cPanel SSL certificate can be issued. Ensure your domain resolves in a browser and that A records are pointing to your Netstreet Africa server. Wait up to four hours, then contact support if the certificate still has not appeared.
+</Accordion>
+
+<Accordion title="Redirect loop with Cloudflare">
+  If you are using Cloudflare and experience an infinite redirect loop after enabling HTTPS, go to your Cloudflare dashboard, open **SSL/TLS**, and change the encryption mode from **Flexible** to **Full** or **Full (Strict)**. This prevents Cloudflare from sending HTTP requests to your server while your server simultaneously redirects everything to HTTPS.
+</Accordion>
+
+<Accordion title="Certificate expiry warning">
+  Free SSL certificates on cPanel and Plesk are renewed automatically. If you receive an expiry warning, check that your domain is still pointing to Netstreet Africa nameservers and that no `.htaccess` rewrite rules are blocking the certificate validation path (`/.well-known/`). Contact support if automatic renewal fails.
+</Accordion>

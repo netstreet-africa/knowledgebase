@@ -1,0 +1,127 @@
+---
+title: "Accessing WebHost Manager (WHM) on Netstreet Africa"
+sidebarTitle: "Accessing WHM"
+description: "Learn the three ways to log in to WebHost Manager on your Netstreet Africa reseller or VPS hosting account, and how to log out securely."
+---
+
+WebHost Manager (WHM) is the reseller-level control panel for cPanel-based hosting accounts on Netstreet Africa. It gives you the tools to create and manage individual cPanel accounts, configure server settings, set up reseller packages, and perform server-wide operations — all without needing root SSH access. This guide covers the three ways to log in to WHM, as well as how to log out securely when you are done.
+
+---
+
+## Who can access WHM?
+
+WHM is available to customers on **Netstreet Africa Reseller Hosting** plans that use cPanel, as well as customers on **Managed VPS** and **Dedicated Server** plans where cPanel/WHM is installed. If your hosting plan uses the Enhance control panel instead, refer to the [Enhance Panel overview](/control-panels/enhance/overview) instead.
+
+---
+
+## Method 1: Log in to WHM directly
+
+You can access WHM directly in your browser without going through the Netstreet Africa client area.
+
+<Steps>
+  <Step title="Open your browser and go to the WHM URL">
+    Use any of the following URLs, replacing `yourdomain.co.za` with your actual domain name:
+
+    | URL | Notes |
+    |---|---|
+    | `https://yourdomain.co.za:2087` | Standard port-based access |
+    | `https://yourdomain.co.za/whm` | Path-based access |
+    | `https://whm.yourdomain.co.za` | Subdomain-based access — useful if port 2087 is blocked by a firewall |
+
+    <Tip>
+      If you are connecting from a network with a strict firewall (such as a corporate office), use `https://whm.yourdomain.co.za` as port 2087 may be blocked.
+    </Tip>
+  </Step>
+  <Step title="Enter your credentials">
+    On the WHM login page, enter your **cPanel username** in the Username field and your **cPanel password** in the Password field.
+  </Step>
+  <Step title="Click Log in">
+    Click **Log in**. If your credentials are correct, the WHM home screen appears.
+  </Step>
+</Steps>
+
+---
+
+## Method 2: Access WHM from within cPanel
+
+If you are already logged in to cPanel, you can switch to WHM without logging in again.
+
+<Steps>
+  <Step title="Log in to cPanel">
+    Log in to your cPanel account at `yourdomain.co.za:2083` or via the Netstreet Africa client area.
+  </Step>
+  <Step title="Find the WebHost Manager icon">
+    Scroll to the **Advanced** section of the cPanel home screen.
+  </Step>
+  <Step title="Click WebHost Manager">
+    Click the **WebHost Manager** icon. The WHM home screen opens.
+  </Step>
+</Steps>
+
+---
+
+## Method 3: Access WHM through the Netstreet Africa client area
+
+The Netstreet Africa client area at [my.netstreet.co.za](https://my.netstreet.co.za) provides a direct login shortcut to WHM — the most convenient method if you are already managing your account there.
+
+<Steps>
+  <Step title="Log in to the client area">
+    Visit [my.netstreet.co.za](https://my.netstreet.co.za) and log in with your Netstreet Africa account credentials.
+  </Step>
+  <Step title="Go to Hosting & Servers">
+    In the left sidebar under **Products & Services**, click **Hosting & Servers**.
+  </Step>
+  <Step title="Launch WHM">
+    On the Hosting & Servers page:
+    - If you have a **reseller hosting account**, click **Login to Control Panel**
+    - If you have a **managed VPS or dedicated server**, click **Login**
+
+    A new browser window opens and you are automatically logged in to WHM.
+
+    <Note>
+      To ensure the WHM window opens correctly, make sure your browser allows pop-ups from `my.netstreet.co.za`.
+    </Note>
+  </Step>
+</Steps>
+
+---
+
+## Logging out of WHM
+
+You should log out of WHM whenever you have finished your session. Logging out explicitly notifies the server that your session has ended. If you do not log out, the server automatically closes your session after a set idle period — but there is a small security risk if an active session is left unattended.
+
+To log out:
+
+1. Look for the **person icon** (user menu) in the top-right corner of the WHM screen.
+2. Click it to open the user menu.
+3. Click **Log Out**.
+
+Your session is immediately terminated and you are returned to the WHM login screen.
+
+---
+
+## Navigating WHM
+
+Once logged in, the WHM interface provides a search box in the upper-left corner — this is the fastest way to find any feature. Start typing the name of what you are looking for (for example, "Create Account" or "Package") and WHM will filter the menu in real time.
+
+Common areas of WHM include:
+
+| Section | What it does |
+|---|---|
+| **Account Functions** | Create, modify, suspend, and terminate cPanel accounts |
+| **Package Manager** | Create and manage hosting packages |
+| **Reseller Center** | Manage reseller privileges and account limits |
+| **Backup Configuration** | Set up and manage server backups |
+| **MySQL Database Server** | Manage MySQL settings and reset the root password |
+| **SSL/TLS** | Install and manage SSL certificates |
+| **Server Status** | View server load, disk usage, and resource consumption |
+
+<Tip>
+  Bookmark the direct WHM URL for your server (e.g. `https://whm.yourdomain.co.za`) so you can access it quickly without going through the client area each time.
+</Tip>
+
+---
+
+## Need help?
+
+If you are unable to log in to WHM, or if you have forgotten your cPanel credentials, contact the Netstreet Africa support team at [my.netstreet.co.za](https://my.netstreet.co.za). We can verify your identity and help you regain access to your account.
