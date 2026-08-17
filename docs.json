@@ -4,13 +4,13 @@
   "name": "Netstreet Knowledge Base",
   "colors": {
     "primary": "#252727",
-    "light": "#a9fc63",
-    "dark": "#81fc80"
+    "light": "#0065E1",
+    "dark": "#0065E1"
   },
   "favicon": "https://media.brand.dev/b94e19fa-9d86-4062-b2a3-2e6ab5d0b506.png",
   "logo": {
-    "light": "https://media.brand.dev/c8fccded-04f2-48f9-a2e4-1443a94e0143.svg",
-    "dark": "https://media.brand.dev/c8fccded-04f2-48f9-a2e4-1443a94e0143.svg"
+    "light": "/images/logo-primary-rgb.svg",
+    "dark": "/images/logo-primary-white.svg"
   },
   "navbar": {
     "links": [
@@ -177,5 +177,16 @@
     "socials": {
       "x": "https://x.com/netstreet"
     }
+  },
+  "background": {
+    "color": {
+      "light": "#131520"
+    }
+  },
+  "icons": {
+    "library": "fontawesome"
+  },
+  "fonts": {
+    "family": "DM Sans"
   }
 }
