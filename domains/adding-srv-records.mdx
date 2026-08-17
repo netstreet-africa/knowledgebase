@@ -20,7 +20,7 @@ You will typically need to add an SRV record when:
 
 Every SRV record follows a precise format. Understanding the format will help you fill in the fields correctly regardless of which tool you use.
 
-```
+```dns
 _service._protocol.name  TTL  class  SRV  priority  weight  port  target
 ```
 
@@ -38,7 +38,7 @@ _service._protocol.name  TTL  class  SRV  priority  weight  port  target
 
 ### Example: SIP over TCP
 
-```
+```dns
 _sip._tcp.yourdomain.co.za.  3600  IN  SRV  10  20  5060  sip.yourdomain.co.za.
 ```
 
@@ -46,7 +46,7 @@ This record tells SIP clients to connect to `sip.yourdomain.co.za` on TCP port `
 
 ### Example: XMPP client connections
 
-```
+```dns
 _xmpp-client._tcp.yourdomain.co.za.  3600  IN  SRV  5  0  5222  xmpp.yourdomain.co.za.
 ```
 
@@ -74,7 +74,7 @@ If your domain is hosted on a Netstreet Africa plan that includes cPanel access,
   <Step title="Fill in the Name field">
     In the **Name** text box, enter the service and protocol in the format `_service._protocol.domain`, for example:
 
-    ```
+    ```text
     _sip._tcp.yourdomain.co.za
     ```
 

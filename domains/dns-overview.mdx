@@ -1,7 +1,7 @@
 ---
-title: "DNS Overview: How Domain Name System Works"
+title: "DNS Overview: Understanding Domain Name System Records"
 sidebarTitle: "DNS Overview"
-description: "Understand how DNS works, what DNS record types do, and how Netstreet Africa manages DNS for your domains and hosting services."
+description: "Understand how DNS works, what record types are available, and how Netstreet Africa manages DNS for your domains and associated hosting services."
 ---
 
 The Domain Name System (DNS) is the internet's address book. When someone types your domain name into a browser, DNS translates that human-readable name into an IP address that computers use to locate your server. Understanding how DNS works — and knowing which record types to use — will help you configure your domain correctly and troubleshoot issues more effectively.
@@ -67,7 +67,7 @@ A **CNAME (Canonical Name) record** creates an alias from one name to another. F
 
 **MX (Mail Exchanger) records** tell the internet which mail servers accept email for your domain. Each MX record has a **priority value** — lower numbers have higher priority. If your primary mail server is unavailable, the sending server will try the next-highest-priority MX record.
 
-```
+```text
 Priority  Value
 10        mail1.netstreet.co.za
 20        mail2.netstreet.co.za

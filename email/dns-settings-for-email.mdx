@@ -41,7 +41,7 @@ An **MX (Mail Exchanger) record** tells other mail servers where to deliver emai
 
 ### What an MX record looks like
 
-```
+```text
 Type:     MX
 Host:     yourdomain.co.za
 Value:    mail.yourdomain.co.za
@@ -73,7 +73,7 @@ Without an SPF record, spammers can easily send email that appears to come from 
 
 ### What an SPF record looks like
 
-```
+```text
 Type:  TXT
 Host:  yourdomain.co.za
 Value: v=spf1 include:netstreet.co.za ~all
@@ -113,7 +113,7 @@ SPF record syntax explained:
 
 ### What a DKIM DNS record looks like
 
-```
+```text
 Type:  TXT
 Host:  default._domainkey.yourdomain.co.za
 Value: v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNA...
@@ -153,7 +153,7 @@ DMARC requires both SPF and DKIM to be configured first. It then adds a policy l
 
 ### What a DMARC record looks like
 
-```
+```text
 Type:  TXT
 Host:  _dmarc.yourdomain.co.za
 Value: v=DMARC1; p=quarantine; rua=mailto:dmarc-reports@yourdomain.co.za; pct=100
@@ -176,7 +176,7 @@ DMARC record syntax explained:
   <Step title="Start with p=none">
     Deploy a monitoring-only policy first. This lets you receive reports without affecting email delivery:
 
-    ```
+    ```text
     v=DMARC1; p=none; rua=mailto:dmarc-reports@yourdomain.co.za
     ```
   </Step>

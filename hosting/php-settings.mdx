@@ -1,7 +1,7 @@
 ---
 title: "Managing PHP Versions and Settings on Netstreet Africa"
 sidebarTitle: "PHP Settings"
-description: "Change your PHP version and customise php.ini directives for your Netstreet Africa hosting account using your control panel."
+description: "Change your PHP version and customise php.ini directives for your Netstreet Africa hosting account using your hosting control panel."
 ---
 
 PHP is the scripting language that powers WordPress and most other popular web applications. Netstreet Africa hosting accounts support multiple PHP versions, and you can switch between them at any time without affecting your account's other settings. You can also customise individual `php.ini` directives to tune PHP's behaviour for your specific application — for example, increasing the maximum upload file size or enabling specific extensions.
@@ -153,7 +153,7 @@ You can customise individual `php.ini` directives to change how PHP behaves on y
 <Accordion title="upload_max_filesize">
   Controls the maximum size of an individual file that can be uploaded via PHP. Default is typically `2M`. For WordPress media uploads, `64M` or higher is recommended.
 
-  ```
+  ```ini
   upload_max_filesize = 64M
   ```
 </Accordion>
@@ -161,7 +161,7 @@ You can customise individual `php.ini` directives to change how PHP behaves on y
 <Accordion title="post_max_size">
   Sets the maximum size of the entire POST request, which must be at least as large as `upload_max_filesize`. Set this to the same value or slightly higher.
 
-  ```
+  ```ini
   post_max_size = 64M
   ```
 </Accordion>
@@ -169,7 +169,7 @@ You can customise individual `php.ini` directives to change how PHP behaves on y
 <Accordion title="memory_limit">
   Specifies the maximum amount of memory a PHP script may consume. WordPress recommends at least `256M`.
 
-  ```
+  ```ini
   memory_limit = 256M
   ```
 </Accordion>
@@ -177,7 +177,7 @@ You can customise individual `php.ini` directives to change how PHP behaves on y
 <Accordion title="max_execution_time">
   Sets the maximum number of seconds a PHP script is allowed to run. Increase this if you experience timeouts during imports or large operations.
 
-  ```
+  ```ini
   max_execution_time = 120
   ```
 </Accordion>
@@ -185,7 +185,7 @@ You can customise individual `php.ini` directives to change how PHP behaves on y
 <Accordion title="display_errors">
   Controls whether PHP errors are shown in the browser. This should be **Off** on live production sites and **On** only during development.
 
-  ```
+  ```ini
   display_errors = Off
   ```
 </Accordion>

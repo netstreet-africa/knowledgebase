@@ -1,7 +1,7 @@
 ---
 title: "Preventing Your Outgoing Email from Being Marked as Spam"
 sidebarTitle: "Preventing Spam"
-description: "Best practices and technical steps to prevent Netstreet Africa emails from landing in spam folders, including SPF, DKIM, DMARC setup and content guidelines."
+description: "Best practices and technical steps to prevent emails from landing in spam folders, including SPF, DKIM, DMARC setup and sender reputation guidelines."
 ---
 
 Having your legitimate emails flagged as spam is frustrating and costly — especially if you run a business that relies on email communication. Modern mail servers use dozens of signals to evaluate whether an incoming message is trustworthy. If your domain lacks proper authentication records, or your email content triggers common spam filters, your messages may never reach your recipients' inboxes. This guide covers the technical and content-based steps you can take to maximise email deliverability from your Netstreet Africa hosting account.
@@ -24,7 +24,7 @@ An SPF record is a DNS TXT record that tells receiving mail servers which IP add
 
 In your domain's DNS zone, add a TXT record with the following format:
 
-```
+```text
 Type:  TXT
 Host:  yourdomain.co.za
 Value: v=spf1 include:netstreet.co.za ~all
@@ -33,7 +33,7 @@ TTL:   3600
 
 If you send email from multiple services (e.g. your hosting server and a third-party newsletter platform), include all of them:
 
-```
+```text
 v=spf1 include:netstreet.co.za include:mailchimp.com ~all
 ```
 
@@ -79,7 +79,7 @@ DMARC ties SPF and DKIM together with an enforced policy. It tells receiving mai
 
 Add the following TXT record to your DNS zone:
 
-```
+```text
 Type:  TXT
 Host:  _dmarc.yourdomain.co.za
 Value: v=DMARC1; p=none; rua=mailto:dmarc@yourdomain.co.za
