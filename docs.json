@@ -193,7 +193,8 @@
     }
   },
   "appearance": {
-    "strict": true
+    "strict": false,
+    "default": "light"
   },
   "footer": {
     "socials": {
