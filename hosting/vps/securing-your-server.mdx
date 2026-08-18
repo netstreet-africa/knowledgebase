@@ -1,10 +1,10 @@
 ---
 title: "Securing Your Unmanaged VPS: A Complete Security Guide"
 sidebarTitle: "Securing Your Server"
-description: "Learn how to harden your Netstreet Africa Unmanaged VPS with SSH hardening, fail2ban, iptables firewall rules, and regular software updates."
+description: "Learn how to harden your Netstreet Unmanaged VPS with SSH hardening, fail2ban, iptables firewall rules, and regular software updates."
 ---
 
-Running an Unmanaged VPS at Netstreet Africa gives you total freedom over your server environment — but that freedom comes with responsibility. Because you have root access, you can install anything, configure anything, and run anything you like. However, if you do not actively secure your server, you leave it open to attack by malicious actors. A minor attack could be a brief annoyance; a major one could wipe out your entire server configuration and data. This guide walks you through the most important steps you should take to harden a new Unmanaged VPS.
+Running an Unmanaged VPS at Netstreet gives you total freedom over your server environment — but that freedom comes with responsibility. Because you have root access, you can install anything, configure anything, and run anything you like. However, if you do not actively secure your server, you leave it open to attack by malicious actors. A minor attack could be a brief annoyance; a major one could wipe out your entire server configuration and data. This guide walks you through the most important steps you should take to harden a new Unmanaged VPS.
 
 <Warning>
   You must have root (or sudo) access to your VPS to follow the procedures on
@@ -16,7 +16,7 @@ Running an Unmanaged VPS at Netstreet Africa gives you total freedom over your s
 
 ## 1. Connect to your server via SSH
 
-Before you can harden your server, you need to connect to it. Netstreet Africa provides your root credentials in the **Product Notes** section of your client area.
+Before you can harden your server, you need to connect to it. Netstreet provides your root credentials in the **Product Notes** section of your client area.
 
 <Tabs>
   <Tab title="Linux / macOS">
@@ -98,7 +98,7 @@ The `root` account is all-powerful on any Linux system. Allowing direct root log
 <Warning>
   Always test that your new sudo user can connect before closing your existing
   root session. If you lock yourself out, you will need to use the emergency
-  console in the Netstreet Africa client area to recover access.
+  console in the Netstreet client area to recover access.
 </Warning>
 
 ---
@@ -133,7 +133,7 @@ Security vulnerabilities are discovered constantly. Keeping your server's packag
 </Tabs>
 
 <Note>
-  Netstreet Africa enables automatic OS updates on all Unmanaged VPS plans by
+  Netstreet enables automatic OS updates on all Unmanaged VPS plans by
   default (as of mid-2024). You can opt out if needed — see our
   [Automatic Updates](/hosting/vps/automatic-updates) guide for details — but we
   strongly recommend keeping automatic updates enabled.
@@ -174,7 +174,7 @@ iptables -A INPUT -j DROP
 ```
 
 <Warning>
-  Make sure you use the correct SSH port number. Some Netstreet Africa VPS plans
+  Make sure you use the correct SSH port number. Some Netstreet VPS plans
   use a non-standard SSH port. Check your product notes before applying the DROP
   rule, or you may lock yourself out.
 </Warning>
@@ -312,11 +312,11 @@ iptables -S | grep fail2ban
 ## Summary checklist
 
 <Steps>
-  <Step title="Connect via SSH using your Netstreet Africa root credentials" />
+  <Step title="Connect via SSH using your Netstreet root credentials" />
   <Step title="Create a non-root sudo user and disable root SSH login" />
   <Step title="Run system updates and keep them current" />
   <Step title="Configure iptables firewall rules and save them" />
   <Step title="Install and configure fail2ban to block brute-force attempts" />
 </Steps>
 
-If you need further assistance hardening your VPS, please open a support ticket in the [Netstreet Africa client area](https://my.netstreet.co.za).
+If you need further assistance hardening your VPS, please open a support ticket in the [Netstreet client area](https://my.netstreet.co.za).

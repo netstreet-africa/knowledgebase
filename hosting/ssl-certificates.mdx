@@ -1,7 +1,7 @@
 ---
-title: "SSL Certificates on Your Netstreet Africa Hosting Account"
+title: "SSL Certificates on Your Netstreet Hosting Account"
 sidebarTitle: "SSL Certificates"
-description: "Understand SSL certificate types, install a free or paid SSL on your Netstreet Africa site, and redirect all visitors to HTTPS automatically."
+description: "Understand SSL certificate types, install a free or paid SSL on your Netstreet site, and redirect all visitors to HTTPS automatically."
 ---
 
 An SSL (Secure Sockets Layer) certificate is a digital credential that does two critical things for your website: it **encrypts** all data exchanged between your server and your visitors' browsers, and it **authenticates** your site so that visitors know they are connecting to the real you and not an impostor. Sites secured with SSL show a padlock icon in the browser address bar and use `https://` in their URL. Without SSL, data transmitted through your site — including login credentials, form submissions, and payment details — can be intercepted in plain text.
@@ -12,7 +12,7 @@ An SSL (Secure Sockets Layer) certificate is a digital credential that does two 
 
 ## Types of SSL certificate
 
-Netstreet Africa supports several certificate types to match every need and budget:
+Netstreet supports several certificate types to match every need and budget:
 
 <CardGroup cols={2}>
   <Card title="Free SSL (Let's Encrypt / cPanel)" icon="lock">
@@ -43,7 +43,7 @@ Netstreet Africa supports several certificate types to match every need and budg
 
 ## Installing a free SSL certificate
 
-Netstreet Africa automatically installs a free SSL certificate on new hosting accounts. In most cases you do not need to do anything — the certificate is generated and renewed for you automatically.
+Netstreet automatically installs a free SSL certificate on new hosting accounts. In most cases you do not need to do anything — the certificate is generated and renewed for you automatically.
 
 <Tabs>
   <Tab title="cPanel (Automatic)">
@@ -57,7 +57,7 @@ Netstreet Africa automatically installs a free SSL certificate on new hosting ac
         Under **Certificates (CRT)**, click **Generate, view, upload, or delete SSL certificates**. Look for an entry in the **Certificates on Server** list. The **Issuer** column shows which authority issued the certificate.
       </Step>
       <Step title="Certificate not present?">
-        New domains can take up to four hours to receive their certificate. If yours has not appeared after that time, contact Netstreet Africa support from the client area and we will assist you.
+        New domains can take up to four hours to receive their certificate. If yours has not appeared after that time, contact Netstreet support from the client area and we will assist you.
       </Step>
     </Steps>
 
@@ -68,7 +68,7 @@ Netstreet Africa automatically installs a free SSL certificate on new hosting ac
   <Tab title="Plesk (Let's Encrypt)">
     <Steps>
       <Step title="Log in to Plesk">
-        Access Plesk from your Netstreet Africa client area.
+        Access Plesk from your Netstreet client area.
       </Step>
       <Step title="Open Websites & Domains">
         In the left sidebar, click **Websites & Domains**.
@@ -110,7 +110,7 @@ Netstreet Africa automatically installs a free SSL certificate on new hosting ac
 
 ## Installing a paid SSL certificate
 
-If you have purchased an SSL certificate from Netstreet Africa or a third-party provider such as Sectigo or DigiCert, follow these steps to install it.
+If you have purchased an SSL certificate from Netstreet or a third-party provider such as Sectigo or DigiCert, follow these steps to install it.
 
 <Steps>
   <Step title="Generate a Certificate Signing Request (CSR)">
@@ -119,7 +119,7 @@ If you have purchased an SSL certificate from Netstreet Africa or a third-party 
     In cPanel, go to **Security → SSL/TLS → Generate an SSL certificate signing request (CSR)** and fill in your domain and contact details.
   </Step>
   <Step title="Submit the CSR to your certificate authority">
-    Paste the CSR into your SSL order form (on the Netstreet Africa website or at your chosen provider). Select your web server type and complete the domain validation step, which typically involves clicking a link in an email sent to your domain's registered address.
+    Paste the CSR into your SSL order form (on the Netstreet website or at your chosen provider). Select your web server type and complete the domain validation step, which typically involves clicking a link in an email sent to your domain's registered address.
   </Step>
   <Step title="Receive and install your certificate">
     Once the CA validates and issues your certificate, you will receive it by email. Install it using the method for your control panel (see the tabs above). In Plesk, paste the certificate text in **Websites & Domains → SSL/TLS Certificates → [your certificate name]**. In cPanel, use **Security → SSL/TLS → Install and Manage SSL → Manage SSL Sites**.
@@ -187,7 +187,7 @@ Once your SSL certificate is installed, you should redirect all HTTP traffic to 
 </Accordion>
 
 <Accordion title="SSL certificate not generated for a new domain">
-  DNS propagation must complete before a Let's Encrypt or cPanel SSL certificate can be issued. Ensure your domain resolves in a browser and that A records are pointing to your Netstreet Africa server. Wait up to four hours, then contact support if the certificate still has not appeared.
+  DNS propagation must complete before a Let's Encrypt or cPanel SSL certificate can be issued. Ensure your domain resolves in a browser and that A records are pointing to your Netstreet server. Wait up to four hours, then contact support if the certificate still has not appeared.
 </Accordion>
 
 <Accordion title="Redirect loop with Cloudflare">
@@ -195,5 +195,5 @@ Once your SSL certificate is installed, you should redirect all HTTP traffic to 
 </Accordion>
 
 <Accordion title="Certificate expiry warning">
-  Free SSL certificates on cPanel and Plesk are renewed automatically. If you receive an expiry warning, check that your domain is still pointing to Netstreet Africa nameservers and that no `.htaccess` rewrite rules are blocking the certificate validation path (`/.well-known/`). Contact support if automatic renewal fails.
+  Free SSL certificates on cPanel and Plesk are renewed automatically. If you receive an expiry warning, check that your domain is still pointing to Netstreet nameservers and that no `.htaccess` rewrite rules are blocking the certificate validation path (`/.well-known/`). Contact support if automatic renewal fails.
 </Accordion>

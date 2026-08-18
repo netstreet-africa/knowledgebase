@@ -1,10 +1,10 @@
 ---
-title: "WordPress Security Best Practices on Netstreet Africa"
+title: "WordPress Security Best Practices on Netstreet"
 sidebarTitle: "Security"
-description: "Protect your WordPress site with strong passwords, regular updates, brute force defences, malware scanning, and backup strategies on Netstreet Africa."
+description: "Protect your WordPress site with strong passwords, regular updates, brute force defences, malware scanning, and backup strategies on Netstreet."
 ---
 
-WordPress powers a significant portion of the world's websites, which also makes it a popular target for hackers, bots, and malicious scripts. The good news is that most successful attacks exploit preventable issues — outdated software, weak passwords, and unused plugins. By following the practices in this guide, you can dramatically reduce the risk of your Netstreet Africa WordPress site being compromised.
+WordPress powers a significant portion of the world's websites, which also makes it a popular target for hackers, bots, and malicious scripts. The good news is that most successful attacks exploit preventable issues — outdated software, weak passwords, and unused plugins. By following the practices in this guide, you can dramatically reduce the risk of your Netstreet WordPress site being compromised.
 
 ## Essential security measures
 
@@ -50,7 +50,7 @@ Outdated software is the most common entry point for attackers. WordPress releas
     Click **Update Now** for WordPress core, or select all plugins/themes and click **Update**. Review the changelog for major updates before applying them to a live site.
   </Step>
   <Step title="Enable automatic updates">
-    For added convenience and security, enable automatic background updates. On Netstreet Africa Managed WordPress, you can enable automatic updates from the control panel. On standard hosting, add the following to `wp-config.php` to enable automatic minor core updates:
+    For added convenience and security, enable automatic background updates. On Netstreet Managed WordPress, you can enable automatic updates from the control panel. On standard hosting, add the following to `wp-config.php` to enable automatic minor core updates:
     ```php
     define('WP_AUTO_UPDATE_CORE', true);
     ```
@@ -80,7 +80,7 @@ Backups are your safety net. They do not prevent a site from being compromised, 
 
 <CardGroup cols={2}>
   <Card title="Automated backups (Managed WordPress)" icon="database">
-    Netstreet Africa Managed WordPress includes automated daily backups. Go to your site's **Backups** section in the control panel to view and restore from any available backup point.
+    Netstreet Managed WordPress includes automated daily backups. Go to your site's **Backups** section in the control panel to view and restore from any available backup point.
   </Card>
   <Card title="Plugin-based backups (cPanel hosting)" icon="plug">
     Use a plugin such as **UpdraftPlus** to schedule automatic backups of your WordPress files and database. Store backups in an offsite location such as Google Drive or Dropbox.
@@ -174,7 +174,7 @@ Install the **Rename wp-login.php** plugin:
 
 Cloudflare provides network-level filtering that can block malicious requests before they reach your server at all. Cloudflare-enabled sites are significantly better protected against brute force attacks and bots.
 
-See the [Cloudflare](/hosting/cloudflare) guide to activate Cloudflare on your Netstreet Africa site.
+See the [Cloudflare](/hosting/cloudflare) guide to activate Cloudflare on your Netstreet site.
 
 ## Scanning for malware
 

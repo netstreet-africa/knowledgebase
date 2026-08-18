@@ -1,19 +1,19 @@
 ---
 title: "DNS Settings for Professional Email: MX, SPF, DKIM & DMARC"
 sidebarTitle: "DNS Settings"
-description: "Understand and configure MX, SPF, DKIM, and DMARC DNS records for your Netstreet Africa domain to ensure reliable email delivery and prevent spoofing."
+description: "Understand and configure MX, SPF, DKIM, and DMARC DNS records for your Netstreet domain to ensure reliable email delivery and prevent spoofing."
 ---
 
-Correct DNS configuration is the foundation of reliable, trustworthy email. When you send an email from your domain, the receiving mail server performs a series of DNS lookups to verify that your message is legitimate and that it was sent from an authorised server. If these DNS records are missing or misconfigured, your emails may be rejected, sent to spam folders, or your domain may be spoofed by attackers. This guide explains each of the four critical email DNS record types — MX, SPF, DKIM, and DMARC — and how to configure them for your Netstreet Africa domain.
+Correct DNS configuration is the foundation of reliable, trustworthy email. When you send an email from your domain, the receiving mail server performs a series of DNS lookups to verify that your message is legitimate and that it was sent from an authorised server. If these DNS records are missing or misconfigured, your emails may be rejected, sent to spam folders, or your domain may be spoofed by attackers. This guide explains each of the four critical email DNS record types — MX, SPF, DKIM, and DMARC — and how to configure them for your Netstreet domain.
 
 ---
 
 ## Viewing your email DNS settings in the Hosting Panel
 
-If you have a Netstreet Africa Professional or Business Email account, you can view the pre-configured DNS record values you need to add directly from the Hosting Panel.
+If you have a Netstreet Professional or Business Email account, you can view the pre-configured DNS record values you need to add directly from the Hosting Panel.
 
 <Steps>
-  <Step title="Log in to the Netstreet Africa Hosting Panel">
+  <Step title="Log in to the Netstreet Hosting Panel">
     Go to [my.netstreet.co.za](https://my.netstreet.co.za) and log in.
   </Step>
   <Step title="Navigate to Email & Office Tools">
@@ -55,7 +55,7 @@ TTL:      3600
 - **TTL** — time-to-live in seconds; `3600` (1 hour) is standard
 
 <Note>
-  If you are using Netstreet Africa email hosting, the MX record values are
+  If you are using Netstreet email hosting, the MX record values are
   provided in your Hosting Panel. If you have migrated email to an external
   provider (e.g. Google Workspace or Microsoft 365), those providers will give
   you their own MX record values.
@@ -85,7 +85,7 @@ SPF record syntax explained:
 | Part | Meaning |
 |---|---|
 | `v=spf1` | Declares this as an SPF record |
-| `include:netstreet.co.za` | Authorises Netstreet Africa's mail servers |
+| `include:netstreet.co.za` | Authorises Netstreet's mail servers |
 | `mx` | Authorises servers listed in your MX record |
 | `a` | Authorises the IP address of your domain's A record |
 | `ip4:x.x.x.x` | Explicitly authorises a specific IPv4 address |
@@ -99,7 +99,7 @@ SPF record syntax explained:
 </Tip>
 
 <Note>
-  Netstreet Africa supports SPF records. You can add a custom SPF record to your
+  Netstreet supports SPF records. You can add a custom SPF record to your
   DNS zone via the Hosting Panel. If you need assistance, open a support ticket
   at [my.netstreet.co.za](https://my.netstreet.co.za) and specify the exact
   record you want added.
@@ -127,7 +127,7 @@ TTL:   3600
 
 <Steps>
   <Step title="Log in to cPanel">
-    Access cPanel from your Netstreet Africa Hosting Panel.
+    Access cPanel from your Netstreet Hosting Panel.
   </Step>
   <Step title="Open Email Deliverability">
     In the **Email** section, click **Email Deliverability**.
@@ -209,4 +209,4 @@ DMARC record syntax explained:
   correctly.
 </Info>
 
-If you need help adding DNS records for your domain at Netstreet Africa, please open a support ticket in the [client area](https://my.netstreet.co.za).
+If you need help adding DNS records for your domain at Netstreet, please open a support ticket in the [client area](https://my.netstreet.co.za).

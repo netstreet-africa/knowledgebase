@@ -1,10 +1,10 @@
 ---
-title: "Using Cloudflare with Your Netstreet Africa Website"
+title: "Using Cloudflare with Your Netstreet Website"
 sidebarTitle: "Cloudflare"
-description: "Activate Cloudflare on your Netstreet Africa site to speed up delivery, protect against DDoS attacks, manage cache, and configure SSL end-to-end."
+description: "Activate Cloudflare on your Netstreet site to speed up delivery, protect against DDoS attacks, manage cache, and configure SSL end-to-end."
 ---
 
-Cloudflare is a global content delivery network (CDN) and security platform that sits between your visitors and your Netstreet Africa server. When you enable Cloudflare, all traffic to your website is routed through Cloudflare's worldwide network of data centres before reaching your server. This gives your site two powerful advantages: **performance** (content is cached and served from a server closer to the visitor) and **security** (Cloudflare filters out malicious traffic, bots, and DDoS attacks before they can reach you).
+Cloudflare is a global content delivery network (CDN) and security platform that sits between your visitors and your Netstreet server. When you enable Cloudflare, all traffic to your website is routed through Cloudflare's worldwide network of data centres before reaching your server. This gives your site two powerful advantages: **performance** (content is cached and served from a server closer to the visitor) and **security** (Cloudflare filters out malicious traffic, bots, and DDoS attacks before they can reach you).
 
 <Note>
   Cloudflare offers a free plan that includes CDN, basic DDoS protection, and DNS management. Paid plans add additional security rules, image optimisation, and access controls. You can sign up at [cloudflare.com](https://www.cloudflare.com).
@@ -12,7 +12,7 @@ Cloudflare is a global content delivery network (CDN) and security platform that
 
 ## How Cloudflare works with your hosting
 
-Once activated, Cloudflare changes your domain's DNS so that requests resolve to Cloudflare's IP addresses rather than your server's IP directly. Cloudflare then forwards legitimate requests to your Netstreet Africa server ("origin") and caches static responses at its edge. This means:
+Once activated, Cloudflare changes your domain's DNS so that requests resolve to Cloudflare's IP addresses rather than your server's IP directly. Cloudflare then forwards legitimate requests to your Netstreet server ("origin") and caches static responses at its edge. This means:
 
 - Static files (images, CSS, JavaScript) are served from a Cloudflare node near your visitor — reducing latency significantly.
 - Your server's IP address is hidden behind Cloudflare, making direct attacks harder.
@@ -35,7 +35,7 @@ There are two ways to start using Cloudflare: directly through the Cloudflare we
         Cloudflare scans your existing DNS records and imports them automatically. Review the list carefully and confirm all your A, CNAME, MX, and TXT records are present. Click **Continue**.
       </Step>
       <Step title="Update your nameservers">
-        Cloudflare provides two nameserver addresses (for example, `alice.ns.cloudflare.com` and `bob.ns.cloudflare.com`). Log in to your Netstreet Africa client area, go to your domain's management page, and replace the existing nameservers with the ones Cloudflare provided.
+        Cloudflare provides two nameserver addresses (for example, `alice.ns.cloudflare.com` and `bob.ns.cloudflare.com`). Log in to your Netstreet client area, go to your domain's management page, and replace the existing nameservers with the ones Cloudflare provided.
       </Step>
       <Step title="Wait for propagation">
         Nameserver changes typically propagate within a few minutes to a few hours. Once Cloudflare detects the change, your site is active on the Cloudflare network.
@@ -77,7 +77,7 @@ Key performance features include:
 
 ## DDoS protection
 
-A Distributed Denial of Service (DDoS) attack floods your server with enormous amounts of traffic, making your site slow or completely unreachable. Cloudflare's network absorbs and filters this traffic before it reaches Netstreet Africa's servers.
+A Distributed Denial of Service (DDoS) attack floods your server with enormous amounts of traffic, making your site slow or completely unreachable. Cloudflare's network absorbs and filters this traffic before it reaches Netstreet's servers.
 
 Cloudflare's security features include:
 
@@ -139,10 +139,10 @@ Cloudflare offers its own SSL layer between visitors and Cloudflare's edge. It i
 
 <Steps>
   <Step title="Set SSL mode to Full or Full (Strict)">
-    In the Cloudflare dashboard, go to **SSL/TLS → Overview** and select **Full** or **Full (Strict)**. This ensures all traffic between Cloudflare and your Netstreet Africa server is encrypted.
+    In the Cloudflare dashboard, go to **SSL/TLS → Overview** and select **Full** or **Full (Strict)**. This ensures all traffic between Cloudflare and your Netstreet server is encrypted.
   </Step>
   <Step title="Install an SSL certificate on your origin">
-    If using **Full (Strict)**, your Netstreet Africa server must have a valid SSL certificate installed (a free Let's Encrypt/cPanel certificate works perfectly). See the [SSL Certificates](/hosting/ssl-certificates) guide for installation instructions.
+    If using **Full (Strict)**, your Netstreet server must have a valid SSL certificate installed (a free Let's Encrypt/cPanel certificate works perfectly). See the [SSL Certificates](/hosting/ssl-certificates) guide for installation instructions.
   </Step>
   <Step title="Enable Always Use HTTPS">
     In the Cloudflare dashboard, go to **SSL/TLS → Edge Certificates** and enable **Always Use HTTPS**. This redirects all HTTP requests to HTTPS at the Cloudflare edge before they reach your server.

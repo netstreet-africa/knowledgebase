@@ -1,7 +1,7 @@
 ---
 title: "DNS Overview: Understanding Domain Name System Records"
 sidebarTitle: "DNS Overview"
-description: "Understand how DNS works, what record types are available, and how Netstreet Africa manages DNS for your domains and associated hosting services."
+description: "Understand how DNS works, what record types are available, and how Netstreet manages DNS for your domains and associated hosting services."
 ---
 
 The Domain Name System (DNS) is the internet's address book. When someone types your domain name into a browser, DNS translates that human-readable name into an IP address that computers use to locate your server. Understanding how DNS works — and knowing which record types to use — will help you configure your domain correctly and troubleshoot issues more effectively.
@@ -29,7 +29,7 @@ When you create or change a DNS record, the change does not take effect everywhe
 
 ## DNS record types
 
-Netstreet Africa supports all standard DNS record types. Here is a reference table of the most commonly used records:
+Netstreet supports all standard DNS record types. Here is a reference table of the most commonly used records:
 
 | Record type | Purpose | Example value |
 |------------|---------|--------------|
@@ -41,7 +41,7 @@ Netstreet Africa supports all standard DNS record types. Here is a reference tab
 | **SRV** | Defines location of servers for specific services (SIP, XMPP, etc.) | `_sip._tcp 100 1 5060 sip.yourdomain.co.za` |
 | **NS** | Delegates a zone (or subdomain) to a set of nameservers | `ns1.netstreet.co.za` |
 | **PTR** | Reverse DNS — maps an IP address back to a domain name | Used for email reputation, diagnostics |
-| **SOA** | Start of Authority — contains zone metadata and serial number | Managed automatically by Netstreet Africa |
+| **SOA** | Start of Authority — contains zone metadata and serial number | Managed automatically by Netstreet |
 
 <Info>
   You cannot set a CNAME record on the root (apex) of a domain (e.g. `yourdomain.co.za` itself). For the root domain, always use an A or AAAA record. Some services that require a CNAME at the root — such as certain CDN providers — may offer a proprietary "ALIAS" or "ANAME" record type instead.
@@ -86,13 +86,13 @@ Priority  Value
 
 **SRV (Service) records** direct specific application protocols to the correct server and port. They are commonly used for VoIP (SIP), instant messaging (XMPP), and other services that require a specific server and port combination. For more detail, see [Adding SRV Records](/domains/adding-srv-records).
 
-## How DNS management works at Netstreet Africa
+## How DNS management works at Netstreet
 
 DNS management for your domains depends on whether your domain is paired with a hosting product:
 
 <CardGroup cols={2}>
   <Card title="Domain + Hosting Package" icon="server">
-    If your domain is linked to a Netstreet Africa hosting plan, DNS records are managed through your control panel (cPanel, Plesk, or Enhance). Changes are applied to the zone on our authoritative nameservers.
+    If your domain is linked to a Netstreet hosting plan, DNS records are managed through your control panel (cPanel, Plesk, or Enhance). Changes are applied to the zone on our authoritative nameservers.
   </Card>
   <Card title="Standalone Domain" icon="globe">
     If you registered a domain without an associated hosting product, you can manage DNS records directly in the **DNS** section of your client area at my.netstreet.co.za.
@@ -100,12 +100,12 @@ DNS management for your domains depends on whether your domain is paired with a 
 </CardGroup>
 
 <Note>
-  If your domain is pointing to external nameservers (e.g. Cloudflare), DNS changes must be made at that external provider — not in your Netstreet Africa client area. Changes made here will have no effect until you point nameservers back to us.
+  If your domain is pointing to external nameservers (e.g. Cloudflare), DNS changes must be made at that external provider — not in your Netstreet client area. Changes made here will have no effect until you point nameservers back to us.
 </Note>
 
 ## DNSSEC
 
-DNSSEC (DNS Security Extensions) adds a layer of cryptographic authentication to DNS responses, helping prevent DNS spoofing and cache poisoning attacks. Netstreet Africa's nameservers do not currently support DNSSEC natively. However, if you have registered your domain with us and use external nameservers that support DNSSEC (such as Cloudflare), we can configure DNSSEC at the **registrar level** on your behalf.
+DNSSEC (DNS Security Extensions) adds a layer of cryptographic authentication to DNS responses, helping prevent DNS spoofing and cache poisoning attacks. Netstreet's nameservers do not currently support DNSSEC natively. However, if you have registered your domain with us and use external nameservers that support DNSSEC (such as Cloudflare), we can configure DNSSEC at the **registrar level** on your behalf.
 
 To request DNSSEC configuration at the registrar level, [open a support ticket](https://my.netstreet.co.za) and provide:
 

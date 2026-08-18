@@ -1,10 +1,10 @@
 ---
 title: "Installing and Configuring OpenClaw AI Agent on Your VPS"
 sidebarTitle: "OpenClaw Guide"
-description: "Install the OpenClaw AI agent on a Netstreet Africa Self-Managed VPS. Covers Homebrew, QuickStart onboarding, and exposing the ControlUI via Nginx and SSL."
+description: "Install the OpenClaw AI agent on a Netstreet Self-Managed VPS. Covers Homebrew, QuickStart onboarding, and exposing the ControlUI via Nginx and SSL."
 ---
 
-OpenClaw is an AI agent that runs directly on your server, giving you an intelligent assistant you can interact with over SSH or through a web interface. This guide walks you through everything you need to get OpenClaw up and running on a Netstreet Africa Self-Managed VPS — from installing prerequisites like Homebrew and creating a dedicated user, all the way to connecting an AI model provider and optionally exposing the ControlUI to the public internet via Nginx with a free Let's Encrypt SSL certificate.
+OpenClaw is an AI agent that runs directly on your server, giving you an intelligent assistant you can interact with over SSH or through a web interface. This guide walks you through everything you need to get OpenClaw up and running on a Netstreet Self-Managed VPS — from installing prerequisites like Homebrew and creating a dedicated user, all the way to connecting an AI model provider and optionally exposing the ControlUI to the public internet via Nginx with a free Let's Encrypt SSL certificate.
 
 <Warning>
   **Do not run OpenClaw as root.** If the AI agent is installed under the root
@@ -21,7 +21,7 @@ Before starting the OpenClaw installation, your Self-Managed VPS needs the follo
 
 <CardGroup cols={2}>
   <Card title="Required" icon="check-circle">
-    - A Netstreet Africa Self-Managed VPS (root access required for setup)
+    - A Netstreet Self-Managed VPS (root access required for setup)
     - Homebrew (installed in this guide)
     - A dedicated `openclaw` user (created in this guide)
     - Node.js (installed automatically by the OpenClaw installer)
@@ -33,7 +33,7 @@ Before starting the OpenClaw installation, your Self-Managed VPS needs the follo
   </Card>
 </CardGroup>
 
-You can find your VPS root credentials in your **Netstreet Africa client area**: go to **Products → VPS → [your VPS] → Product Notes**.
+You can find your VPS root credentials in your **Netstreet client area**: go to **Products → VPS → [your VPS] → Product Notes**.
 
 ---
 
@@ -404,4 +404,4 @@ openclaw devices approve <request-id>
 
 For more information on customising and extending OpenClaw, visit the official documentation at [https://docs.openclaw.ai](https://docs.openclaw.ai).
 
-If you need help with your Netstreet Africa VPS infrastructure, open a support ticket in your [client area](https://my.netstreet.co.za).
+If you need help with your Netstreet VPS infrastructure, open a support ticket in your [client area](https://my.netstreet.co.za).

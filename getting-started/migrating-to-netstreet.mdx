@@ -1,21 +1,21 @@
 ---
-title: "Migrating Your Website to Netstreet Africa Hosting"
+title: "Migrating Your Website to Netstreet Hosting"
 sidebarTitle: "Migrating to Netstreet"
-description: "Move your website to Netstreet Africa using cPanel account transfer or manual migration, with step-by-step DNS switchover and propagation guidance."
+description: "Move your website to Netstreet using cPanel account transfer or manual migration, with step-by-step DNS switchover and propagation guidance."
 ---
 
-Moving your website to Netstreet Africa is straightforward whether your current host uses cPanel or not. This guide covers both the assisted cPanel account transfer process and the step-by-step manual migration path, and explains how to switch your DNS records once everything is in place. Taking a little extra care during the transition — particularly around timing — will keep downtime to an absolute minimum.
+Moving your website to Netstreet is straightforward whether your current host uses cPanel or not. This guide covers both the assisted cPanel account transfer process and the step-by-step manual migration path, and explains how to switch your DNS records once everything is in place. Taking a little extra care during the transition — particularly around timing — will keep downtime to an absolute minimum.
 
 <Warning>
-  We strongly recommend leaving **at least 7 days of overlap** between opening your Netstreet Africa account and closing your previous hosting account. This gives you time to test everything and weather any DNS propagation delays before committing to the switch.
+  We strongly recommend leaving **at least 7 days of overlap** between opening your Netstreet account and closing your previous hosting account. This gives you time to test everything and weather any DNS propagation delays before committing to the switch.
 </Warning>
 
 ## Before You Begin
 
 Regardless of which migration method you use, keep these points in mind:
 
-- **Use a separate email address.** When signing up with Netstreet Africa, use an email address that does *not* belong to the domain you are migrating. If that domain's email stops working mid-migration, you could miss important updates from our team.
-- **Do not cancel your old account early.** Keep your previous hosting account active until you have fully tested your site on Netstreet Africa servers and confirmed that DNS has propagated.
+- **Use a separate email address.** When signing up with Netstreet, use an email address that does *not* belong to the domain you are migrating. If that domain's email stops working mid-migration, you could miss important updates from our team.
+- **Do not cancel your old account early.** Keep your previous hosting account active until you have fully tested your site on Netstreet servers and confirmed that DNS has propagated.
 - **Test before you switch.** You can preview your site on our servers using a temporary URL or a local `hosts` file before changing your name servers publicly.
 
 ## Option 1 — cPanel Account Transfer (Assisted Migration)
@@ -35,7 +35,7 @@ If your current hosting provider runs cPanel, our Migrations team can perform a 
 ### How to Request a cPanel Migration
 
 <Steps>
-  <Step title="Sign up for your Netstreet Africa account">
+  <Step title="Sign up for your Netstreet account">
     If you have not already done so, create your account at [my.netstreet.co.za](https://my.netstreet.co.za). Remember to use an email address that is not hosted on the domain you are migrating.
   </Step>
   <Step title="Log in to the client area">
@@ -47,7 +47,7 @@ If your current hosting provider runs cPanel, our Migrations team can perform a 
     - **Subject:** Site migration request
     - **Department:** Migrations
     - **Message:** Include the following information:
-      - The destination product or service on your Netstreet Africa account
+      - The destination product or service on your Netstreet account
       - The domain name(s) to be migrated
       - Any SSL certificates you want transferred
       - cPanel login credentials, FTP details, or SSH connection details for your current host
@@ -56,17 +56,17 @@ If your current hosting provider runs cPanel, our Migrations team can perform a 
   <Step title="Wait for confirmation from our Migrations team">
     Our team processes migrations in the order they are received. We will keep you updated on progress. Migration speed can vary depending on your current host's network speed, the number of sites being migrated, and overall complexity.
   </Step>
-  <Step title="Test your site on the Netstreet Africa server">
+  <Step title="Test your site on the Netstreet server">
     Before changing your domain's name servers, test your site thoroughly using the temporary shared URL provided in the client area, or by adding a temporary entry to your local `hosts` file.
   </Step>
   <Step title="Update your domain's name servers">
-    Once you are satisfied with the migration, update your domain's name server settings to point to Netstreet Africa. If your domain is registered with us, you can do this from **Products & Services** in the client area.
+    Once you are satisfied with the migration, update your domain's name server settings to point to Netstreet. If your domain is registered with us, you can do this from **Products & Services** in the client area.
   </Step>
   <Step title="Wait for DNS propagation">
     Allow up to **24–48 hours** for DNS changes to propagate fully across the internet, although many users will see the update much sooner.
   </Step>
   <Step title="Cancel your old hosting account">
-    Only after you have confirmed your site is fully live and working on the Netstreet Africa servers should you cancel your account with the previous provider.
+    Only after you have confirmed your site is fully live and working on the Netstreet servers should you cancel your account with the previous provider.
   </Step>
 </Steps>
 
@@ -75,11 +75,11 @@ If your current hosting provider runs cPanel, our Migrations team can perform a 
 If your current hosting provider does not use cPanel, or if you prefer to handle the migration yourself, you can move your data manually.
 
 <Steps>
-  <Step title="Sign up for your Netstreet Africa account">
+  <Step title="Sign up for your Netstreet account">
     Create your account at [my.netstreet.co.za](https://my.netstreet.co.za) if you have not done so already. Use an email address that is not on the domain being migrated.
   </Step>
   <Step title="Transfer your website files">
-    Upload your website files to the `public_html` directory of your new Netstreet Africa hosting account. You can use FTP, SFTP, or the file manager in your control panel to do this.
+    Upload your website files to the `public_html` directory of your new Netstreet hosting account. You can use FTP, SFTP, or the file manager in your control panel to do this.
   </Step>
   <Step title="Migrate your email accounts">
     Re-create your email accounts in cPanel or your control panel, then migrate any existing email data across using an email client or the tools provided in your control panel.
@@ -88,16 +88,16 @@ If your current hosting provider does not use cPanel, or if you prefer to handle
     Export your MySQL or PostgreSQL databases from your old host (usually via phpMyAdmin or the command line), then import them into the database tool in your new control panel. Update your website's configuration files with the new database connection details.
   </Step>
   <Step title="Test your site before switching DNS">
-    Use the shared temporary URL visible in the client area at [my.netstreet.co.za](https://my.netstreet.co.za), or modify your local `hosts` file, to verify the site looks and functions correctly on the Netstreet Africa server before going live.
+    Use the shared temporary URL visible in the client area at [my.netstreet.co.za](https://my.netstreet.co.za), or modify your local `hosts` file, to verify the site looks and functions correctly on the Netstreet server before going live.
   </Step>
   <Step title="Update your domain's name servers">
-    Point your domain to Netstreet Africa's name servers. If the domain is registered with Netstreet Africa, update the name servers from within the client area.
+    Point your domain to Netstreet's name servers. If the domain is registered with Netstreet, update the name servers from within the client area.
   </Step>
   <Step title="Wait for DNS propagation">
     DNS changes typically propagate within **24–48 hours**. During this window, some visitors may still be directed to your old host while others reach your new one — this is normal.
   </Step>
   <Step title="Cancel your old hosting account">
-    Once the site is confirmed live on Netstreet Africa and DNS has fully propagated, you can safely close your account with the previous provider.
+    Once the site is confirmed live on Netstreet and DNS has fully propagated, you can safely close your account with the previous provider.
   </Step>
 </Steps>
 
