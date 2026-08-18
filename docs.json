@@ -16,12 +16,6 @@
     "dark": "/images/logo-primary-white.svg"
   },
   "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "https://my.netstreet.co.za"
-      }
-    ],
     "primary": {
       "type": "button",
       "label": "Client Area",
