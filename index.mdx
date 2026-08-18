@@ -4,35 +4,41 @@ description: "Guides, tutorials, and answers for every Netstreet Africa product 
 mode: "custom"
 ---
 
-<div style={{ position: 'relative', overflow: 'hidden', background: '#131520', padding: '5.5rem 1.5rem 5rem' }}>
-  <div style={{ position: 'absolute', top: '-30%', right: '-10%', width: '620px', height: '620px', background: 'radial-gradient(circle at center, rgba(0,101,225,0.35), rgba(102,174,240,0.12) 45%, transparent 70%)', filter: 'blur(20px)', pointerEvents: 'none' }} />
-
-  <div style={{ position: 'absolute', bottom: '-40%', left: '-8%', width: '520px', height: '520px', background: 'radial-gradient(circle at center, rgba(102,174,240,0.18), transparent 68%)', filter: 'blur(24px)', pointerEvents: 'none' }} />
-
-  <div style={{ position: 'relative', maxWidth: '760px', margin: '0 auto', textAlign: 'center' }}>
-    <span style={{ display: 'inline-block', fontFamily: "'DM Sans', sans-serif", textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.8rem', color: '#66AEF0', marginBottom: '1.1rem' }}>Help Centre</span>
-    <h1 style={{ color: '#FFFFFF', fontSize: '2.9rem', fontWeight: 500, lineHeight: 1.1, letterSpacing: '-0.02em', margin: '0 0 1rem' }}>How can we help you today?</h1>
-    <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: '1.15rem', lineHeight: 1.4, maxWidth: '560px', margin: '0 auto 2rem' }}>Search hundreds of guides, tutorials, and answers for every Netstreet Africa product and service — or browse by topic below.</p>
-
-    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', maxWidth: '520px', margin: '0 auto', padding: '0.95rem 1.1rem', borderRadius: '12px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.16)' }}>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="8" />
-
-        <path d="m21 21-4.3-4.3" />
-      </svg>
-
-      <span style={{ color: 'rgba(255,255,255,0.7)', flex: 1, textAlign: 'left' }}>Search the Knowledge Base…</span>
-      <kbd style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', color: 'rgba(255,255,255,0.75)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: '6px', padding: '3px 7px' }}>⌘K</kbd>
+export const Hero = () => (
+  <div style={{ position: 'relative', overflow: 'hidden', background: '#131520', padding: '5.5rem 1.5rem 5rem' }}>
+    <div style={{ position: 'absolute', top: '-30%', right: '-10%', width: '620px', height: '620px', background: 'radial-gradient(circle at center, rgba(0,101,225,0.35), rgba(102,174,240,0.12) 45%, transparent 70%)', filter: 'blur(20px)', pointerEvents: 'none' }} />
+    <div style={{ position: 'absolute', bottom: '-40%', left: '-8%', width: '520px', height: '520px', background: 'radial-gradient(circle at center, rgba(102,174,240,0.18), transparent 68%)', filter: 'blur(24px)', pointerEvents: 'none' }} />
+    <div style={{ position: 'relative', maxWidth: '760px', margin: '0 auto', textAlign: 'center' }}>
+      <span style={{ display: 'inline-block', fontFamily: "'DM Sans', sans-serif", textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.8rem', color: '#66AEF0', marginBottom: '1.1rem' }}>Help Centre</span>
+      <h1 style={{ color: '#FFFFFF', fontSize: '2.9rem', fontWeight: 500, lineHeight: 1.1, letterSpacing: '-0.02em', margin: '0 0 1rem' }}>How can we help you today?</h1>
+      <p style={{ color: 'rgba(255,255,255,0.82)', fontSize: '1.15rem', lineHeight: 1.4, maxWidth: '560px', margin: '0 auto 2rem' }}>Search hundreds of guides, tutorials, and answers for every Netstreet Africa product and service — or browse by topic below.</p>
+      <div
+        onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, ctrlKey: true, bubbles: true }))}
+        style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', maxWidth: '520px', margin: '0 auto', padding: '0.95rem 1.1rem', borderRadius: '12px', background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.16)', cursor: 'pointer', backdropFilter: 'blur(8px)' }}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <span style={{ color: 'rgba(255,255,255,0.7)', flex: 1, textAlign: 'left' }}>Search the Help Centre…</span>
+        <kbd style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', color: 'rgba(255,255,255,0.75)', border: '1px solid rgba(255,255,255,0.22)', borderRadius: '6px', padding: '3px 7px' }}>⌘K</kbd>
+      </div>
     </div>
   </div>
-</div>
+);
+
+export const SectionHead = ({ eyebrow, title, sub }) => (
+  <div style={{ marginBottom: '1.6rem' }}>
+    <span style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.75rem', color: '#0065E1', marginBottom: '0.5rem' }}>{eyebrow}</span>
+    <h2 style={{ fontSize: '1.6rem', fontWeight: 500, letterSpacing: '-0.01em', margin: '0 0 0.3rem' }}>{title}</h2>
+    <p style={{ margin: 0, opacity: 0.7 }}>{sub}</p>
+  </div>
+);
+
+<Hero />
 
 <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '3.5rem 1.5rem 1rem' }}>
-  <div style={{ marginBottom: '1.6rem' }}>
-    <span style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.75rem', color: '#0065E1', marginBottom: '0.5rem' }}>Browse</span>
-    <h2 style={{ fontSize: '1.6rem', fontWeight: 500, letterSpacing: '-0.01em', margin: '0 0 0.3rem' }}>Browse by category</h2>
-    <p style={{ margin: 0, opacity: 0.7 }}>Everything you need, organised by topic.</p>
-  </div>
+  <SectionHead eyebrow="Browse" title="Browse by category" sub="Everything you need, organised by topic." />
 
   <CardGroup cols={3}>
     <Card title="Getting Started" icon="rocket" href="/getting-started/overview">
@@ -62,11 +68,7 @@ mode: "custom"
 </div>
 
 <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '2.5rem 1.5rem 1rem' }}>
-  <div style={{ marginBottom: '1.6rem' }}>
-    <span style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.75rem', color: '#0065E1', marginBottom: '0.5rem' }}>Control Panels</span>
-    <h2 style={{ fontSize: '1.6rem', fontWeight: 500, letterSpacing: '-0.01em', margin: '0 0 0.3rem' }}>Manage your control panel</h2>
-    <p style={{ margin: 0, opacity: 0.7 }}>Step-by-step guides for the control panel powering your account.</p>
-  </div>
+  <SectionHead eyebrow="Control Panels" title="Manage your control panel" sub="Step-by-step guides for the control panel powering your account." />
 
   <CardGroup cols={4}>
     <Card title="cPanel" icon="gauge-high" href="/control-panels/cpanel/getting-started">
@@ -88,11 +90,37 @@ mode: "custom"
 </div>
 
 <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '2.5rem 1.5rem 1rem' }}>
-  <div style={{ marginBottom: '1.6rem' }}>
-    <span style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.75rem', color: '#0065E1', marginBottom: '0.5rem' }}>Divisions</span>
-    <h2 style={{ fontSize: '1.6rem', fontWeight: 500, letterSpacing: '-0.01em', margin: '0 0 0.3rem' }}>Our divisions</h2>
-    <p style={{ margin: 0, opacity: 0.7 }}>Netstreet Africa services across Cloud, Cyber Security, IoT, and Managed Services.</p>
-  </div>
+  <SectionHead eyebrow="Products" title="Products & services" sub="Dive into guides for specific Netstreet Africa products." />
+
+  <CardGroup cols={3}>
+    <Card title="Web Hosting" icon="boxes-stacked" href="/hosting/publishing-your-website">
+      Publish your site, tune PHP settings, and get the most out of your hosting plan.
+    </Card>
+
+    <Card title="Managed WordPress" icon="wordpress" href="/hosting/wordpress/managed-wordpress">
+      Managed WordPress hosting — setup, the WordPress Toolkit, security, and the AI website builder.
+    </Card>
+
+    <Card title="VPS & Dedicated Servers" icon="terminal" href="/hosting/vps/managed-vs-unmanaged">
+      Managed vs unmanaged, securing your server, automatic updates, and advanced guides.
+    </Card>
+
+    <Card title="SSL Certificates" icon="lock" href="/hosting/ssl-certificates">
+      Order, install, and renew SSL certificates — including free Let's Encrypt options.
+    </Card>
+
+    <Card title="Cloudflare" icon="bolt" href="/hosting/cloudflare">
+      Speed up and protect your site with Cloudflare's CDN and security features.
+    </Card>
+
+    <Card title="Email Hosting" icon="at" href="/email/dns-settings-for-email">
+      Mail DNS records, spam filtering, and deliverability for your domain.
+    </Card>
+  </CardGroup>
+</div>
+
+<div style={{ maxWidth: '72rem', margin: '0 auto', padding: '2.5rem 1.5rem 1rem' }}>
+  <SectionHead eyebrow="Divisions" title="Our divisions" sub="Netstreet Africa services across Cloud, Cyber Security, IoT, and Managed Services." />
 
   <CardGroup cols={4}>
     <Card title="Cloud" icon="cloud" href="/getting-started/overview">
@@ -114,11 +142,7 @@ mode: "custom"
 </div>
 
 <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '2.5rem 1.5rem 1.5rem' }}>
-  <div style={{ marginBottom: '1.6rem' }}>
-    <span style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.75rem', color: '#0065E1', marginBottom: '0.5rem' }}>Most Read</span>
-    <h2 style={{ fontSize: '1.6rem', fontWeight: 500, letterSpacing: '-0.01em', margin: '0 0 0.3rem' }}>Popular articles</h2>
-    <p style={{ margin: 0, opacity: 0.7 }}>The guides our customers read most.</p>
-  </div>
+  <SectionHead eyebrow="Most Read" title="Popular articles" sub="The guides our customers read most." />
 
   <CardGroup cols={2}>
     <Card title="Getting started with Netstreet" icon="flag-checkered" href="/getting-started/overview" horizontal>
