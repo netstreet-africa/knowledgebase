@@ -186,5 +186,8 @@
   },
   "fonts": {
     "family": "DM Sans"
+  },
+  "appearance": {
+    "strict": true
   }
 }
