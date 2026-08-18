@@ -195,7 +195,7 @@
   },
   "appearance": {
     "strict": false,
-    "default": "light"
+    "default": "dark"
   },
   "footer": {
     "socials": {
