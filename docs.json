@@ -185,7 +185,12 @@
     "library": "fontawesome"
   },
   "fonts": {
-    "family": "DM Sans"
+    "heading": {
+      "family": "DM Sans"
+    },
+    "body": {
+      "family": "Ubuntu"
+    }
   },
   "appearance": {
     "strict": true
