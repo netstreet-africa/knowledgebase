@@ -179,7 +179,7 @@
   "background": {
     "color": {
       "light": "#ffffff",
-      "dark": "#131520"
+      "dark": "#000000"
     },
     "decoration": "gradient"
   },
