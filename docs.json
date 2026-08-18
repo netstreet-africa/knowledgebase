@@ -3,7 +3,7 @@
   "theme": "mint",
   "name": "Netstreet Knowledge Base",
   "colors": {
-    "primary": "#ffffff",
+    "primary": "#0065E1",
     "light": "#0065E1",
     "dark": "#0065E1"
   },
@@ -178,7 +178,8 @@
   },
   "background": {
     "color": {
-      "light": "#ffffff"
+      "light": "#ffffff",
+      "dark": "#131520"
     }
   },
   "icons": {
