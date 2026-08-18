@@ -3,13 +3,13 @@
   "theme": "mint",
   "name": "Netstreet Knowledge Base",
   "colors": {
-    "primary": "#252727",
+    "primary": "#ffffff",
     "light": "#0065E1",
     "dark": "#0065E1"
   },
   "favicon": {
-    "light": "/images/Dark.png",
-    "dark": "/images/Light.png"
+    "light": "/images/fav.png",
+    "dark": "/images/fav.png"
   },
   "logo": {
     "light": "/images/logo-primary-rgb.svg",
