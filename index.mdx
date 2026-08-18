@@ -35,6 +35,78 @@ export const SectionHead = ({ eyebrow, title, sub }) => (
   </div>
 );
 
+export const Footer = () => {
+  const columns = [
+    {
+      header: 'Help Centre',
+      items: [
+        { label: 'Getting Started', href: '/getting-started/overview' },
+        { label: 'Domains & DNS', href: '/domains/dns-overview' },
+        { label: 'Control Panels', href: '/control-panels/cpanel/getting-started' },
+        { label: 'Hosting & Servers', href: '/hosting/publishing-your-website' },
+        { label: 'Email & Security', href: '/email/setting-up-email' },
+      ],
+    },
+    {
+      header: 'Support',
+      items: [
+        { label: 'Client Area', href: 'https://my.netstreet.co.za' },
+        { label: 'Open a Ticket', href: '/account/working-with-tickets' },
+        { label: 'Billing FAQ', href: '/account/billing-faq' },
+        { label: 'FAQ', href: 'https://netstreet.co.za/faq/' },
+      ],
+    },
+    {
+      header: 'Company',
+      items: [
+        { label: 'About', href: 'https://netstreet.co.za/about/' },
+        { label: 'Solutions', href: 'https://netstreet.co.za/solutions/' },
+        { label: 'Industries', href: 'https://netstreet.co.za/industries/' },
+        { label: 'Blog', href: 'https://netstreet.co.za/blog/' },
+        { label: 'Contact', href: 'https://netstreet.co.za/contact/' },
+      ],
+    },
+  ];
+
+  return (
+    <div style={{ background: '#131520', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '4rem 1.5rem 2rem' }}>
+      <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2.5rem', alignItems: 'start' }}>
+          <div style={{ gridColumn: 'span 1', minWidth: '200px' }}>
+            <div style={{ color: '#FFFFFF', fontWeight: 500, fontSize: '1.05rem', marginBottom: '0.6rem' }}>Netstreet Africa</div>
+            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', lineHeight: 1.6, margin: 0, maxWidth: '260px' }}>
+              Cloud, Cyber Security, IoT, and Managed Services — backed by 24/7/365 support.
+            </p>
+          </div>
+
+          {columns.map((col) => (
+            <div key={col.header}>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.72rem', color: '#66AEF0', marginBottom: '1rem' }}>{col.header}</div>
+              <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                {col.items.map((item) => (
+                  <li key={item.href} style={{ margin: 0 }}>
+                    <a href={item.href} style={{ color: 'rgba(255,255,255,0.72)', fontSize: '0.9rem', textDecoration: 'none' }}>{item.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center', marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>© {new Date().getFullYear()} Netstreet Africa. All rights reserved.</span>
+          <a href="https://www.linkedin.com/company/netstreet-africa" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', textDecoration: 'none' }}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z" />
+            </svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 <Hero />
 
 <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '3.5rem 1.5rem 1rem' }}>
@@ -171,7 +243,7 @@ export const SectionHead = ({ eyebrow, title, sub }) => (
   </CardGroup>
 </div>
 
-<div style={{ maxWidth: '72rem', margin: '0 auto', padding: '1rem 1.5rem 5rem' }}>
+<div style={{ maxWidth: '72rem', margin: '0 auto', padding: '1rem 1.5rem 3.5rem' }}>
   <div style={{ position: 'relative', overflow: 'hidden', background: '#131520', borderRadius: '20px', padding: '3rem 2rem', textAlign: 'center' }}>
     <div style={{ position: 'absolute', top: '-50%', right: '-6%', width: '420px', height: '420px', background: 'radial-gradient(circle at center, rgba(0,101,225,0.28), transparent 70%)', pointerEvents: 'none' }} />
 
@@ -186,3 +258,5 @@ export const SectionHead = ({ eyebrow, title, sub }) => (
     </div>
   </div>
 </div>
+
+<Footer />
