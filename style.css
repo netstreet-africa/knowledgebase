@@ -1,0 +1,12 @@
+/*
+ * Custom styles for the Netstreet Knowledge Base.
+ * Mintlify loads this file automatically from the repo root.
+ */
+
+/* Navbar logo.
+ * Mintlify's default is the Tailwind utility `h-7` (1.75rem / 28px).
+ * 1.225rem is 70% of that — a 30% reduction. Width stays `auto`,
+ * so the aspect ratio is preserved. */
+.nav-logo {
+  height: 1.225rem !important;
+}
