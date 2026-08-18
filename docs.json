@@ -199,5 +199,8 @@
     "socials": {
       "linkedin": "https://www.linkedin.com/company/netstreet-africa"
     }
+  },
+  "metadata": {
+    "timestamp": true
   }
 }
