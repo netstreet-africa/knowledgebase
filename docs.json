@@ -189,5 +189,10 @@
   },
   "appearance": {
     "strict": true
+  },
+  "footer": {
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/netstreet-africa"
+    }
   }
 }
