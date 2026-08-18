@@ -10,3 +10,28 @@
 .nav-logo {
   height: 1.225rem !important;
 }
+
+/* "Client Area" navbar button.
+ * Mintlify defaults: text-sm (0.875rem), pl-3/pr-2/py-2 padding,
+ * and a size-3 (0.75rem) chevron. Scaled down ~30% so the button
+ * sits in proportion with the reduced logo above.
+ * The ID selector outranks the theme's utility classes, so no
+ * !important is needed here. */
+#topbar-cta-button a {
+  font-size: 0.6875rem;   /* 11px, was 14px */
+  padding-top: 0.35rem;   /* was 0.5rem */
+  padding-bottom: 0.35rem;
+  padding-left: 0.55rem;  /* was 0.75rem */
+  padding-right: 0.4rem;  /* was 0.5rem */
+}
+
+/* Chevron */
+#topbar-cta-button a svg {
+  width: 0.5rem;          /* 8px, was 12px */
+  height: 0.5rem;
+}
+
+/* Rounded background pill — tighten the radius to match */
+#topbar-cta-button a > span {
+  border-radius: 0.6rem;
+}
