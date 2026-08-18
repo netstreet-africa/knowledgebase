@@ -29,13 +29,151 @@
     }
   },
   "navigation": {
-    "pages": [
-      "index",
-      "",
-      "",
-      "",
-      "",
-      ""
+    "tabs": [
+      {
+        "tab": "Getting Started",
+        "groups": [
+          {
+            "group": "Welcome",
+            "pages": [
+              "getting-started/overview",
+              "getting-started/logging-in",
+              "getting-started/managing-products-and-services",
+              "getting-started/migrating-to-netstreet"
+            ]
+          },
+          {
+            "group": "Account & Billing",
+            "pages": [
+              "account/accessing-the-hosting-panel",
+              "account/managing-your-profile",
+              "account/billing-faq",
+              "account/working-with-tickets"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Domains & DNS",
+        "groups": [
+          {
+            "group": "Domains",
+            "pages": [
+              "domains/registering-a-domain",
+              "domains/renewing-a-domain",
+              "domains/domain-management",
+              "domains/transferring-a-domain"
+            ]
+          },
+          {
+            "group": "DNS Management",
+            "pages": [
+              "domains/dns-overview",
+              "domains/managing-dns-zones",
+              "domains/adding-srv-records",
+              "domains/wildcard-dns"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Control Panels",
+        "groups": [
+          {
+            "group": "cPanel",
+            "pages": [
+              "control-panels/cpanel/getting-started",
+              "control-panels/cpanel/home-screen",
+              "control-panels/cpanel/changing-password",
+              "control-panels/cpanel/manage-team"
+            ]
+          },
+          {
+            "group": "Plesk",
+            "pages": [
+              "control-panels/plesk/getting-started",
+              "control-panels/plesk/logging-in",
+              "control-panels/plesk/file-manager",
+              "control-panels/plesk/managing-users",
+              "control-panels/plesk/backups"
+            ]
+          },
+          {
+            "group": "Enhance Panel",
+            "pages": [
+              "control-panels/enhance/overview",
+              "control-panels/enhance/from-cpanel",
+              "control-panels/enhance/managing-websites",
+              "control-panels/enhance/managing-email",
+              "control-panels/enhance/managing-databases"
+            ]
+          },
+          {
+            "group": "WebHost Manager",
+            "pages": [
+              "control-panels/whm/accessing-whm",
+              "control-panels/whm/reseller-hosting",
+              "control-panels/whm/backups"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Hosting & Servers",
+        "groups": [
+          {
+            "group": "Web Hosting",
+            "pages": [
+              "hosting/publishing-your-website",
+              "hosting/php-settings",
+              "hosting/ssl-certificates",
+              "hosting/cloudflare"
+            ]
+          },
+          {
+            "group": "WordPress",
+            "pages": [
+              "hosting/wordpress/managed-wordpress",
+              "hosting/wordpress/wordpress-toolkit",
+              "hosting/wordpress/security",
+              "hosting/wordpress/ai-website-builder"
+            ]
+          },
+          {
+            "group": "VPS & Dedicated Servers",
+            "pages": [
+              "hosting/vps/managed-vs-unmanaged",
+              "hosting/vps/securing-your-server",
+              "hosting/vps/automatic-updates",
+              "hosting/vps/openclaw-guide"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Email & Security",
+        "groups": [
+          {
+            "group": "Email",
+            "pages": [
+              "email/setting-up-email",
+              "email/managing-spam",
+              "email/dns-settings-for-email",
+              "email/preventing-spam"
+            ]
+          },
+          {
+            "group": "Security",
+            "pages": [
+              "security/ssl-overview",
+              "security/lets-encrypt",
+              "security/choosing-strong-passwords",
+              "security/securing-hacked-site",
+              "security/known-scams"
+            ]
+          }
+        ]
+      }
     ]
   },
   "background": {
