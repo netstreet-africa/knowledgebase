@@ -180,7 +180,8 @@
     "color": {
       "light": "#ffffff",
       "dark": "#131520"
-    }
+    },
+    "decoration": "gradient"
   },
   "icons": {
     "library": "fontawesome"
