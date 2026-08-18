@@ -1,16 +1,16 @@
 ---
-title: "Reseller Hosting with WHM on Netstreet Africa Explained"
+title: "Reseller Hosting with WHM on Netstreet Explained"
 sidebarTitle: "Reseller Hosting"
-description: "Learn how to manage reseller packages, create client cPanel accounts, configure branding, and run your hosting business using WHM on Netstreet Africa."
+description: "Learn how to manage reseller packages, create client cPanel accounts, configure branding, and run your hosting business using WHM on Netstreet."
 ---
 
-Netstreet Africa reseller hosting lets you run your own hosting business under your brand, powered by our infrastructure. With WebHost Manager (WHM), you get a reseller-level control panel that sits above your clients' individual cPanel accounts — giving you the ability to create packages, provision accounts, manage resources, apply custom branding, and bill clients, all from a single interface. This guide covers everything you need to know to get your reseller operation running.
+Netstreet reseller hosting lets you run your own hosting business under your brand, powered by our infrastructure. With WebHost Manager (WHM), you get a reseller-level control panel that sits above your clients' individual cPanel accounts — giving you the ability to create packages, provision accounts, manage resources, apply custom branding, and bill clients, all from a single interface. This guide covers everything you need to know to get your reseller operation running.
 
 ---
 
 ## How reseller hosting works
 
-When you sign up for a Netstreet Africa reseller plan, you receive:
+When you sign up for a Netstreet reseller plan, you receive:
 
 - A **WHM account** — your reseller-level admin panel
 - A **cPanel account** — your own personal hosting space
@@ -19,7 +19,7 @@ When you sign up for a Netstreet Africa reseller plan, you receive:
 Your clients each get their own **cPanel account** that they manage independently. They never see WHM — only their own cPanel — and they have no visibility into other clients' accounts.
 
 <Info>
-  If you are considering moving from a cPanel-based reseller plan to Netstreet Africa's Enhance-based reseller offering, see the [From cPanel to Enhance](/control-panels/enhance/from-cpanel) guide for a full comparison and migration walkthrough.
+  If you are considering moving from a cPanel-based reseller plan to Netstreet's Enhance-based reseller offering, see the [From cPanel to Enhance](/control-panels/enhance/from-cpanel) guide for a full comparison and migration walkthrough.
 </Info>
 
 ---
@@ -138,11 +138,11 @@ WHM gives you full control over every account on your reseller plan.
 
 ## Branding options
 
-One of the key advantages of Netstreet Africa reseller hosting is the ability to present your hosting service entirely under your own brand. Your clients will see your company name — not Netstreet Africa's.
+One of the key advantages of Netstreet reseller hosting is the ability to present your hosting service entirely under your own brand. Your clients will see your company name — not Netstreet's.
 
 ### White-label nameservers
 
-Set up private nameservers (e.g. `ns1.yourbrand.co.za` and `ns2.yourbrand.co.za`) so that when clients look up their domain, they see your brand rather than a generic server name. You can configure this through **Reseller Center → Nameserver Configuration** in WHM, and register the nameservers as glue records through Netstreet Africa's domain management tools.
+Set up private nameservers (e.g. `ns1.yourbrand.co.za` and `ns2.yourbrand.co.za`) so that when clients look up their domain, they see your brand rather than a generic server name. You can configure this through **Reseller Center → Nameserver Configuration** in WHM, and register the nameservers as glue records through Netstreet's domain management tools.
 
 ### Custom cPanel branding
 
@@ -166,14 +166,14 @@ You can also configure WHM to show your custom hostname and company name in syst
 
 ## Setting up WHMCS for billing automation
 
-Many Netstreet Africa resellers use WHMCS to automate client billing, provisioning, and support. WHMCS integrates directly with WHM via an API, so creating a new client order in WHMCS automatically creates the corresponding cPanel account in WHM — and suspending an overdue account in WHMCS automatically suspends it in WHM.
+Many Netstreet resellers use WHMCS to automate client billing, provisioning, and support. WHMCS integrates directly with WHM via an API, so creating a new client order in WHMCS automatically creates the corresponding cPanel account in WHM — and suspending an overdue account in WHMCS automatically suspends it in WHM.
 
 <Steps>
   <Step title="Order a WHMCS licence">
-    WHMCS licences are available through the Netstreet Africa client area at [my.netstreet.co.za](https://my.netstreet.co.za).
+    WHMCS licences are available through the Netstreet client area at [my.netstreet.co.za](https://my.netstreet.co.za).
   </Step>
   <Step title="Install WHMCS on your hosting account">
-    Install WHMCS on one of your cPanel domains. WHMCS provides detailed installation documentation, or the Netstreet Africa support team can assist.
+    Install WHMCS on one of your cPanel domains. WHMCS provides detailed installation documentation, or the Netstreet support team can assist.
   </Step>
   <Step title="Connect WHMCS to WHM">
     In WHMCS, go to **Setup → Products/Services → Servers** and add your WHM server using your reseller hostname and API token. WHMCS will then be able to create, suspend, and terminate cPanel accounts automatically.
@@ -181,7 +181,7 @@ Many Netstreet Africa resellers use WHMCS to automate client billing, provisioni
 </Steps>
 
 <Note>
-  Netstreet Africa supports WHMCS integration on all cPanel-based reseller plans. Contact support at [my.netstreet.co.za](https://my.netstreet.co.za) if you need help setting up the WHM API credentials.
+  Netstreet supports WHMCS integration on all cPanel-based reseller plans. Contact support at [my.netstreet.co.za](https://my.netstreet.co.za) if you need help setting up the WHM API credentials.
 </Note>
 
 ---
@@ -193,11 +193,11 @@ Many Netstreet Africa resellers use WHMCS to automate client billing, provisioni
 </Accordion>
 
 <Accordion title="Can I sell hosting to clients at my own prices?">
-  Yes. You buy wholesale from Netstreet Africa and set your own retail prices. You invoice your clients directly — Netstreet Africa has no relationship with your end customers.
+  Yes. You buy wholesale from Netstreet and set your own retail prices. You invoice your clients directly — Netstreet has no relationship with your end customers.
 </Accordion>
 
-<Accordion title="Do my clients know they are hosted on Netstreet Africa?">
-  Only if you tell them. With private nameservers and custom cPanel branding, your clients see your brand at every touchpoint. Netstreet Africa operates entirely in the background.
+<Accordion title="Do my clients know they are hosted on Netstreet?">
+  Only if you tell them. With private nameservers and custom cPanel branding, your clients see your brand at every touchpoint. Netstreet operates entirely in the background.
 </Accordion>
 
 <Accordion title="Can I give a client their own reseller privileges?">
@@ -209,11 +209,11 @@ Many Netstreet Africa resellers use WHMCS to automate client billing, provisioni
 </Accordion>
 
 <Accordion title="Can I migrate existing cPanel accounts to my reseller plan?">
-  Yes. WHM includes a built-in transfer tool under **Transfers → Transfer or Restore an Account**. You can migrate accounts from another WHM/cPanel server by providing the source server's hostname and root credentials. Contact Netstreet Africa support if you need help with bulk migrations.
+  Yes. WHM includes a built-in transfer tool under **Transfers → Transfer or Restore an Account**. You can migrate accounts from another WHM/cPanel server by providing the source server's hostname and root credentials. Contact Netstreet support if you need help with bulk migrations.
 </Accordion>
 
 ---
 
 ## Need help?
 
-The Netstreet Africa support team is available to assist with any aspect of your reseller setup. Open a support ticket at [my.netstreet.co.za](https://my.netstreet.co.za) for help with package configuration, account provisioning, WHMCS integration, or anything else related to your reseller business.
+The Netstreet support team is available to assist with any aspect of your reseller setup. Open a support ticket at [my.netstreet.co.za](https://my.netstreet.co.za) for help with package configuration, account provisioning, WHMCS integration, or anything else related to your reseller business.

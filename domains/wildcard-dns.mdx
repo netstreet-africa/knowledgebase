@@ -1,10 +1,10 @@
 ---
-title: "Using Wildcard DNS for Subdomains at Netstreet Africa"
+title: "Using Wildcard DNS for Subdomains at Netstreet"
 sidebarTitle: "Wildcard DNS"
 description: "Learn what wildcard DNS is, what *.domain.co.za covers, when to use it, and how to configure a wildcard subdomain in cPanel or your DNS zone."
 ---
 
-A wildcard DNS record is a catch-all entry that matches any subdomain of your domain that does not have a more specific record already defined. Instead of creating individual DNS records for every subdomain you might ever need, a single wildcard entry handles them all automatically. Netstreet Africa supports wildcard DNS for all hosted domains.
+A wildcard DNS record is a catch-all entry that matches any subdomain of your domain that does not have a more specific record already defined. Instead of creating individual DNS records for every subdomain you might ever need, a single wildcard entry handles them all automatically. Netstreet supports wildcard DNS for all hosted domains.
 
 ## What does a wildcard DNS entry cover?
 
@@ -57,11 +57,11 @@ The wildcard record handles the DNS layer — your web server still needs to be 
 
 ## Enabling wildcard subdomains in cPanel
 
-If your domain is hosted on a Netstreet Africa plan with cPanel, you can enable wildcard DNS using the Subdomains tool.
+If your domain is hosted on a Netstreet plan with cPanel, you can enable wildcard DNS using the Subdomains tool.
 
 <Steps>
   <Step title="Log in to cPanel">
-    Access cPanel through your Netstreet Africa client area or via your hosting panel link.
+    Access cPanel through your Netstreet client area or via your hosting panel link.
   </Step>
   <Step title="Open the Subdomains tool">
     In the **Domains** section of the cPanel home screen, click **Subdomains**.
@@ -125,7 +125,7 @@ This routes any unmatched subdomain to the same destination as your root domain.
 
 ## Wildcard SSL certificates
 
-A standard SSL certificate only covers the exact domain(s) listed in it. To secure wildcard subdomains with HTTPS, you need a **wildcard SSL certificate** issued for `*.yourdomain.co.za`. Netstreet Africa supports wildcard Let's Encrypt certificates for qualifying plans. Contact our support team at [my.netstreet.co.za](https://my.netstreet.co.za) if you need help setting up a wildcard certificate.
+A standard SSL certificate only covers the exact domain(s) listed in it. To secure wildcard subdomains with HTTPS, you need a **wildcard SSL certificate** issued for `*.yourdomain.co.za`. Netstreet supports wildcard Let's Encrypt certificates for qualifying plans. Contact our support team at [my.netstreet.co.za](https://my.netstreet.co.za) if you need help setting up a wildcard certificate.
 
 <Note>
   A wildcard SSL certificate for `*.yourdomain.co.za` secures all **first-level** subdomains but does **not** cover the root domain `yourdomain.co.za` itself. To cover both, you typically need a Subject Alternative Name (SAN) certificate or a combined wildcard + root certificate.

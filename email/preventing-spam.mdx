@@ -4,7 +4,7 @@ sidebarTitle: "Preventing Spam"
 description: "Best practices and technical steps to prevent emails from landing in spam folders, including SPF, DKIM, DMARC setup and sender reputation guidelines."
 ---
 
-Having your legitimate emails flagged as spam is frustrating and costly — especially if you run a business that relies on email communication. Modern mail servers use dozens of signals to evaluate whether an incoming message is trustworthy. If your domain lacks proper authentication records, or your email content triggers common spam filters, your messages may never reach your recipients' inboxes. This guide covers the technical and content-based steps you can take to maximise email deliverability from your Netstreet Africa hosting account.
+Having your legitimate emails flagged as spam is frustrating and costly — especially if you run a business that relies on email communication. Modern mail servers use dozens of signals to evaluate whether an incoming message is trustworthy. If your domain lacks proper authentication records, or your email content triggers common spam filters, your messages may never reach your recipients' inboxes. This guide covers the technical and content-based steps you can take to maximise email deliverability from your Netstreet hosting account.
 
 <Note>
   This guide is intended for users with legitimate email that is being incorrectly
@@ -58,7 +58,7 @@ DKIM adds a cryptographic signature to every outgoing email. Receiving mail serv
 
 <Steps>
   <Step title="Log in to cPanel">
-    Access cPanel via your Netstreet Africa Hosting Panel.
+    Access cPanel via your Netstreet Hosting Panel.
   </Step>
   <Step title="Open Email Deliverability">
     In the **Email** section, click **Email Deliverability**.
@@ -96,7 +96,7 @@ See our [DNS Settings for Email](/email/dns-settings-for-email) guide for full d
 
 Reverse DNS (rDNS) maps your server's IP address back to a hostname. Many receiving mail servers — particularly Gmail, Yahoo, and Hotmail/Outlook — perform an rDNS lookup on the sending IP address. If no rDNS record exists, or if the hostname does not match the sending domain, your email may be flagged.
 
-To configure rDNS for your VPS or dedicated server, please open a support ticket in the [Netstreet Africa client area](https://my.netstreet.co.za) and provide the hostname you would like associated with your server's IP address.
+To configure rDNS for your VPS or dedicated server, please open a support ticket in the [Netstreet client area](https://my.netstreet.co.za) and provide the hostname you would like associated with your server's IP address.
 
 ---
 
@@ -174,10 +174,10 @@ Use free tools to check whether your sending IP or domain has been blacklisted:
 
   1. Ensure no devices on your network are infected with malware sending spam
   2. Follow the specific removal instructions published by the blacklist organisation
-  3. If your IP address is dynamic, contact Netstreet Africa support to request a new IP assignment
+  3. If your IP address is dynamic, contact Netstreet support to request a new IP assignment
   4. Alternatively, use a dedicated outbound SMTP relay service
 
-  Netstreet Africa has no affiliation with blacklist organisations and cannot
+  Netstreet has no affiliation with blacklist organisations and cannot
   directly remove your IP from their lists.
 </Accordion>
 
@@ -194,4 +194,4 @@ Use free tools to check whether your sending IP or domain has been blacklisted:
   <Step title="Monitor your sender reputation and act on blacklist alerts" />
 </Steps>
 
-For additional help with email deliverability, please open a support ticket in the [Netstreet Africa client area](https://my.netstreet.co.za).
+For additional help with email deliverability, please open a support ticket in the [Netstreet client area](https://my.netstreet.co.za).
