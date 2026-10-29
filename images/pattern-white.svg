@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="208" height="123" viewBox="0 0 208 123">
+  <!-- One tile of the Netstreet "interlocking N" pattern. Repeat on both axes. -->
+  <g fill="#FFFFFF">
+    <path d="M36 0h69l68 123h-69z"/>
+    <path d="M175 0h33v62h-68z"/>
+    <path d="M0 62h70l-34 61H0z"/>
+  </g>
+</svg>

@@ -8,6 +8,7 @@ export const Hero = () => (
   <div style={{ position: 'relative', overflow: 'hidden', background: '#131520', padding: '5.5rem 1.5rem 5rem' }}>
     <div style={{ position: 'absolute', top: '-30%', right: '-10%', width: '620px', height: '620px', background: 'radial-gradient(circle at center, rgba(0,101,225,0.35), rgba(102,174,240,0.12) 45%, transparent 70%)', filter: 'blur(20px)', pointerEvents: 'none' }} />
     <div style={{ position: 'absolute', bottom: '-40%', left: '-8%', width: '520px', height: '520px', background: 'radial-gradient(circle at center, rgba(102,174,240,0.18), transparent 68%)', filter: 'blur(24px)', pointerEvents: 'none' }} />
+    <div className="ns-pattern ns-pattern--hero" aria-hidden="true" />
     <div style={{ position: 'relative', maxWidth: '760px', margin: '0 auto', textAlign: 'center' }}>
       <span style={{ display: 'inline-block', fontFamily: "'DM Sans', sans-serif", textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.8rem', color: '#66AEF0', marginBottom: '1.1rem' }}>Help Centre</span>
       <h1 style={{ color: '#FFFFFF', fontSize: '2.9rem', fontWeight: 500, lineHeight: 1.1, letterSpacing: '-0.02em', margin: '0 0 1rem' }}>How can we help you today?</h1>
@@ -186,15 +187,15 @@ export const Footer = () => (
 </div>
 
 <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '1rem 1.5rem 3.5rem' }}>
-  <div style={{ position: 'relative', overflow: 'hidden', background: '#131520', borderRadius: '20px', padding: '3rem 2rem', textAlign: 'center' }}>
-    <div style={{ position: 'absolute', top: '-50%', right: '-6%', width: '420px', height: '420px', background: 'radial-gradient(circle at center, rgba(0,101,225,0.28), transparent 70%)', pointerEvents: 'none' }} />
+  <div style={{ position: 'relative', overflow: 'hidden', background: '#0065E1', borderRadius: '20px', padding: '3rem 2rem', textAlign: 'center' }}>
+    <div className="ns-pattern ns-pattern--cta" aria-hidden="true" />
 
     <div style={{ position: 'relative' }}>
       <h2 style={{ color: '#FFFFFF', fontSize: '1.5rem', fontWeight: 500, margin: '0 0 0.5rem' }}>Still need a hand?</h2>
       <p style={{ color: 'rgba(255,255,255,0.82)', margin: '0 0 1.75rem' }}>Our support team is available 24/7/365 — we're happy to help with anything.</p>
 
       <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <a href="https://my.netstreet.co.za" style={{ display: 'inline-block', background: 'linear-gradient(120deg, #0065E1 0%, #66AEF0 100%)', color: '#FFFFFF', fontWeight: 500, padding: '0.75rem 1.6rem', borderRadius: '8px', textDecoration: 'none' }}>Contact support</a>
+        <a href="https://my.netstreet.co.za" style={{ display: 'inline-block', background: '#FFFFFF', color: '#0065E1', fontWeight: 500, padding: '0.75rem 1.6rem', borderRadius: '8px', textDecoration: 'none' }}>Contact support</a>
         <a href="/account/working-with-tickets" style={{ display: 'inline-block', border: '1px solid rgba(255,255,255,0.4)', color: '#FFFFFF', fontWeight: 500, padding: '0.75rem 1.6rem', borderRadius: '8px', textDecoration: 'none' }}>Open a ticket</a>
       </div>
     </div>

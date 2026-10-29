@@ -4,7 +4,7 @@
   "name": "Netstreet Knowledge Base",
   "colors": {
     "primary": "#0065E1",
-    "light": "#0065E1",
+    "light": "#66AEF0",
     "dark": "#0065E1"
   },
   "favicon": {
@@ -173,7 +173,7 @@
   "background": {
     "color": {
       "light": "#ffffff",
-      "dark": "#000000"
+      "dark": "#131520"
     }
   },
   "icons": {
