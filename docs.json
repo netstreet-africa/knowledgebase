@@ -167,6 +167,70 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Products",
+        "menu": [
+          {
+            "item": "Movilo",
+            "description": "Help for gym owners, staff, members and operators.",
+            "icon": "dumbbell",
+            "groups": [
+              {
+                "group": "Movilo help",
+                "pages": [
+                  "products/movilo/index",
+                  "products/movilo/overview"
+                ]
+              },
+              {
+                "group": "Gym owners and staff",
+                "icon": "dumbbell",
+                "pages": [
+                  "products/movilo/gym/getting-started",
+                  "products/movilo/gym/team-roles",
+                  "products/movilo/gym/members",
+                  "products/movilo/gym/memberships",
+                  "products/movilo/gym/invoices-and-payments",
+                  "products/movilo/gym/classes-and-bookings",
+                  "products/movilo/gym/check-in",
+                  "products/movilo/gym/gates-and-turnstiles",
+                  "products/movilo/gym/contracts",
+                  "products/movilo/gym/enquiries",
+                  "products/movilo/gym/website-integrations",
+                  "products/movilo/gym/settings",
+                  "products/movilo/gym/reports",
+                  "products/movilo/gym/member-privacy"
+                ]
+              },
+              {
+                "group": "Members",
+                "icon": "person-walking",
+                "pages": [
+                  "products/movilo/members/joining-a-gym",
+                  "products/movilo/members/your-account",
+                  "products/movilo/members/signing-your-contract",
+                  "products/movilo/members/member-portal",
+                  "products/movilo/members/getting-in",
+                  "products/movilo/members/questions"
+                ]
+              },
+              {
+                "group": "Platform operators",
+                "icon": "server",
+                "pages": [
+                  "products/movilo/operator/console-access",
+                  "products/movilo/operator/console-overview",
+                  "products/movilo/operator/billing-gyms",
+                  "products/movilo/operator/plans-and-limits",
+                  "products/movilo/operator/email",
+                  "products/movilo/operator/server-settings",
+                  "products/movilo/operator/backups-and-care"
+                ]
+              }
+            ]
+          }
+        ]
       }
     ]
   },

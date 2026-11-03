@@ -1,0 +1,130 @@
+---
+title: "Movilo help centre"
+sidebarTitle: "Help centre"
+description: "Find help for your gym’s everyday work with Movilo. Set up memberships, manage classes and payments, or get support with your member portal."
+icon: "dumbbell"
+keywords: ["Movilo", "gym", "help", "members", "bookings", "check-in"]
+mode: "center"
+---
+
+import { MoviloSearch } from "/snippets/movilo-search.jsx";
+
+<div className="movilo-help">
+  <section className="movilo-hero" aria-labelledby="movilo-hero-title">
+    <p className="movilo-eyebrow"><span className="movilo-brand-mark" aria-hidden="true">m</span> MOVILO <span className="movilo-byline">by Netstreet</span></p>
+    <h1 id="movilo-hero-title">Your next move,<br />made simple.</h1>
+    <p className="movilo-hero-description">A little guidance for every part of your gym’s day.<br className="movilo-desktop-break" /> Find answers, get set up and keep things moving.</p>
+    <MoviloSearch />
+    <div className="movilo-quick-links" aria-label="Quick answers">
+      <span>Looking for:</span>
+      <a href="/products/movilo/gym/classes-and-bookings">Booking a class</a>
+      <a href="/products/movilo/members/signing-your-contract">Signing a contract</a>
+      <a href="/products/movilo/members/getting-in">Getting into your gym</a>
+    </div>
+    <div className="movilo-hero-orbit movilo-hero-orbit-one" aria-hidden="true" />
+    <div className="movilo-hero-orbit movilo-hero-orbit-two" aria-hidden="true" />
+  </section>
+
+  <section className="movilo-section" aria-labelledby="movilo-start-title">
+    <div className="movilo-section-heading"><div><p className="movilo-eyebrow">A place to start</p><h2 id="movilo-start-title">Find your way with Movilo</h2></div><a href="/products/movilo/overview" className="movilo-text-link">Meet Movilo <span aria-hidden="true">↗</span></a></div>
+    <Columns cols={3}>
+      <Card title="Gym owners and staff" icon="dumbbell" href="/products/movilo/gym/getting-started">Set up your gym, bring your team on board and make your daily work easier.</Card>
+      <Card title="Gym members" icon="person-walking" href="/products/movilo/members/joining-a-gym">Join your gym, sign your contract, book a class and get through the door.</Card>
+      <Card title="Platform operators" icon="sliders" href="/products/movilo/operator/console-access">Run Movilo for Netstreet, manage gym subscriptions and help owners get unstuck.</Card>
+    </Columns>
+  </section>
+
+  <section className="movilo-welcome" aria-labelledby="movilo-welcome-title">
+    <div className="movilo-welcome-art" aria-hidden="true">
+      <div className="movilo-art-window">
+        <div className="movilo-art-top"><span /><span /><span /></div>
+        <div className="movilo-art-label">A GOOD DAY STARTS HERE</div>
+        <div className="movilo-art-title">Let’s get moving.</div>
+        <div className="movilo-art-row"><span className="movilo-art-check">✓</span><span>Your gym. Your brand.</span></div>
+        <div className="movilo-art-row"><span className="movilo-art-check">✓</span><span>Your people, in one place.</span></div>
+        <div className="movilo-art-row"><span className="movilo-art-check">✓</span><span>Ready for the day ahead.</span></div>
+      </div>
+      <span className="movilo-art-badge">Made for your gym <span>↗</span></span>
+    </div>
+    <div className="movilo-welcome-copy"><p className="movilo-eyebrow">New around here?</p><h2 id="movilo-welcome-title">Start with the essentials.</h2><p>From your first membership to the first check-in, get your gym ready for the people who make it.</p><a className="movilo-button" href="/products/movilo/gym/getting-started">Set up your gym <span aria-hidden="true">↗</span></a></div>
+  </section>
+
+  <section className="movilo-section" aria-labelledby="movilo-answers-title">
+    <div className="movilo-section-heading"><div><p className="movilo-eyebrow">Everyday answers</p><h2 id="movilo-answers-title">Get straight to it</h2><p>Quick routes to the things you need to do.</p></div></div>
+    <Columns cols={2}>
+      <Card title="Add your first member" icon="user-plus" href="/products/movilo/gym/members" horizontal>Photos, member details, memberships and who can come in.</Card>
+      <Card title="Create your membership plans" icon="id-card" href="/products/movilo/gym/memberships" horizontal>Set prices, billing periods and class credits.</Card>
+      <Card title="Send an invoice and record a payment" icon="file-invoice-dollar" href="/products/movilo/gym/invoices-and-payments" horizontal>Email invoices, record EFT or cash, and track arrears.</Card>
+      <Card title="Schedule a class" icon="calendar-days" href="/products/movilo/gym/classes-and-bookings" horizontal>Manage coaches, rooms, bookings and waitlists.</Card>
+      <Card title="Sign your gym contract" icon="signature" href="/products/movilo/members/signing-your-contract" horizontal>Read, sign and confirm your contract with a signing code.</Card>
+      <Card title="Can’t get into your gym?" icon="door-open" href="/products/movilo/members/getting-in" horizontal>Check your membership, contract and overdue invoices.</Card>
+    </Columns>
+  </section>
+
+  <section className="movilo-section movilo-topics" aria-labelledby="movilo-topics-title">
+    <div className="movilo-section-heading"><div><p className="movilo-eyebrow">The knowledge base</p><h2 id="movilo-topics-title">A guide for every part of your day</h2><p>Explore Movilo, one topic at a time.</p></div></div>
+    <Columns cols={3}>
+      <Card title="Members and memberships" icon="user-group" href="/products/movilo/gym/members">Member profiles, plans, class credits and access eligibility.</Card>
+      <Card title="Invoices and payments" icon="credit-card" href="/products/movilo/gym/invoices-and-payments">Invoices, payment records, grace periods and billing exports.</Card>
+      <Card title="Classes and bookings" icon="calendar-days" href="/products/movilo/gym/classes-and-bookings">Your schedule, coaches, rooms, capacity and waitlists.</Card>
+      <Card title="Check-in and gates" icon="qrcode" href="/products/movilo/gym/check-in">Reception check-in, QR passes and connected gate arrivals.</Card>
+      <Card title="Contracts and privacy" icon="file-signature" href="/products/movilo/gym/contracts">Membership contracts, signing links and version history.</Card>
+      <Card title="Team and settings" icon="sliders" href="/products/movilo/gym/settings">Roles, branches, branding, domains and your subscription.</Card>
+      <Card title="Your gym website" icon="globe" href="/products/movilo/gym/website-integrations">Pricing embeds, join links and enquiries from your website.</Card>
+      <Card title="Member portal" icon="mobile-screen-button" href="/products/movilo/members/member-portal">Class bookings, account details, contracts and your QR pass.</Card>
+      <Card title="Reports and activity" icon="chart-line" href="/products/movilo/gym/reports">Membership health, class capacity, activity and exports.</Card>
+    </Columns>
+    <Accordion title="Browse every Movilo guide" className="movilo-all-guides">
+      <div className="movilo-guide-directory">
+        <div>
+        <h3>Gym owners and staff</h3>
+        <ul>
+          <li><a href="/products/movilo/gym/getting-started">Getting started</a></li>
+          <li><a href="/products/movilo/gym/team-roles">Team roles</a></li>
+          <li><a href="/products/movilo/gym/members">Members</a></li>
+          <li><a href="/products/movilo/gym/memberships">Memberships</a></li>
+          <li><a href="/products/movilo/gym/invoices-and-payments">Invoices and payments</a></li>
+          <li><a href="/products/movilo/gym/classes-and-bookings">Classes and bookings</a></li>
+          <li><a href="/products/movilo/gym/check-in">Check-in</a></li>
+          <li><a href="/products/movilo/gym/gates-and-turnstiles">Gates and turnstiles</a></li>
+          <li><a href="/products/movilo/gym/contracts">Contracts</a></li>
+          <li><a href="/products/movilo/gym/enquiries">Enquiries</a></li>
+          <li><a href="/products/movilo/gym/website-integrations">Your website</a></li>
+          <li><a href="/products/movilo/gym/settings">Settings</a></li>
+          <li><a href="/products/movilo/gym/reports">Reports</a></li>
+          <li><a href="/products/movilo/gym/member-privacy">Member privacy</a></li>
+        </ul>
+        </div>
+        <div>
+        <h3>Members</h3>
+        <ul>
+          <li><a href="/products/movilo/members/joining-a-gym">Joining a gym</a></li>
+          <li><a href="/products/movilo/members/your-account">Your account</a></li>
+          <li><a href="/products/movilo/members/signing-your-contract">Signing your contract</a></li>
+          <li><a href="/products/movilo/members/member-portal">Member portal</a></li>
+          <li><a href="/products/movilo/members/getting-in">Getting in</a></li>
+          <li><a href="/products/movilo/members/questions">Questions</a></li>
+        </ul>
+        </div>
+        <div>
+        <h3>Platform operators</h3>
+        <ul>
+          <li><a href="/products/movilo/operator/console-access">Console access</a></li>
+          <li><a href="/products/movilo/operator/console-overview">Console overview</a></li>
+          <li><a href="/products/movilo/operator/billing-gyms">Billing gyms</a></li>
+          <li><a href="/products/movilo/operator/plans-and-limits">Plans and limits</a></li>
+          <li><a href="/products/movilo/operator/email">Platform email</a></li>
+          <li><a href="/products/movilo/operator/server-settings">Server settings</a></li>
+          <li><a href="/products/movilo/operator/backups-and-care">Backups and care</a></li>
+        </ul>
+        </div>
+      </div>
+    </Accordion>
+  </section>
+
+  <section className="movilo-support" id="movilo-support" aria-labelledby="movilo-support-title">
+    <div><p className="movilo-eyebrow">Here to help</p><h2 id="movilo-support-title">A real person, when you need one.</h2><p>Gym member? Your gym’s team can help with your membership, payments and access. Gym owner or staff? Contact Netstreet for Movilo support.</p></div>
+    <div className="movilo-support-actions"><a className="movilo-button" href="https://my.netstreet.co.za">Contact Netstreet <span aria-hidden="true">↗</span></a><a className="movilo-text-link" href="/products/movilo/members/questions">Member questions <span aria-hidden="true">↗</span></a></div>
+  </section>
+  <p className="movilo-version">Movilo by Netstreet · Guide for version 0.1.0</p>
+</div>

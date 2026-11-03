@@ -1,0 +1,42 @@
+---
+title: "Publish and manage membership contracts"
+sidebarTitle: "Contracts"
+description: "Write and publish your gym’s membership contract in Movilo, send signing links, collect signatures and manage new contract versions."
+icon: "file-signature"
+keywords: ["Movilo", "Contracts", "gym management"]
+---
+
+Write and publish your gym’s membership contract in Movilo, send signing links, collect signatures and manage new contract versions.
+
+## Writing your contract
+
+Under **Settings, Contracts**, edit the title, fixed term (up to 24 months, or 0 for month to month), the sections, and the statements a member must tick. Movilo starts you with plain example wording. **Replace it with your own and have a lawyer check it.**
+
+These fields fill in each member’s details:
+
+| Field | Becomes |
+| --- | --- |
+| `{{member_name}}`, `{{member_email}}`, `{{member_phone}}` | The member’s name, email and phone |
+| `{{member_id_number}}`, `{{member_birth_date}}` | Their ID or passport number, and date of birth |
+| `{{gym}}`, `{{gym_legal_name}}`, `{{gym_registration}}`, `{{gym_address}}` | Your gym name and business details from Settings, Invoices |
+| `{{plan}}`, `{{fee}}` | Their membership and its price |
+| `{{start_date}}`, `{{term_months}}`, `{{end_date}}` | When it starts, the fixed term, and when the term ends |
+
+**Preview with sample details** shows how it reads. **Publish** makes it live.
+
+## What happens once it’s published
+
+- Every new member is emailed a private link to sign, which lasts 30 days. They can’t check in, book or use a gate until they sign. The old tick box for contract acceptance disappears.
+- They read it, tick each statement, sign by drawing or typing their name, and confirm a six-digit code. The code is texted to their mobile if Movilo can send texts and their number works, or emailed if not.
+- Movilo keeps a signed PDF with a final page showing how it was signed: the time, internet address, device, where the code went, and a fingerprint of exactly what they saw. Nobody can change or delete a signed contract, including you.
+- Members who signed online can cancel without reason within 7 days.
+
+## Changing your contract
+
+Publish a new version. New members sign it. Members who signed earlier keep the version they signed. To ask someone to sign the new version, use **Email again** on their profile. They keep access while it waits.
+
+## Signing at the desk
+
+**Sign here** on a member’s profile opens their contract on this device, such as a tablet at reception. They still confirm the code sent to their own phone or email.
+
+<Note>Based on the Movilo v0.1.0 guide. Available features depend on your role, your plan and your gym’s configuration.</Note>

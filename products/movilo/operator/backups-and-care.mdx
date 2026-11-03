@@ -1,0 +1,16 @@
+---
+title: "Back up and maintain Movilo"
+sidebarTitle: "Backups and care"
+description: "Plan database and encryption-key backups, check restores, monitor Movilo errors and understand shared database storage for gym records."
+icon: "database"
+keywords: ["Movilo", "Backups and care", "gym management"]
+---
+
+Plan database and encryption-key backups, check restores, monitor Movilo errors and understand shared database storage for gym records.
+
+- **Back up nightly, away from Cloudflare.** Export the database every night, encrypt the file and store it elsewhere, for example AWS S3 in Cape Town or Backblaze B2. Restore one now and then to prove it works.
+- **Back up `SECRETS_KEY` separately,** for example in a password manager. A restored database can’t read encrypted values without it.
+- **Watch for errors.** Failed requests are logged as “Movilo API error” and gate problems as “Movilo gate error”.
+- **Space.** All gyms share one database. Photos and signed contract PDFs take most of the space, about 65 MB per 1 000 members.
+
+<Note>Based on the Movilo v0.1.0 guide. Available features depend on your role, your plan and your gym’s configuration.</Note>

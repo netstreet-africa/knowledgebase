@@ -1,7 +1,7 @@
 ---
 title: "Netstreet Help Centre"
 description: "Guides, tutorials, and answers for every Netstreet product and service."
-mode: "custom"
+mode: "center"
 ---
 
 export const Hero = () => (
@@ -50,6 +50,7 @@ export const Footer = () => (
   </div>
 );
 
+<div className="ns-help-home">
 <Hero />
 
 <div style={{ maxWidth: '72rem', margin: '0 auto', padding: '3.5rem 1.5rem 1rem' }}>
@@ -108,6 +109,10 @@ export const Footer = () => (
   <SectionHead eyebrow="Products" title="Products & services" sub="Dive into guides for specific Netstreet products." />
 
   <CardGroup cols={3}>
+    <Card title="Movilo" icon="dumbbell" href="/products/movilo/index">
+      Help for your gym’s everyday work: memberships, classes, billing, check-in, gates, and your member portal.
+    </Card>
+
     <Card title="Web Hosting" icon="boxes-stacked" href="/hosting/publishing-your-website">
       Publish your site, tune PHP settings, and get the most out of your hosting plan.
     </Card>
@@ -203,3 +208,4 @@ export const Footer = () => (
 </div>
 
 <Footer />
+</div>
