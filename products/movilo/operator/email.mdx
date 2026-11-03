@@ -1,0 +1,21 @@
+---
+title: "Configure Movilo platform email"
+sidebarTitle: "Platform email"
+description: "Set up Movilo’s sending service, check sending-domain records and customise platform email wording while keeping account messages separate."
+icon: "envelope"
+keywords: ["Movilo", "Platform email", "gym management"]
+---
+
+Set up Movilo’s sending service, check sending-domain records and customise platform email wording while keeping account messages separate.
+
+Movilo sends account emails (confirming an email address and resetting a password), contract signing links and codes, subscription invoices, and email for gyms without their own mail server.
+
+- **Choose one way to send** under Email in the console: a sending service such as Resend or SendGrid over SMTP, which is the recommended choice, or Microsoft 365. Microsoft is turning off password sign-in for SMTP by default for existing tenants from about December 2026, so check with your Microsoft administrator before relying on it.
+- **Check the domain.** The domain check looks for SPF, DKIM, DMARC and MX records. Enter your DKIM selector to check DKIM.
+- **Wording.** You can change the subject, message and button of Movilo’s subscription invoice, confirmation and reset emails. Words in double braces, such as `{{invoice_number}}`, are filled in for each email.
+
+<Note>
+**Some emails always go through Movilo, never a gym’s mail server:** password resets, email confirmations, and contract signing links and codes. They let someone into an account or sign a contract, so a gym must never be able to read them.
+</Note>
+
+<Note>Based on the Movilo v0.1.0 guide. Available features depend on your role, your plan and your gym’s configuration.</Note>

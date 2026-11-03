@@ -1,0 +1,23 @@
+---
+title: "Access the Movilo operator console"
+sidebarTitle: "Console access"
+description: "Set up an authorised Netstreet operator account and open the Movilo platform console on the main address to manage the service."
+icon: "key"
+keywords: ["Movilo", "Console access", "gym management"]
+---
+
+Set up an authorised Netstreet operator account and open the Movilo platform console on the main address to manage the service.
+
+1. Sign up on Movilo’s main address with your work email, and confirm it from the email Movilo sends.
+2. Someone with access to the server runs this once, with your address:
+
+   ```bash
+   npm run platform:admin -- you@netstreet.co.za --remote
+   ```
+3. Sign in again and open **/platform**. Your account also shows a link to it under Settings, Your account.
+
+<Note>
+**The console only works on Movilo’s main address.** On a gym’s own address or subdomain, operator powers are switched off, even for your account. That protects you if a gym’s domain is ever misused.
+</Note>
+
+<Note>Based on the Movilo v0.1.0 guide. Available features depend on your role, your plan and your gym’s configuration.</Note>

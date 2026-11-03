@@ -1,0 +1,26 @@
+---
+title: "Configure the Movilo server"
+sidebarTitle: "Server settings"
+description: "Review the server settings for Movilo encryption, public addresses, email, signing codes and custom domains, plus test-only settings to avoid."
+icon: "server"
+keywords: ["Movilo", "Server settings", "gym management"]
+---
+
+Review the server settings for Movilo encryption, public addresses, email, signing codes and custom domains, plus test-only settings to avoid.
+
+These are set on the server by whoever deploys Movilo. Keep secrets out of email and chat.
+
+| Setting | What it does |
+| --- | --- |
+| `SECRETS_KEY` | **Required.** At least 32 random characters. Encrypts mail passwords, gate passcodes, fingerprint and face templates, and ID numbers. Without it, no member can be added. Keep a copy somewhere safe: if it’s lost, every encrypted value must be collected again. |
+| `APP_URL` | Movilo’s public address, such as `https://app.movilo.co.za`. |
+| `APP_DOMAIN` | The domain gym subdomains and gate addresses live under, such as `movilo.co.za`. Needed for gates. |
+| `RESEND_API_KEY`, `EMAIL_FROM` | Optional. Sends Movilo’s email through Resend’s API instead of SMTP. |
+| `SMS_PROVIDER`, `SMS_USERNAME`, `SMS_PASSWORD`, `SMS_FROM` | Optional. Text messages for contract signing codes, through BulkSMS or Twilio. Without them, codes go by email. |
+| `CF_API_TOKEN`, `CF_ZONE_ID`, `CUSTOM_DOMAIN_TARGET` | Optional. Let gyms connect their own domains, through Cloudflare for SaaS. |
+
+<Warning>
+Never set `ALLOW_LOCAL_SMTP`, `CF_API_BASE`, `DOH_URL` or `SMS_API_BASE` on a live server. They exist only for testing.
+</Warning>
+
+<Note>Based on the Movilo v0.1.0 guide. Available features depend on your role, your plan and your gym’s configuration.</Note>
